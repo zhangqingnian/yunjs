@@ -1,0 +1,2 @@
+/* pages/venueCard/termCardDetails/index.wxss */
+@import '../venueCardDetails/index.wxss'

@@ -1,0 +1,118 @@
+/* pages/my/index.wxss */
+
+page{
+    width: 100%;
+    height: 100%;
+}
+
+.containner {
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+}
+
+.mtop30 {
+    margin-top: 30rpx;
+}
+
+.topwarp {
+    padding: 30rpx;
+    
+    background: #fff;
+}
+
+.top {
+    color: #323232;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 30rpx;
+    border-bottom: 1px solid #dcdcdc;
+    
+}
+
+.avatar {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    background: red;
+    margin-right: 30rpx;
+}
+
+.Nickname {
+    font-size: 31rpx;
+    margin-bottom: 25rpx;
+}
+
+.iphone {
+    font-size: 31rpx;
+}
+
+.top .left {
+    align-items: center;
+}
+
+.top .right {
+    width: 22rpx;
+    height: 41rpx;
+}
+
+.bottom{
+    flex-wrap: wrap;
+    
+}
+
+.bottom view{
+    width: 25%;
+    text-align: center;
+    margin-top: 25rpx;
+}
+
+.bottom .name{
+    font-size: 28rpx;
+    color: #323232;
+}
+
+.bottom .value{
+    font-size: 30rpx;
+    color: #63AFE0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.list {
+    background: #fff;
+    padding: 0 30rpx;
+    font-size: 28rpx;
+    color: #969696;
+}
+
+.list .icon{
+    width: 34rpx;
+    height: 34rpx;
+    margin-right: 20rpx;
+}
+
+.list .right{
+    width: 16rpx;
+    height: 26rpx;
+}
+
+.list .item {
+    height: 92rpx;
+    border-bottom: 1px solid #DCDCDC;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list .item:last-child{
+    border-bottom: none;
+}

@@ -1,0 +1,36 @@
+/* star 处理函数 */
+
+var filterStar = function (num){
+    var _on = '/images/venuedetail/icon_star.png';
+    var _off = '/images/venuedetail/icon_off.png';
+    var _arr = [];
+    for(var i=0;i<5;i++){
+        i < num ? _arr.push(_on) : _arr.push(_off)        
+    }
+    return _arr
+}
+
+var filterDistance = function(val){
+    return val < 1000 ? val+'m' : (val/1000).toFixed(1)+'km'
+}
+
+var filterCardStauts = function(val){
+    return val == 1 ? '销售中' : ''
+}
+
+
+var filterCardName = function(str){
+    return str.length > 10 ? str.slice(0,8) + '...' : str
+    
+}
+
+var filterCardTime = function (str) {
+    return str.split(' ')[0];
+}
+
+module.exports = {
+    filterStar: filterStar,
+    filterDistance: filterDistance,
+    filterCardName: filterCardName, 
+    filterCardTime: filterCardTime
+}

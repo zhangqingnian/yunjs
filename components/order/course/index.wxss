@@ -1,0 +1,2 @@
+/* components/order/course/index.wxss */
+@import '../venue/index.wxss'

@@ -1,0 +1,131 @@
+/**index.wxss**/
+.mtop30{margin-top: 30rpx;}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    background: #e1e1e1;
+}
+
+.index-top{
+    padding: 25rpx 30rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: #63afe0;
+    font-size: 32rpx;
+}
+.area{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+.area image{
+    width: 30rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+}
+.area text{
+    line-height: 40rpx;
+    color: #fff;
+}
+
+.date image{
+    width: 35rpx;
+    height: 40rpx;
+}
+
+swiper,swiper swiper-item image{
+  width: 100%;
+  height: 300rpx;
+}
+
+.types {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    background: #fff;
+}
+
+.types view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15rpx 0;
+    width: 20%;
+}
+
+.types  text{
+    font-size: 28rpx;
+}
+.types view image{
+    width: 80rpx;
+    height: 80rpx;
+}
+
+.benyuehuodong{
+    display: flex;
+    flex-direction: column;
+    background: #fff
+}
+
+.benyuehuodong .title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 80rpx;
+    padding: 0 30rpx;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.benyuehuodong .title text{
+    font-size: 28rpx;
+}
+
+.benyuehuodong .content{
+    padding: 25rpx 30rpx;
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+}
+
+.benyuehuodong .content image{
+    width: 340rpx;
+    height: 200rpx;
+    margin-bottom: 10rpx;
+}
+
+.benyuehuodong .content image:nth-child(odd){
+    margin-right: 10rpx;
+}
+
+.venues .content{
+    /* justify-content: space-around; */
+}
+.venues .content view{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0rpx;
+}
+
+.venues .content view image{
+    width: 220rpx;
+    height: 150rpx;
+    background:red;
+
+}
+
+.venues .content image:nth-child(odd){
+    margin-right: 0rpx;
+}
+
+.venues .content view text{
+    font-size: 24rpx;
+    width:220rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    text-align: center;
+}

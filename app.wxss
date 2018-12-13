@@ -1,0 +1,16 @@
+/**app.wxss**/
+
+page {
+    font-family:PingFang-SC-Medium;
+    color: #2B2B2B;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}

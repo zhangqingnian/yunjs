@@ -1,0 +1,71 @@
+<!--index.wxml-->
+<view wx:if="{{!selectCity}}" class="container">
+    <!-- 位置 -->
+    <view class='index-top'>
+        <view class='area' bindtap='onSelectCity'>
+            <image src='/images/area.png'></image>
+            <text>{{city}}</text>
+        </view>
+    </view>
+    <!-- 轮播 -->
+    <swiper indicator-dots='true' autoplay="true" indicator-color="#fff" indicator-active-color="#2ee66b">
+        <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}" bindtap='goWebview' data-path="{{item.linkAddr}}">
+            <image src="{{imgUrl+item.path}}"></image>
+        </swiper-item>
+    </swiper>
+    <!-- 运动类型列表 -->
+    <view class='types'>
+        <view  wx:for="{{venuetype}}" wx:key="item.sport_type_id" 
+            bindtap='onGoVenuelist' data-id='{{item.sport_type_id}}'>
+            <!-- src="{{'/images/nav/' + item.sport_type_id + '.png'}}" -->
+            <image src="{{'/images/nav/' + 22 + '.png'}}"></image>
+            <text>{{item.typeName}}</text>
+        </view>
+    </view>
+    <!-- 本月活动 -->
+    <view class='benyuehuodong mtop30'>
+        <view class='title'>
+            <text>本月活动</text>
+            <text>更多</text>
+        </view>
+        <view class='content'>
+            <image wx:for="{{benyue}}" src="{{imgUrl + item.path}}" 
+            wx:key="{{item.id}}" bindtap='goWebview' data-path="{{item.linkAddr}}"></image>
+        </view>
+    </view>
+    <!-- 推荐场馆 -->
+    <view class='benyuehuodong mtop30 venues'>
+        <view class='title'>
+            <text>推荐场馆</text>
+            <text>更多</text>
+        </view>
+        <view class='content'>
+            <view wx:for="{{tuijian}}" wx:key="{{item.id}}">
+                <image src='{{imgUrl + item.path}}'></image>
+                <text>{{item.venueName}}</text>
+            </view>
+            
+        </view>
+    </view>
+    <!-- 热门课程 -->
+    <view class='benyuehuodong mtop30'>
+        <view class='title'>
+            <text>热门课程</text>
+            <text>更多</text>
+        </view>
+        <view class='content'>
+            <!-- <block wx:for="{{hot}}" wx:key="{{item.id}}">
+                <image src='{{imgUrl + item.img}}'></image> 
+            </block> -->
+             
+            <image src='/images/1.png'></image>
+            <image src='/images/1.png'></image>
+            <image src='/images/1.png'></image>
+            <image src='/images/1.png'></image>
+           
+        </view>
+    </view>
+</view>
+
+<v-city bind:cancel="onCancel" bind:city="onCity" wx:if="{{selectCity}}" 
+        city="{{city}}" cityLists="{{cityLists}}"/>

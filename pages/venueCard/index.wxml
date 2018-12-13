@@ -1,0 +1,97 @@
+<!--pages/venueCard/index.wxml-->
+<wxs src="../../utils/venue.wxs" module="util" />
+<view class='containner venueTicket flex_column'>
+    <view class='content flex_row' >
+        <view class='item flex_column' 
+        bindtap='onGoDetail' 
+        data-cardtype='{{item.cardsTypeStr}}'
+        data-id='{{item.id}}'
+        wx:for="{{venueCard}}" wx:key="{{idx}}">
+            <view class='imgwarp'>
+                <image class='vipImg' 
+                src='{{imgUrl + item.fileName}}'></image>
+                <view class='type'>{{item.cardsTypeStr}}</view>
+                <view class='bottom flex_row'>
+                    <text class='price'>￥{{item.buyMoney}}</text>
+                    <text class='state'>{{item.status?'销售中':''}}</text>
+                </view>
+            </view>
+            <view class='cardType flex_row'>
+                <text>{{util.filterCardName(item.cardName)}}</text>
+                <text>{{item.cardsTypeStr}}</text>
+            </view>
+            <view class='bottomContent flex_row'>
+                <view class='flex_column'>
+                    <text>{{item.sportName}}</text>
+                    <text>发布于{{util.filterCardTime(item.createTimeStr)}}</text>
+                </view>
+                <view class='order'>订购</view>
+            </view>
+        </view>
+        <!--  
+            <view class='item flex_column'>
+                <view class='imgwarp'>
+                    <image class='vipImg' src='/images/card2.png'></image>
+                    <view class='type'>月卡</view>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥289.00</text>
+                        <text class='state'>在售中</text>
+                    </view>
+                </view>
+                <view class='cardType flex_row'>
+                    <text>一卡通次数卡</text>
+                    <text>次数卡</text>
+                </view>
+                <view class='bottomContent flex_row'>
+                    <view class='flex_column'>
+                        <text>游泳健身类</text>
+                        <text>发布于2018/02/23</text>
+                    </view>
+                    <view class='order'>订购</view>
+                </view>
+            </view>
+            <view class='item flex_column'>
+                <view class='imgwarp'>
+                    <image class='vipImg' src='/images/card3.png'></image>
+                    <view class='type'>季卡</view>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥289.00</text>
+                        <text class='state'>在售中</text>
+                    </view>
+                </view>
+                <view class='cardType flex_row'>
+                    <text>一卡通次数卡</text>
+                    <text>次数卡</text>
+                </view>
+                <view class='bottomContent flex_row'>
+                    <view class='flex_column'>
+                        <text>游泳健身类</text>
+                        <text>发布于2018/02/23</text>
+                    </view>
+                    <view class='order'>订购</view>
+                </view>
+            </view>
+            <view class='item flex_column'>
+                <view class='imgwarp'>
+                    <image class='vipImg' src='/images/card4.png'></image>
+                    <view class='type'>年卡</view>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥289.00</text>
+                        <text class='state'>在售中</text>
+                    </view>
+                </view>
+                <view class='cardType flex_row'>
+                    <text>一卡通次数卡</text>
+                    <text>次数卡</text>
+                </view>
+                <view class='bottomContent flex_row'>
+                    <view class='flex_column'>
+                        <text>游泳健身类</text>
+                        <text>发布于2018/02/23</text>
+                    </view>
+                    <view class='order'>订购</view>
+                </view>
+            </view>
+        -->
+    </view>
+</view>

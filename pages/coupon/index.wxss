@@ -1,0 +1,84 @@
+/* pages/coupon/index.wxss */
+
+page {
+    width: 100%;
+    height: 100%;
+}
+
+.containner {
+    min-height: 100%;
+    background: #f5f5f5;
+    align-items: center;
+}
+
+.coupon {
+    margin-top: 15rpx;
+    position: relative;
+}
+
+.couponImg {
+    width: 660rpx;
+    height: 230rpx;
+}
+
+.couponContent {
+    width: 520rpx;
+    position: absolute;
+    top: 20rpx;
+    left:70rpx 
+}
+
+.head {
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.price {
+    font-size: 48rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: #da0808;
+}
+
+.condition {
+    font-size: 24rpx;
+    color: #969696;
+    margin-left: 15rpx;
+    margin-top:-10rpx;
+
+}
+
+.couponName {
+    font-size: 32rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(50, 50, 50, 1);
+    margin-top: 6rpx;
+}
+
+
+.address{
+    margin: 10rpx 0;
+}
+.address, .term {
+    font-size: 28rpx;
+    color: #323232;
+}
+
+
+.btn {
+    width: 140rpx;
+    height: 50rpx;
+    background: rgba(255, 125, 37, 1);
+    border-radius: 20rpx;
+    font-size: 32rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 50rpx;
+    margin-bottom: 10rpx;
+    position: absolute;
+    bottom: 40rpx;
+    right: 70rpx;
+}

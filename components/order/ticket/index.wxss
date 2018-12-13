@@ -1,0 +1,2 @@
+/* components/order/ticket/index.wxss */
+@import '../venue/index.wxss'

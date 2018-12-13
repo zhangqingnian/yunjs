@@ -1,0 +1,18 @@
+<!--pages/coupon/index.wxml-->
+<view class='containner flex_column'>
+    <view class='coupon'>
+        <image class='couponImg' src='/images/coupon.png'></image>
+        <view class='couponContent flex_column'>
+            <view class='head flex_row'>
+                <view class='valueWarp flex_column'>
+                    <text class='price'>￥38.00</text>
+                    <text class='condition'>(满38元使用)</text>
+                </view>
+                <view class='couponName'>游泳馆门票优惠券</view>
+            </view>
+            <text class='address'>全民健身中心</text>
+            <text class='term'>有效期至：2018/09/30</text>
+        </view>
+        <view class='btn'>领取</view>
+    </view>
+</view>

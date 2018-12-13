@@ -1,0 +1,27 @@
+/* pages/confirmOrder/other/index.wxss */
+@import '../ticket/index.wxss';
+
+
+.icon_append{
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.student{
+    justify-content: space-between;
+    font-size: 28rpx;
+}
+
+.iphone{
+    margin-left: 200rpx;
+}
+
+.xieyi{
+    align-items: center;
+    padding: 10rpx 30rpx;
+    color: #63AFE0;
+}
+
+.checkbox {
+  transform:scale(.7);
+}

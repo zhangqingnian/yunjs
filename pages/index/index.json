@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "斤斗云健身",
+    "usingComponents": {
+        "v-city": "/components/city/city"
+    }
+}

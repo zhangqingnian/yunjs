@@ -1,0 +1,395 @@
+/* pages/venuedetail/index.wxss */
+
+page{
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    font-size: 32rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+}
+
+.icon_right {
+    width: 15rpx;
+    height: 27rpx;
+    margin-left: 10rpx;
+}
+
+.icon1 {
+    width: 26rpx;
+    height: 26rpx;
+    margin-right: 15rpx;
+}
+
+.mtop_30 {
+    margin-top: 30rpx;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.containner {
+    width: 100%;
+    min-height: 100%;
+    background: rgba(245, 245, 245, 1);
+    color: #2b2b2b;
+    box-sizing: border-box;
+    padding-bottom: 100rpx;
+}
+
+swiper, swiper swiper-item image {
+    width: 100%;
+    height: 300rpx;
+}
+
+.venueNews {
+    background: #fff;
+    padding: 30rpx 25rpx;
+    box-sizing: border-box;
+}
+
+.one {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.venueNanme {
+    font-size: 32rpx;
+    font-weight: bold;
+}
+
+.venueType text {
+    display: inline-block;
+    width: 60rpx;
+    height: 30rpx;
+    font-size: 24rpx;
+    text-align: center;
+    line-height: 30rpx;
+    margin-left: 20rpx;
+    color: #fff;
+}
+
+.ke{
+    background: #63afe0;
+}
+
+.ka {
+    background: #d18e3e;
+}
+
+.chang {
+    background: #d13e3e;
+}
+
+.two {
+    font-size: 24rpx;
+    justify-content: space-between;
+    align-content: center;
+    margin: 20rpx 0;
+}
+
+.address, .telephone {
+    font-size: 28rpx;
+    align-items: center;
+    margin: 20rpx 0;
+}
+
+.telephone {
+    margin-bottom: 0;
+}
+
+/* ------------------- */
+
+.selctType {
+    background: #fff;
+    padding: 25rpx 30rpx;
+}
+
+.selctType .title {
+    margin-bottom: 18rpx;
+}
+
+.scroll-view_H {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.scroll-view_H text {
+    width: 140rpx;
+    height: 50rpx;
+    border: 1px solid;
+    font-size: 28rpx;
+    display: inline-block;
+    text-align: center;
+    line-height: 50rpx;
+    border-radius: 10rpx;
+    margin-right: 20rpx;
+}
+
+.scroll-view_H text.on {
+    color: #63afe0;
+}
+
+/* ----------- */
+
+.coupon {
+    background: #fff;
+    padding: 25rpx 30rpx;
+}
+
+.coupon>view {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coupon view {
+    align-items: center;
+}
+
+.coupon .text {
+    color: #63afe0;
+    font-size: 28rpx;
+}
+
+/* ------------- */
+
+.serve {
+    background: #fff;
+}
+
+.serve .title {
+    padding: 25rpx 30rpx;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.serveType {
+    padding: 20rpx 30rpx 0 30rpx;
+    flex-wrap: wrap;
+}
+
+.serveType image {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 0 97.5rpx 30rpx 0;
+}
+
+.serveType image:nth-child(5n) {
+    margin-right: 0;
+}
+
+/* -------------- */
+
+.fengcai, .rating, .course, .venueTicket, .introduce {
+    background: #fff;
+}
+
+.fengcai .top, .rating .top, .course .top, .venueTicket .top {
+    padding: 25rpx 30rpx;
+    border-bottom: 1px solid #dcdcdc;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fengcai .top .text, .rating .top .text, .course .top .text,
+.venueTicket .top .text {
+    color: #63afe0;
+    font-size: 28rpx;
+}
+
+.fengcai .top .warp, .rating .top .warp, .course .top .warp,
+.venueTicket .top .warp {
+    align-items: center;
+}
+
+.fengcai .content {
+    padding: 20rpx 30rpx;
+}
+
+.fengcai .content image {
+    margin-right: 20rpx;
+}
+
+.rating .content {
+    padding: 0 20rpx;
+}
+
+.rating .content .item {
+    padding: 20rpx 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.userInfo {
+    color: #323232;
+}
+
+.avatar {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    background: red;
+    /* border: 1px solid #dcdcdc; */
+}
+
+.userName {
+    font-size: 28rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+}
+
+.ratingTime {
+    font-size: 24rpx;
+}
+
+.ratingContent {
+    font-size: 24rpx;
+    margin: 20rpx 0 0 90rpx;
+}
+
+.more {
+    text-align: center;
+    line-height: 78rpx;
+    color: #63afe0;
+    font-size: 30rpx;
+    font-weight: bold;
+}
+
+.course .content {
+    padding: 20rpx 70rpx;
+    justify-content: space-between;
+}
+
+.course .content .item {
+    width: 250rpx;
+}
+
+.course .imgwarp {
+    position: relative;
+    width: 250rpx;
+    height: 180rpx;
+    border-radius: 10rpx;
+    margin-bottom: 20rpx;
+    overflow: hidden;
+}
+
+.course .vipImg {
+    width: 250rpx;
+    height: 180rpx;
+}
+
+.cardName {
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+    font-size: 20rpx;
+    font-family: MFLangSong_Noncommercial-Regular;
+    font-weight: 400;
+    color: #696969;
+}
+
+.bottom {
+    position: absolute;
+    background: rgba(99, 224, 140, 0.5);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10rpx;
+    bottom: 0;
+    font-size: 22rpx;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    color: #f26179;
+}
+
+.state {
+    color: #fff;
+}
+
+.courseName, .footer {
+    font-size: 24rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: #323232;
+}
+
+.footer {
+    justify-content: space-between;
+}
+
+.venueTicket .content {
+    padding: 20rpx 30rpx;
+    justify-content: space-between;
+}
+
+.venueTicket .content .item {
+    width: 330rpx;
+}
+
+.venueTicket .content  .imgwarp {
+    position: relative;
+    width: 330rpx;
+    height: 220rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.venueTicket .content .vipImg {
+    width: 330rpx;
+    height: 220rpx;
+    background: red;
+}
+
+.venueTicket .price {
+    color: #fff;
+}
+
+.ticketName {
+    font-size: 24rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: #323232;
+    margin-top: 20rpx;
+}
+
+.introduce .top {
+    padding: 25rpx 30rpx;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.introduce .content {
+    padding: 20rpx 30rpx;
+    font-size: 24rpx;
+}
+
+.action {
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background: rgba(245, 245, 245, 1);
+}
+
+.action  view {
+    width: 165rpx;
+    height: 80rpx;
+    background: rgba(99, 175, 224, 1);
+    border-radius: 10px;
+    font-size: 28rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 80rpx;
+
+}

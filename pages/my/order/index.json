@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "我的订单",
+    "usingComponents": {
+        "v-venue": "/components/order/venue/index",
+        "v-card": "/components/order/card/index",
+        "v-course": "/components/order/course/index",
+        "v-ticket": "/components/order/ticket/index"
+    }
+}

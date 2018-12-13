@@ -1,0 +1,147 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.4.0",
+	"appid": "wx58248eb6a6468f9c",
+	"projectname": "yunjs",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 4,
+			"list": [
+				{
+					"id": -1,
+					"name": "馆卡",
+					"pathName": "pages/guanka/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "课程",
+					"pathName": "pages/kechen/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my",
+					"pathName": "pages/my/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": 4,
+					"name": "预定",
+					"pathName": "pages/yuding/index",
+					"query": "id=1320&sportTypeId=22"
+				},
+				{
+					"id": 5,
+					"name": "场馆详情",
+					"pathName": "pages/venueList/venueDetail/index",
+					"query": "id=1320"
+				},
+				{
+					"id": -1,
+					"name": "场馆课程",
+					"pathName": "pages/venueCourser/index",
+					"query": ""
+				},
+				{
+					"id": 7,
+					"name": "课程详情",
+					"pathName": "pages/kechen/kechenDetails/index",
+					"query": "id=94"
+				},
+				{
+					"id": 8,
+					"name": "确认订单",
+					"pathName": "pages/confirmOrder/other/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "场馆门票详情",
+					"pathName": "pages/venueTicket/venueTicketDetails/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my课程",
+					"pathName": "pages/my/kechen/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my订单",
+					"pathName": "pages/my/order/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my联系人",
+					"pathName": "pages/my/contacts/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "my学员",
+					"pathName": "pages/my/student/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "场馆列表",
+					"pathName": "pages/venueList/index",
+					"query": "id=22"
+				},
+				{
+					"id": -1,
+					"name": "场馆馆卡列表",
+					"pathName": "pages/venueCard/index",
+					"query": "id=1320"
+				},
+				{
+					"id": -1,
+					"name": "门票列表",
+					"pathName": "pages/venueTicket/index",
+					"query": "id=1320"
+				}
+			]
+		}
+	}
+}

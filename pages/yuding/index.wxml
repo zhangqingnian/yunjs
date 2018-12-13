@@ -1,0 +1,152 @@
+<!--pages/yuding/index.wxml-->
+<view class='container'>
+    <view class='date'>
+        <!-- 日期 -->
+        <scroll-view class="scroll-view_H" scroll-x="true">
+            <view class='item' wx:for="{{date}}" wx:key="{{idx}}">
+                <text>{{item.week}}</text>
+                <text>{{item.date}}</text>
+            </view>
+        </scroll-view>
+
+    </view>
+
+    <view class='areaNav flex_row'>
+        <view class='left'></view>
+        <view class='right area'>
+            <!-- 场地 -->
+            <scroll-view class="scroll-view_H" scroll-x="true">
+                <text wx:for="{{field}}" wx:key="{{item.id}}">{{item.areaName}}</text>
+            </scroll-view>
+        </view>
+    </view>
+    <view class='content flex_row'>
+        <view class='left time'>
+            <!-- 时间 -->
+            <scroll-view class='scroll-view-y' scroll-y style='margin-top:-30rpx;'>
+                <view wx:for="{{hour}}" wx:key="{{idx}}">{{item}}</view>
+            </scroll-view>
+        </view>
+        <view class='right'>
+            <scroll-view class='scroll-view-y' scroll-y>
+                <view class='item-warp flex_row'>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>不可预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                    <view>￥999预约</view>
+                </view>
+            </scroll-view>
+        </view>
+    </view>
+    <view class='bottomwarp flex_row'>
+        <view class='news flex_column' bindtap='onShowNews'>
+            <image src='/images/dingchang.png'></image>
+            <view>订场信息</view>
+        </view>
+        <view class='confirm'>
+            确认订场
+        </view>
+    </view>
+</view>
+
+<view class='mask' wx:if="{{isShowNews}}"></view>
+<view class='newswarp' wx:if="{{isShowNews}}">
+    <view class='topwarp'>
+        <view class='top'>
+            <text>订场信息</text>
+            <image class='close' bindtap='onClose' src='/images/close.png'></image>
+        </view>
+        
+        <scroll-view class='newslist' scroll-y>
+            <view class='flex_row'>
+                <text>2号场</text>
+                <text>2018-11-12</text>
+                <text> 星期一</text>
+                <text>13-16</text>
+                <text>3小时</text>
+            </view>
+            <view class='flex_row'>
+                <text>2号场</text>
+                <text>2018-11-12</text>
+                <text> 星期一</text>
+                <text>13-16</text>
+                <text>3小时</text>
+            </view>
+            <view class='flex_row'>
+                <text>2号场</text>
+                <text>2018-11-12</text>
+                <text> 星期一</text>
+                <text>13-16</text>
+                <text>3小时</text>
+            </view>
+        </scroll-view>
+    </view>
+</view>

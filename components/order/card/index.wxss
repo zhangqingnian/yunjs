@@ -1,0 +1,3 @@
+/* components/order/card/index.wxss */
+
+@import '../venue/index.wxss'

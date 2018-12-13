@@ -1,0 +1,66 @@
+/* pages/venueCourser/index.wxss */
+
+.containner {
+    width: 100%;
+    min-height: 100%;
+}
+
+.venueTicket .content {
+    padding: 20rpx 30rpx;
+    flex-wrap: wrap;
+}
+
+.venueTicket .content .item {
+    width: 330rpx;
+    margin-right: 30rpx;
+    margin-bottom: 30rpx;
+}
+.venueTicket .content .item:nth-child(2n) {
+    margin-right: 0rpx;
+}
+
+.venueTicket .content  .imgwarp {
+    position: relative;
+    width: 330rpx;
+    height: 220rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+    margin-bottom: 15rpx;
+}
+
+.venueTicket .content .vipImg {
+    width: 330rpx;
+    height: 220rpx;
+    background: red;
+}
+
+.bottom {
+    position: absolute;
+    background: rgba(99, 224, 140, 0.5);
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10rpx;
+    bottom: 0;
+    font-size: 22rpx;
+    font-family: MicrosoftYaHei;
+    font-weight: 400;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.bottomContent {
+    font-size: 24rpx;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order {
+    width: 64rpx;
+    height: 50rpx;
+    background: #ff7d25;
+    color: #fff;
+    text-align: center;
+    line-height: 50rpx;
+    border-radius: 10rpx;
+}

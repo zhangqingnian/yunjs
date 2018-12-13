@@ -1,0 +1,67 @@
+/* components/order/index.wxss */
+
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex_column {
+    display: flex;
+    flex-direction: column;
+}
+
+.order {
+    margin-top: 30rpx;
+    background: #fff;
+    padding: 0 30rpx;
+    font-size: 28rpx;
+}
+
+.order-top {
+    padding: 25rpx 0;
+    border-bottom: 1px solid #dcdcdc;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order .order-type {
+    font-size: 30rpx;
+}
+
+.order .slotwarp {
+    color: #969696;
+    align-items: center;
+}
+
+.order-bottom {
+    justify-content: space-between;
+    padding: 15rpx 0;
+}
+
+
+
+.list view {
+    line-height: 46rpx;
+}
+
+.btns{
+    justify-content: center;
+}
+
+.btn {
+    width: 140rpx;
+    height: 50rpx;
+    background: rgba(255, 125, 37, 1);
+    border-radius: 20px;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 32rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 40rpx;
+}
+
+.btn:last-child{
+     margin-bottom: 0rpx;
+}

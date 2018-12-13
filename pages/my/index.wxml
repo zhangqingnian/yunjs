@@ -1,0 +1,64 @@
+<!--pages/my/index.wxml-->
+<view class='containner'>
+    <view class='topwarp'>
+        <view class='top flex_row'>
+            <view class='flex_row left'>
+                <image class='avatar'></image>
+                <view class='flex_column'>
+                    <text class='Nickname'>青柠树下微风吹过</text>
+                    <text class='iphone'>13876820134</text>
+                </view>
+            </view>
+            <image class='right' src='/images/venuedetail/icon_big.png'></image>
+        </view>
+        <view class='bottom flex_row'>
+            <view class='flex_column' wx:for="{{bottomData}}" wx:key="{{item.title}}" bindtap='onBottomTap' data-name='{{item.title}}'>
+                <text class='value'>{{item.value}}</text>
+                <text class='name'>{{item.title}}</text>
+            </view>
+        <!--  
+            <view class='flex_column'>
+                <text class='value'>23张</text>
+                <text class='name'>优惠券</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>¥9578.3</text>
+                <text class='name'>余额</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>¥289.00</text>
+                <text class='name'>赠送金额</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>287</text>
+                <text class='name'>积分</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>2</text>
+                <text class='name'>馆卡</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>3</text>
+                <text class='name'>课程</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>1</text>
+                <text class='name'>门票</text>
+            </view>
+            <view class='flex_column'>
+                <text class='value'>2</text>
+                <text class='name'>场地</text>
+            </view>
+        -->
+        </view>
+    </view>
+    <view class='mtop30 list'>
+        <view class='flex_row item' wx:for="{{list}}" wx:key="{{item.name}}" bindtap='onListTap' data-name='{{item.name}}'>
+            <view class='flex_row'>
+                <image class='icon' src='{{item.icon}}'></image>
+                <text class='text'>{{item.name}}</text>
+            </view>
+            <image class='right' src='/images/venuedetail/icon_small.png'></image>
+        </view>
+    </view>
+</view>

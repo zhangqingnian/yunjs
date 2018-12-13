@@ -1,0 +1,21 @@
+<!--components/pay/index.wxml-->
+<view class='mask'></view>
+<view class='playwarp'>
+    <view class='topwarp'>
+    <view class='top'>
+        <text>支付方式</text>
+        <image class='close' bindtap='onClose' src='/images/close.png'></image>
+    </view>
+    <view class='playlist'>
+        <view class='flex_row item' wx:for="{{playlist}}" wx:key="idx">
+            <view class='flex_row' >
+                <image class='play-icon' src='{{item.src}}'></image>
+                <view>{{item.name}}</view>
+            </view>
+            <image class='select' bindtap='onSelectPlay' data-name='{{item.name}}'
+            src="{{item.isOn ? onSrc : offSrc}}"></image>
+        </view>
+    </view>
+    </view>
+    <view class='play'>立即支付</view>
+</view>

@@ -1,0 +1,52 @@
+<!--components/city/city.wxml-->
+<view class='containner'>
+    <view class='header'>
+        <view class="search-container">
+            <image class="icon" src="/images/search.png"></image>
+            <input class='bar' placeholder='请输入城市名或拼音' bindinput="onBindInpu" />
+        </view>
+        <view class='cancel' bind:tap="onCancel">取消</view>
+    </view>
+
+    <view wx:if="{{!isSearch}}" style='padding-top:30rpx;'>
+        <view class="searchLetter touchClass">
+            <view class="thishotText" bindtap="hotCity">
+                <view style="margin-top:0;">当前</view>
+                <view style="margin-top:0;">历史</view>
+            </view>
+            <view wx:for="{{searchLetter}}" style="color:#2ab4ff;font-size:20rpx;" wx:key="index" data-letter="{{item.name}}" catchtouchend="clickLetter">{{item.name}}</view>
+        </view>
+        <block wx:if="{{isShowLetter}}">
+            <view class="showSlectedLetter">
+                {{showLetter}}
+            </view>
+        </block>
+        <scroll-view scroll-y="true" style="height:{{winHeight}}px" bindscroll="onbindScroll" scroll-into-view="{{scrollTopId}}" scroll-top="{{scrollTop}}">
+            <view class="hotcity-common thisCity">当前选择城市</view>
+            <view class="thisCityName">{{city}}</view>
+            <view wx:if="{{hotcityList.length}}">
+                <text class="hotcity hotcity-common">历史搜索城市</text>
+                <view class="weui-grids">
+                    <block wx:for-items="{{hotcityList}}" wx:key="{{index}}">
+                        <view class="weui-grid" data-nodeCode="{{item.nodecode}}" data-city="{{item.city}}" bindtap="bindHotCity">
+                            <view class="weui-grid__label">{{item.city}}</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="selection" wx:for="{{cityList}}" wx:key="{{item.initial}}">
+                <view class="item_letter" >{{item.initial}}</view>
+                <view class="item_city" wx:for="{{item.cityInfo}}" wx:for-item="ct" wx:key="{{ct.id}}" data-nodeCode="{{ct.nodeCode}}" data-city="{{ct.city}}" bindtap="bindCity">
+                    {{ct.city}}
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <view wx:if="{{isSearch}}" class="selection">
+        <view wx:if="{{searchReslut.length}}" class="item_city"  wx:for="{{searchReslut}}" wx:for-item="ct" wx:key="{{ct.id}}" data-nodeCode="{{ct.nodeCode}}" data-city="{{ct.city}}" bindtap="bindCity">
+            {{ct.city}}
+        </view>
+        <view wx:if="{{!searchReslut.length}}" class='tip' >搜索不到该城市!</view>
+    </view>
+</view>

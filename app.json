@@ -1,0 +1,62 @@
+{
+    "pages": [
+        "pages/venueList/index",
+        "pages/venueTicket/index",
+        "pages/venueCard/index",
+        "pages/coupon/couponDetails/index",
+        "pages/coupon/index",
+        "pages/venueCourser/index",
+        "pages/venueList/venueDetail/index",
+        "pages/yuding/index",
+        "pages/authorize/index",
+        "pages/index/index",
+        "pages/guanka/index",
+        "pages/kechen/index",
+        "pages/my/index",
+        "pages/webviwe/index",
+        "pages/kechen/kechenDetails/index",
+        "pages/venueCard/venueCardDetails/index",
+        "pages/venueTicket/venueTicketDetails/index",
+        "pages/my/kechen/index",
+        "pages/my/order/index",
+        "pages/my/contacts/index",
+        "pages/my/student/index",
+        "pages/venueCard/termCardDetails/index",
+        "pages/confirmOrder/other/index",
+        "pages/confirmOrder/ticket/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#63afe0",
+        "navigationBarTitleText": "",
+        "navigationBarTextStyle": "#fff"
+    },
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "/images/icon-首页-未选@2x.png",
+                "selectedIconPath": "/images/icon-首页-选中@2x.png"
+            },
+            {
+                "pagePath": "pages/guanka/index",
+                "text": "馆卡",
+                "iconPath": "/images/icon-场馆-未选@2x.png",
+                "selectedIconPath": "/images/icon-场馆-选中@2x.png"
+            },
+            {
+                "pagePath": "pages/kechen/index",
+                "text": "课程",
+                "iconPath": "/images/icon-课程-未选中@2x.png",
+                "selectedIconPath": "/images/icon-课程-选中@2x.png"
+            },
+            {
+                "pagePath": "pages/my/index",
+                "text": "我的",
+                "iconPath": "/images/icon-我的-未选中@2x.png",
+                "selectedIconPath": "/images/icon-我的-选中@2x.png"
+            }
+        ]
+    }
+}

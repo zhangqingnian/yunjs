@@ -1,0 +1,15 @@
+<!--pages/my/student/index.wxml-->
+<view class='containner'>
+    <view class='item flex_row'>
+        <view class='usrnam'>王大锤</view>
+        <view class='flex_row'>
+            <view class='iphone'>18618164562</view>
+             <view class='flex_row action'>
+                <image src='/images/my/icon_7.png'></image>
+                <image src='/images/my/icon_8.png'></image>
+            </view>
+        </view>
+    </view>
+
+    <view class='add'>新增学员</view>
+</view>

@@ -1,0 +1,50 @@
+<!--pages/coupon/couponDetails/index.wxml-->
+<view class='containner flex_column'>
+    <view class='coupon mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>游泳馆门票优惠券</view>
+            <view class='type'>类型：游泳健身类</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>优惠券价格：</view>
+                <view class='value price'>¥38.00</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>365天</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>全名健身中心</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>地址：</view>
+                    <view class='value'>浙江省宁波市余姚市凯丰路199</view>
+                </view>
+                <view class='go flex_row'>
+                    <view>去这里</view>
+                    <image src='/images/venuedetail/icon_1.png'></image>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>限领数量：</view>
+                <view class='value'>1张/人</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>剩余数量：</view>
+                <view class='value'>2</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='explain mtop30'>
+        <view class='title'>使用说明</view>
+        <view class='content'>
+        此卡仅限健身馆、游泳馆、羽毛球通用消费，每次核销仅限对应核销场馆消费，有效期一年，过期作废。一旦购买，不可退转。购买则代表接受电子协议。
+        </view>
+    </view>
+
+    <view class='buy'>领取优惠券</view>
+</view>

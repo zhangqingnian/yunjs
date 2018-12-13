@@ -1,0 +1,84 @@
+<!--pages/venueCard/venueCardDetails/index.wxml-->
+<view class='containner flex_column'>
+    <view class='cardWarp'>
+        <image src='{{imgUrl + card.fileName}}'></image>
+    </view>
+
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>{{card.cardName}}</view>
+            <view class='type'>类型：{{card.sportName}}</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>馆卡价格：</view>
+                <view class='value price'>¥{{card.buyMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>馆卡次数：</view>
+                <view class='value'>30次</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>365天</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>地址：</view>
+                    <view class='value'>{{card.address}}</view>
+                </view>
+                <view class='go flex_row' 
+                bindtap='onMap' 
+                data-name='{{card.venueName}}'
+                data-address='{{card.address}}'
+                data-lat='{{card.lat}}'
+                data-lon='{{card.lon}}'>
+                    <view>去这里</view>
+                    <image src='/images/venuedetail/icon_1.png'></image>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>馆卡规格：</view>
+                <view class='value'>{{card.description}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>剩余数量：</view>
+                <view class='value'>{{card.surplusAmount}}</view>
+            </view>
+            <view class='item flex_row jihuo'>
+                <view class='name'>激活时间：</view>
+                <view class='value'>
+                    <text class='{{item.isOn ? "on":""}}' 
+                    bindtap='onSelectTime'
+                    data-item='{{item}}'
+                    wx:for="{{time}}" 
+                    wx:key="{{idx}}">{{item.name}}</text>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>提示：</view>
+                <view class='value'>
+                激活时间选择立即可直接使用，选择一天，一天后可使用
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>购买须知</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{card.remark}}
+        </view>
+    </view>
+
+
+
+    <view class='baoming'>报名</view>
+</view>

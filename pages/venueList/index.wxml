@@ -1,0 +1,229 @@
+<!--pages/venueList/index.wxml-->
+<wxs src="../../utils/venue.wxs" module="util" />
+<view class='containner'>
+    <view class='header'>
+        <view class="search-container">
+            <image class="search" src="/images/icon-搜索@2x.png" />
+            <input class='input' focus="true" placeholder='请输入您要搜索的运动项目' />
+        </view>
+    </view>
+    <view class='sort'>
+        <view class='left'></view>
+        <view class='right'>
+            <view class='warp'>
+                <text>价格</text>
+                <view>
+                    <image src='/images/icon_向上@2x.png'></image>
+                    <image src='/images/icon_向下@2x.png'></image>
+                </view>
+            </view>
+
+            <view class='warp'>
+                <text>距离</text>
+                <view>
+                    <image src='/images/icon_向上@2x.png'></image>
+                    <image src='/images/icon_向下@2x.png'></image>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='bottom-container'>
+
+        <view class='left'>
+            <scroll-view class='cardwarp' scroll-y>
+                <view class='type'>
+                    <block wx:for="{{typeList}}" wx:key='{{item.sport_type_id}}'>
+                        <view class="type-item {{item.isOn ? 'on' :''}}" bindtap='selectType' data-id="{{item.sport_type_id}}">{{item.typeName}}</view>
+                    </block>
+                </view>
+            </scroll-view>    
+        </view>
+        <view class='right '>
+            <scroll-view class='cardwarp' scroll-y>
+                <view class='card-container'>
+                    <view class='card flex_row' wx:for="{{venueList}}" wx:key="{{item.id}}"
+                    bindtap='onGoDetails' data-id='{{item.id}}'>
+                        <image class='venueImg' src='{{imgUrl + item.path}}'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>{{item.venueName}}</view>
+                                <view class='distance'>
+                                    {{ util.filterDistance(item.distance) }}
+                                </view>
+                            </view>
+                            <view class='star flex_row' >
+                            
+                            <block wx:for="{{ util.filterStar(item.venueStars)}}" 
+                            wx:key="{{idx}}"
+                            wx:for-item="itemName">           
+                               <image src='{{itemName}}'></image>
+                            </block>
+                                
+                            </view>
+                            <view class='address'>{{item.address}}</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                <!--  
+                    
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                    <view class='card flex_row'>
+                        <image class='venueImg' src='/images/vip.png'></image>
+                        <view class='venueNews flex_column'>
+                            <view class='flex_row topwarp'>
+                                <view class='venueName'>全民健身中心</view>
+                                <view class='distance'>200km</view>
+                            </view>
+                            <view class='star flex_row'>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_star.png'></image>
+                                <image src='/images/venuedetail/icon_off.png'></image>
+                            </view>
+                            <view class='address'>凯丰路896号</view>
+                        </view>
+                    </view>
+                -->
+                </view>
+
+            </scroll-view>
+        </view>
+
+    </view>
+</view>

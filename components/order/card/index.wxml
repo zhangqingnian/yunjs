@@ -1,0 +1,35 @@
+<!--components/order/card/index.wxml-->
+<view class='order my-class'>
+    <view class='order-top flex_row'>
+        <text class='order-type'>馆卡订单</text>
+        <view class='slotwarp flex_row'>
+            <slot name='text'></slot>
+            <slot name='delete'></slot>
+        </view>
+    </view>
+    <view class='order-bottom flex_row'>
+        <view class='list'>
+            <view>
+                <text>场馆名称：</text>
+                <text>宁波蕊目马术俱乐部</text>
+            </view>
+            <view>
+                <text>场馆电话：</text>
+                <text>0574-88420555</text>
+            </view>
+            <view>
+                <text>预约时间：</text>
+                <text>2018/09/30  12:00</text>
+            </view>
+            <view>
+                <text>预约项目：</text>
+                <text>马术</text>
+            </view>
+        </view>
+        <view class='btns flex_column'>
+            <slot name='play'></slot>
+            <slot name='refund'></slot>
+            <slot name='card'></slot>
+        </view>
+    </view>
+</view>
