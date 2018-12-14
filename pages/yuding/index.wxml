@@ -11,98 +11,29 @@
 
     </view>
 
-    <view class='areaNav flex_row'>
-        <view class='left'></view>
-        <view class='right area'>
-            <!-- 场地 -->
-            <scroll-view class="scroll-view_H" scroll-x="true">
-                <text wx:for="{{field}}" wx:key="{{item.id}}">{{item.areaName}}</text>
-            </scroll-view>
-        </view>
-    </view>
     <view class='content flex_row'>
         <view class='left time'>
             <!-- 时间 -->
-            <scroll-view class='scroll-view-y' scroll-y style='margin-top:-30rpx;'>
+            <scroll-view class='scroll-view-y timeWarp' scroll-y style='height:calc(100% - 70rpx);margin-top:70rpx;'>
                 <view wx:for="{{hour}}" wx:key="{{idx}}">{{item}}</view>
             </scroll-view>
         </view>
         <view class='right'>
-            <scroll-view class='scroll-view-y' scroll-y>
-                <view class='item-warp flex_row'>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>不可预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
-                    <view>￥999预约</view>
+            <scroll-view class='scroll-view-y' scroll-x style='white-space:nowrap;width: 560rpx;'>
+                <view class='area'>
+                    <!-- 场地 -->
+                    <text wx:for="{{field}}" wx:key="{{item.id}}">{{item.areaName}}</text>
                 </view>
+                <scroll-view class='scroll-view-y contentWarp' scroll-y style='width:{{areaWidth}}'>
+                    <block wx:for="{{field}}" wx:key="{{item.id}}">
+                        <view class='item-warp' >
+                            <view wx:for="{{item.venueAreaOpenTimes}}" 
+                            wx:for-item="itemName"
+                            wx:key="{{idx}}">{{itemName.cvaoStartTime}}</view>
+                        </view>
+                    </block>
+                </scroll-view>
+
             </scroll-view>
         </view>
     </view>
@@ -124,7 +55,7 @@
             <text>订场信息</text>
             <image class='close' bindtap='onClose' src='/images/close.png'></image>
         </view>
-        
+
         <scroll-view class='newslist' scroll-y>
             <view class='flex_row'>
                 <text>2号场</text>

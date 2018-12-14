@@ -13,7 +13,48 @@ Page({
         isShowNews: false,
         hour:[],
         date:[],
-        field:[]
+        field:[],
+        areaWidth:'',
+        datas:[
+            '不可预约',
+            '不可预约',
+            '不可预约',
+
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+            '不可预约',
+
+
+            '不可预约',
+            '不可预约',
+            '不可预约',
+        ]
     },
 
     /**
@@ -27,7 +68,7 @@ Page({
         } = options;
         id = Number(id);
         sportTypeId = Number(sportTypeId);
-        let hour = this._hour(9,24);
+        let hour = this._hour(0,24);
         let date = this._date(14);
         this.setData({
             hour,
@@ -41,9 +82,17 @@ Page({
             isShowNews: true
         })
     },
+    _setWidrh(len){
+        let _one = 140;
+        let areaWidth = _one * len +'rpx';
+        this.setData({
+            areaWidth
+        })
+    },
     _getField(id, sportTypeId, openDate){
         venueModel.getField(id, sportTypeId, openDate).then(res => {
             console.log(res.data)
+            this._setWidrh(res.data.length)
             this.setData({
                 field:res.data
             })
