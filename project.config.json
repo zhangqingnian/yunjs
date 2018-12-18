@@ -67,7 +67,7 @@
 					"id": 4,
 					"name": "预定",
 					"pathName": "pages/yuding/index",
-					"query": "id=1320&sportTypeId=22"
+					"query": "id=1320&sportTypeId=23"
 				},
 				{
 					"id": 5,

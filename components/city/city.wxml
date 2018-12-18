@@ -35,7 +35,7 @@
                 </view>
             </view>
             <view class="selection" wx:for="{{cityList}}" wx:key="{{item.initial}}">
-                <view class="item_letter" >{{item.initial}}</view>
+                <view class="item_letter"  id="{{item.initial}}">{{item.initial}}</view>
                 <view class="item_city" wx:for="{{item.cityInfo}}" wx:for-item="ct" wx:key="{{ct.id}}" data-nodeCode="{{ct.nodeCode}}" data-city="{{ct.city}}" bindtap="bindCity">
                     {{ct.city}}
                 </view>
