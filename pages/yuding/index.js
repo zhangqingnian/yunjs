@@ -240,10 +240,8 @@ Page({
         console.log(one)
         arr.forEach((item,index) => {
             one.forEach(items => {
-                let a = item.cvaoStartTime
-                let b = items.cvaoStartTime
-                if (a === b) {
-                    console.log('模板：' + items.cvaoIsOpen)
+                if (item.cvaoStartTime == items.cvaoStartTime) {
+                    console.log('模板：' + items.cvaoStartTime)
                     item = items
                     console.log(arr)
                 }
