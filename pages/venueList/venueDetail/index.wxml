@@ -42,7 +42,9 @@
         <view class='title'>选择类型</view>
         <scroll-view class="scroll-view_H" scroll-x="true">
             <block wx:for="{{venue.venueAreaVo}}" wx:key="{{item.cvaSportTypeId}}">          
-                <text class='on' data-cvaSportTypeId='{{item.cvaSportTypeId}}' >{{item.tvtTypeName}}</text>
+                <text class='{{item.cvaSportTypeId == sportTypeId ? "on":""}}' 
+                bindtap='onSelectSportType'
+                data-cvaSportTypeId='{{item.cvaSportTypeId}}' >{{item.tvtTypeName}}</text>
             </block>
         </scroll-view>
     </view>

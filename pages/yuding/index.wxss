@@ -129,7 +129,7 @@ page {
 .item-warp view{
     width:120rpx;
     height:50rpx;
-    background:#F5F5F5;
+    background: #fff;
     border:1px solid rgba(150,150,150,1);
     border-radius:6rpx;
     text-align: center;
@@ -138,6 +138,18 @@ page {
     color: #969696;
     margin:25rpx 10rpx;
     box-sizing: border-box;
+}
+
+.item-warp view.yes{
+    background: #fff;
+}
+.item-warp view.no{
+    border:1px dashed rgba(150,150,150,1);
+    background:#F5F5F5;
+}
+
+.item-warp view.on{
+    color: #63AFE0
 }
 
 .news {
@@ -224,5 +236,8 @@ page {
 }
 
 .newslist view text{
-    margin-right: 30rpx;
+    margin-right: 20rpx;
+}
+.newslist view text:last-child{
+    margin-right: 0;
 }

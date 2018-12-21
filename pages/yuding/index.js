@@ -10,182 +10,16 @@ Page({
      * 页面的初始数据
      */
     data: {
-        isShowNews: false,
+    
+        selectArr: [], //预约
+        isShowNews: false, 
         hour: [],
         date: [],
         field: [],
         areaWidth: '',
         defaultData: [],
-        arr: [{
-            "cvaoEndTime": "01:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "00:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "02:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "01:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "03:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "02:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "04:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "03:00",
-            "id": 496823
-        }, {
+        currentDate:'' //当前日期
 
-            "cvaoEndTime": "05:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "04:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "06:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "05:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "07:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "06:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "08:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "07:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "09:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "08:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "10:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "09:00",
-            "id": 496823
-        }, {
-            "cvaoEndTime": "11:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "10:00",
-            "id": 496825
-        }, {
-            "cvaoEndTime": "12:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "11:00",
-            "id": 496827
-        }, {
-            "cvaoEndTime": "13:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "12:00",
-            "id": 496829
-        }, {
-            "cvaoEndTime": "14:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "13:00",
-            "id": 496831
-        }, {
-            "cvaoEndTime": "15:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "14:00",
-            "id": 496833
-        }, {
-            "cvaoEndTime": "16:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "15:00",
-            "id": 496835
-        }, {
-            "cvaoEndTime": "17:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "16:00",
-            "id": 496837
-        }, {
-            "cvaoEndTime": "18:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "17:00",
-            "id": 496839
-        }, {
-            "cvaoEndTime": "19:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "18:00",
-            "id": 496841
-        }, {
-            "cvaoEndTime": "20:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "19:00",
-            "id": 496843
-        }, {
-            "cvaoEndTime": "21:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "20:00",
-            "id": 496845
-        }, {
-            "cvaoEndTime": "22:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "21:00",
-            "id": 496847
-        }, {
-            "cvaoEndTime": "23:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "22:00",
-            "id": 496849
-        }, {
-            "cvaoEndTime": "00:00",
-            "cvaoIsOccupy": 0,
-            "cvaoIsOpen": 0,
-            "cvaoPrice": 0,
-            "cvaoStartTime": "23:00",
-            "id": 496851
-        }]
     },
 
     /**
@@ -202,17 +36,89 @@ Page({
         let hour = this._hour(0, 24);
         let date = this._date(14);
         this.setData({
+            id,
+            sportTypeId,
             hour,
-            date
+            date,
+            currentDate: date[0]
         });
         this._getField(id, sportTypeId, openDate);
     },
-    onMove(e) {
-        console.log(e)
+    onSelectDate(e){
+        let { dateId, isOn } = e.currentTarget.dataset.item;
+        if(isOn)return;
+        let { id, sportTypeId}= this.data;
+        let currentDate 
+        this.data.date.forEach(item => {
+            if (item.dateId == dateId){
+                item.isOn = true;
+                currentDate = item;
+                this._getField(id, sportTypeId, item.openDate);
+            }else{
+                item.isOn = false;
+            }
+        })
+        this.setData({
+            date:this.data.date,
+            currentDate
+        })
+        
+    },
+    onSelect(e) {
+        let _arr = this.data.selectArr; //已经预约的
+        let maxLen = 4; //最大预约数
+        let {item,area} = e.currentTarget.dataset;
+        let {
+            cvaoIsOpen,
+            id
+        } = item;
+        if (!cvaoIsOpen) return; //点击不可预约 retrun
+
+
+        let field = this.data.field;
+        field.forEach(item => {
+            item.venueAreaOpenTimes.forEach(items => {
+                if (items.id == id) {
+                    if (!items.isSelect) {
+                        if (_arr.length < maxLen) {
+                            items.isSelect = !items.isSelect
+                            items.area = area;
+                            items.currentDate = this.data.currentDate;
+                            _arr.push(items);
+                        } else {
+                            wx.showToast({
+                                title: '最多选择4个',
+                                icon: 'none',
+                                duration: 1000
+                            })
+                        }
+                    } else {
+                        _arr.forEach((e, index) => {
+                            if (e.id == id) {
+                                items.isSelect = !items.isSelect
+                                _arr.splice(index, 1);
+                            }
+                        })
+                    }
+                }
+            })
+        })
+        console.log(_arr)
+        this.setData({
+            field,
+            selectArr:_arr
+        })
+
+
     },
     onShowNews() {
         this.setData({
             isShowNews: true
+        })
+    },
+    onClose() {
+        this.setData({
+            isShowNews: false
         })
     },
     _setWidrh(len) {
@@ -224,47 +130,249 @@ Page({
     },
     _getField(id, sportTypeId, openDate) {
         venueModel.getField(id, sportTypeId, openDate).then(res => {
-            console.log(res.data)
-            this._setWidrh(res.data.length);
-            this._default(res.data)
-            this.setData({
-                field: res.data
-            })
+            let area = res.data;
+            
+            console.log(area)
+            this._setWidrh(area.length);
+            this._default(area)
         })
     },
     _default(area) {
-        this.data.hour.pop()
-        let hour = this.data.hour;
-        let arr = this.data.arr;
-        let one = area[0].venueAreaOpenTimes;
-        console.log(one)
-        arr.forEach((item,index) => {
-            one.forEach(items => {
-                if (item.cvaoStartTime == items.cvaoStartTime) {
-                    console.log('模板：' + items.cvaoStartTime)
-                    item = items
-                    console.log(arr)
-                }
-            })           
-        })
-      
+        let arr = [
+                        {
+                            "cvaoEndTime": "01:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "00:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "02:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "01:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "03:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "02:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "04:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "03:00",
+                            "id": 496823
+                        }, {
 
-        // area.forEach((item,i) => {
-        //     let a = item.venueAreaOpenTimes
-        //     item.venueAreaOpenTimes = arr
-        //     item.venueAreaOpenTimes.forEach(arrItem => {
-        //         a.forEach(items => {
-        //             if (items.cvaoStartTime == arrItem.cvaoStartTime) {
-        //                 console.log("数据库值：" + items.cvaoIsOpen)
-        //                 arrItem = items
-        //                 console.log("本地值" + arrItem.cvaoIsOpen)
-        //             }else{
-        //                 arrItem.cvaoStartTime = '不可预约'
+                            "cvaoEndTime": "05:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "04:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "06:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "05:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "07:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "06:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "08:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "07:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "09:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "08:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "10:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "09:00",
+                            "id": 496823
+                        }, {
+                            "cvaoEndTime": "11:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "10:00",
+                            "id": 496825
+                        }, {
+                            "cvaoEndTime": "12:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "11:00",
+                            "id": 496827
+                        }, {
+                            "cvaoEndTime": "13:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "12:00",
+                            "id": 496829
+                        }, {
+                            "cvaoEndTime": "14:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "13:00",
+                            "id": 496831
+                        }, {
+                            "cvaoEndTime": "15:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "14:00",
+                            "id": 496833
+                        }, {
+                            "cvaoEndTime": "16:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "15:00",
+                            "id": 496835
+                        }, {
+                            "cvaoEndTime": "17:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "16:00",
+                            "id": 496837
+                        }, {
+                            "cvaoEndTime": "18:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "17:00",
+                            "id": 496839
+                        }, {
+                            "cvaoEndTime": "19:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "18:00",
+                            "id": 496841
+                        }, {
+                            "cvaoEndTime": "20:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "19:00",
+                            "id": 496843
+                        }, {
+                            "cvaoEndTime": "21:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "20:00",
+                            "id": 496845
+                        }, {
+                            "cvaoEndTime": "22:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "21:00",
+                            "id": 496847
+                        }, {
+                            "cvaoEndTime": "23:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "22:00",
+                            "id": 496849
+                        }, {
+                            "cvaoEndTime": "00:00",
+                            "cvaoIsOccupy": 0,
+                            "cvaoIsOpen": 0,
+                            "cvaoPrice": 0,
+                            "cvaoStartTime": "23:00",
+                            "id": 496851
+                        }
+        ];
+        // let k = 0;
+        // let newData = [];
+        // for (var i = 0; i < area.length; i++) {
+        //     newData = [];
+        //     let a = area[i].venueAreaOpenTimes;
+        //     area[i].venueAreaOpenTimes = arr;
+        //     if (!a.length) return;
+        //     outer: for (var j = 0; j < area[i].venueAreaOpenTimes.length; j++) {
+        //         inter: for (k; k < area[i].venueAreaOpenTimes.length;) {
+        //             if (k < a.length) {
+        //                 if (a[k].cvaoStartTime == area[i].venueAreaOpenTimes[j].cvaoStartTime) {
+        //                     newData.push(a[k]);
+        //                     k++;
+        //                     continue outer;
+        //                 } else {
+        //                     newData.push(area[i].venueAreaOpenTimes[j])
+        //                     break inter;
+        //                 }
+        //             } else {
+        //                 newData.push(area[i].venueAreaOpenTimes[j])
+        //                 break inter;
         //             }
-        //         })
-        //     })
-        // })
-        //console.log(area)
+
+        //         }
+        //     }
+        //     if (newData.length != 0) {
+        //         area[i].venueAreaOpenTimes = newData;
+        //         k = 0;
+        //     }
+        // }
+        for (let k = 0; k < area.length; k++) {
+            let [...clon] = arr;
+            let one = area[k].venueAreaOpenTimes;
+            for (var i = 0; i < arr.length; i++) {
+                for (let j = 0; j < one.length; j++) {
+                    if (arr[i].cvaoStartTime == one[j].cvaoStartTime) {
+                        arr[i] = one[j];
+                        console.log(arr[i].cvaoStartTime)
+
+                    }
+
+                }
+            }
+            area[k].venueAreaOpenTimes = arr;
+            arr = clon;
+        }
+
+        let _arr = this.data.selectArr;
+        area.forEach(item => {
+            item.venueAreaOpenTimes.forEach(items => {
+                items.isSelect = false;
+                if(_arr.length){
+                    _arr.forEach(e => {
+                        if (e.id == items.id) {
+                            items.isSelect = true;
+                        }
+                    })
+                }           
+            })
+        })
+        this.setData({
+            field: area
+        })
     },
     _hour(start, end) {
         var _arr = [];
@@ -283,16 +391,26 @@ Page({
         let myDate = new Date();
 
         for (let i = 0; i < max; i++) {
-            myDate.setDate(myDate.getDate() + 1)
+            if(i != 0){
+               myDate.setDate(myDate.getDate() + 1)
+            }
+                
+            let time = myDate.getTime();
+            let year = myDate.getFullYear();
             let month = myDate.getMonth() + 1;
             let day = myDate.getDate();
             let week = weeks[myDate.getDay()];
             let obj = {
                 date: month + '/' + day,
-                week: week
+                week: week,
+                openDate: time,
+                formatDate:year+'-'+month+'-'+day,
+                isOn:false,
+                dateId:i
             }
             _arr.push(obj)
         }
+        _arr[0].isOn = true;
         return _arr;
     }
 })

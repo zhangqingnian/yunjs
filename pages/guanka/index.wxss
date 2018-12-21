@@ -124,6 +124,7 @@ page{
     width: 250rpx;
     height: 150rpx;
     border-radius: 3px;
+    overflow: hidden;
 }
 .price{
     color: #F26179;
@@ -144,6 +145,7 @@ page{
 .card image{
     width: 250rpx;
     height: 150rpx;
+    border-radius:3px;
 }
 
 .cardName{

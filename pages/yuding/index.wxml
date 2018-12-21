@@ -3,7 +3,10 @@
     <view class='date'>
         <!-- 日期 -->
         <scroll-view class="scroll-view_H" scroll-x="true">
-            <view class='item' wx:for="{{date}}" wx:key="{{idx}}">
+            <view class='item {{item.isOn ? "on":""}}' 
+            bindtap='onSelectDate'
+            data-item='{{item}}'
+            wx:for="{{date}}" wx:key="{{idx}}">
                 <text>{{item.week}}</text>
                 <text>{{item.date}}</text>
             </view>
@@ -25,9 +28,16 @@
                 <view class='contentWarp'>
                     <block wx:for="{{field}}" wx:key="{{item.id}}">
                         <view class='item-warp' >
-                            <view wx:for="{{item.venueAreaOpenTimes}}" 
+                            <view 
+                            bindtap='onSelect'
+                            data-item='{{itemName}}'
+                            data-area='{{item.areaName}}'
+                            class='{{itemName.cvaoIsOpen?"yes":"no"}} {{itemName.isSelect?"on":""}}'
+                            wx:for="{{item.venueAreaOpenTimes}}" 
                             wx:for-item="itemName"
-                            wx:key="{{idx}}">{{itemName.cvaoStartTime}}</view>
+                            wx:key="{{idx}}">
+                                {{itemName.cvaoIsOpen ? '￥'+itemName.cvaoPrice+'预约' : '不可预约'}}
+                            </view>
                         </view>
                     </block>
                 </view>
@@ -53,29 +63,15 @@
             <text>订场信息</text>
             <image class='close' bindtap='onClose' src='/images/close.png'></image>
         </view>
-
         <scroll-view class='newslist' scroll-y>
-            <view class='flex_row'>
-                <text>2号场</text>
-                <text>2018-11-12</text>
-                <text> 星期一</text>
-                <text>13-16</text>
-                <text>3小时</text>
+            <view class='flex_row' wx:for="{{selectArr}}" wx:key="{{item.id}}">
+                <text>{{item.area}}</text>
+                <text>{{item.currentDate.formatDate}}</text>
+                <text> {{item.currentDate.week}}</text>
+                <text>{{item.cvaoStartTime}}-{{item.cvaoEndTime}}</text>
+                <text>1小时</text>
             </view>
-            <view class='flex_row'>
-                <text>2号场</text>
-                <text>2018-11-12</text>
-                <text> 星期一</text>
-                <text>13-16</text>
-                <text>3小时</text>
-            </view>
-            <view class='flex_row'>
-                <text>2号场</text>
-                <text>2018-11-12</text>
-                <text> 星期一</text>
-                <text>13-16</text>
-                <text>3小时</text>
-            </view>
+            
         </scroll-view>
     </view>
 </view>

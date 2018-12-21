@@ -35,7 +35,6 @@ Page({
     onLoad: function(options) {
         console.log(options)
         let { id, sportTypeId } = options;
-        console.log(id)
         this.setData({
             id,
             sportTypeId
@@ -46,6 +45,13 @@ Page({
         this._getGk(id);
         this._getKc(id);
         this._getKKC(id);
+    },
+    //选择运动类型
+    onSelectSportType(e){
+        let sportTypeId = e.currentTarget.dataset.cvasporttypeid;
+        this.setData({
+            sportTypeId
+        })
     },
     //购买课程
     onBuyCourse(e) {
@@ -99,7 +105,6 @@ Page({
     //课卡场
     _getKKC(id) {
         venueModel.getKKC(id).then(res => {
-            console.log(res.data)
             this.setData({
                 venueKKC: res.data
             })
@@ -117,7 +122,6 @@ Page({
     //评论
     _getRating(id) {
         venueModel.getRating(id).then(res => {
-            console.log(res.data.items)
             this.setData({
                 venueRating: res.data.items
             })
@@ -126,7 +130,6 @@ Page({
     //馆卡
     _getGk(id) {
         venueModel.getGk(id).then(res => {
-            console.log(res.data.items)
             this.setData({
                 venueGk: res.data.items
             })
@@ -135,7 +138,6 @@ Page({
     //课程
     _getKc(id) {
         venueModel.getKc(id).then(res => {
-            console.log(res.data.items)
             this.setData({
                 venueKc: res.data.items
             })

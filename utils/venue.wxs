@@ -20,17 +20,28 @@ var filterCardStauts = function(val){
 
 
 var filterCardName = function(str){
-    return str.length > 10 ? str.slice(0,8) + '...' : str
-    
+    return str.length > 10 ? str.slice(0,8) + '...' : str  
+}
+
+var filterCardName2 = function (str) {
+    return str.length > 8 ? str.slice(0, 8) + '...' : str
+}
+
+var filterVenueName = function (str) {
+    return str.length > 6 ? str.slice(0, 6) + '...' : str
 }
 
 var filterCardTime = function (str) {
     return str.split(' ')[0];
 }
 
+
+
 module.exports = {
     filterStar: filterStar,
     filterDistance: filterDistance,
     filterCardName: filterCardName, 
-    filterCardTime: filterCardTime
+    filterCardName2: filterCardName2,
+    filterCardTime: filterCardTime,
+    filterVenueName: filterVenueName
 }

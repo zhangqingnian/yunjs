@@ -120,4 +120,31 @@ export class VenueModel extends Http {
             }
         })
     }
+
+    //馆卡列表(根据类型查馆卡列表)
+    getVenueCardList(data){
+        return this.request({
+            url: 'm/crm/venueCards/front/listVenueCardsByTypes',
+            method: 'POST',
+            data
+        })
+    }
+
+    //课程列表(查询所有能报名的课程)
+    getVenueCourserList(data){
+        return this.request({
+            url: 'm/crm/venueCourse/front/listVenueCourseForStatus',
+            method: 'POST',
+            data
+        })
+    }
+
+    //运动类型
+    getVenuetype() {
+        return this.request({
+            url: 'm/crm/venue/front/selectAllVenueType'
+        })
+    }
+
+    
 }

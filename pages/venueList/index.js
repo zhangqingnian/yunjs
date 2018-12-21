@@ -51,6 +51,7 @@ Page({
     getType(id){
         indexModel.getVenuetype().then(res => {
             let data = res.data.items;
+            console.log(data)
             data.unshift({ sort: 0, sport_type_id: '', type: 0, typeName: "综合" })
             data.forEach(item => {
                 item.isOn = false
