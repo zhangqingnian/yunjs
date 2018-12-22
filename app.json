@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/authorize/index",
         "pages/venueList/index",
         "pages/venueTicket/index",
         "pages/venueCard/index",
@@ -8,7 +9,6 @@
         "pages/venueCourser/index",
         "pages/venueList/venueDetail/index",
         "pages/yuding/index",
-        "pages/authorize/index",
         "pages/index/index",
         "pages/guanka/index",
         "pages/kechen/index",
@@ -23,13 +23,16 @@
         "pages/my/student/index",
         "pages/venueCard/termCardDetails/index",
         "pages/confirmOrder/other/index",
-        "pages/confirmOrder/ticket/index"
+        "pages/confirmOrder/ticket/index",
+        "pages/login/index",
+        "pages/coupon/couponList/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#63afe0",
         "navigationBarTitleText": "",
-        "navigationBarTextStyle": "#fff"
+        "navigationBarTextStyle": "#fff",
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "list": [

@@ -1,20 +1,19 @@
 import { config } from '../config.js'
 
-
-
 export class Http {
-    request({ url, data, method, header }) {
+    request({ url, data, method }) {
         return new Promise((resolve, reject) => {
-            this._request(url, resolve, reject, data, method, header);
+            this._request(url, resolve, reject, data, method);
         })
     }
 
-    _request(url, resolve, reject, data = {}, method = 'GET', header) {
+    _request(url, resolve, reject, data = {}, method = 'GET') {
         wx.request({
             url: config.api_base_url + url,
             data: data,
             header: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
+                'ACCESS_TOKEN': wx.getStorageSync('token').accessToken || ''
             },
             method: method,
             success: (res) => {

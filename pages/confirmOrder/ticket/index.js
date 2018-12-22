@@ -1,66 +1,70 @@
 // pages/confirmOrder/ticket/index.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        isCoupon:false,
+        ticketNum:1,
+        ticket:{},
+        total:0
+    },
 
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function(options) {
+        
+        let ticket = JSON.parse(options.ticket);
+        console.log(ticket)
+        
+        this.setData({
+            ticket,
+            total: ticket.ticketPrice
+        })
+    },
+    onAdd(){
+        if (this.data.ticketNum < this.data.ticket.ticketBuylimitAmount){
+            this.setData({
+                ticketNum: this.data.ticketNum + 1,
+                total: (this.data.ticketNum + 1) * this.data.ticket.ticketPrice
+            })
+        }else{
+            wx.showToast({
+                title: '已到最大限购数量',
+                icon:'none',
+                duration:1000
+            })
+        }
+        
+    },
+    onReduce(){
+        if (this.data.ticketNum>1){
+            this.setData({
+                ticketNum: this.data.ticketNum - 1,
+                total: (this.data.ticketNum - 1) * this.data.ticket.ticketPrice
+            })
+        }
+       
+    },
+    onSubmit() {
+        this.setData({
+            payShow: true
+        })
+    },
+    onClose() {
+        this.setData({
+            payShow: false
+        })
+    },
+    //优惠券列表
+    onGoCoupon(){
+        console.log(1);
+        this.setData({
+            isCoupon:true
+        })
+    }
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+    
 })

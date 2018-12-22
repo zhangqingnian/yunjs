@@ -83,6 +83,6 @@
 
 
 
-    <view class='baoming'>报名</view>
+    <view class='baoming' bindtap='onGoOrder'>报名</view>
 </view>
 

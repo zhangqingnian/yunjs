@@ -52,7 +52,7 @@
     <view class='coupon mtop_30' wx:if="{{venue.countCoupon}}">
         <view class='flex_row'>
             <text class='title'>场馆优惠券</text>
-            <view class='flex_row'>
+            <view class='flex_row' bindtap='onGoCoupon'>
                 <text class='text'>{{venue.countCoupon}}张优惠券</text>
                 <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>

@@ -1,7 +1,8 @@
-<!--pages/coupon/index.wxml-->
-<view class='containner flex_column'>
-    <view class='coupon' 
-        catchtap='onGodetails'
+<!--components/couponList/index.wxml-->
+<view class='containner'>
+    hello
+    <!-- <view class='coupon' 
+        catchtap='onGoback'
         data-item='{{item}}'
         wx:for="{{couponList}}" wx:key="{{item.id}}">
         <image class='couponImg' src='/images/coupon.png'></image>
@@ -16,6 +17,5 @@
             <text class='address'>{{item.venueName}}</text>
             <text class='term'>有效期至：{{item.effectiveTimeStr}}</text>
         </view>
-        <view class='btn' catchtap='onReceiveCoupon' data-item='{{item}}'>领取</view>
-    </view>
+    </view> -->
 </view>

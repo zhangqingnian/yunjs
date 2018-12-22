@@ -35,6 +35,10 @@ var filterCardTime = function (str) {
     return str.split(' ')[0];
 }
 
+var filterMomey = function (num) {
+    return num.toFixed(2)
+}
+
 
 
 module.exports = {
@@ -43,5 +47,6 @@ module.exports = {
     filterCardName: filterCardName, 
     filterCardName2: filterCardName2,
     filterCardTime: filterCardTime,
-    filterVenueName: filterVenueName
+    filterVenueName: filterVenueName,
+    filterMomey: filterMomey
 }

@@ -1,5 +1,7 @@
 <!--pages/confirmOrder/ticket/index.wxml-->
-<view class='containner flex_column'>
+<wxs src="../../../utils/venue.wxs" module="util" />
+
+<view wx:if="{{!isCoupon}}" class='containner flex_column'>
     <view class='category itemClass mtop30'>
         <view class='titleWarp flex_row'>
             <view >订单信息</view>
@@ -7,25 +9,25 @@
         <view class='content flex_column'>
             <view class='item flex_row'>
                 <view class='name'>门票名称：</view>
-                <view class='value'>游泳馆门票</view>
+                <view class='value'>{{ticket.ticketName}}</view>
             </view>
             <view class='item flex_row'>
                 <view class='name'>场馆：</view>
-                <view class='value'>全名健身中心</view>
+                <view class='value'>{{ticket.venueName}}</view>
             </view>
             <view class='item hasAddress flex_row'>
                 <view class='flex_row'>
                     <view class='name'>场馆地址：</view>
-                    <view class='value'>浙江省宁波市余姚市凯丰路199</view>
+                    <view class='value'>{{ticket.venueAddress}}</view>
                 </view>
             </view>
             <view class='item jihuo flex_row'>
                 <view class='name'>二维码颜色：</view>
-                <view class='value color'></view>
+                <view class='value color' style='background:rgb({{ticket.dColor}})'></view>
             </view>
             <view class='item flex_row'>
                 <view class='name'>限购数量：</view>
-                <view class='value'>15张/人/天</view>
+                <view class='value'>{{ticket.ticketBuylimitAmount}}</view>
             </view>
         </view>
     </view>
@@ -44,9 +46,9 @@
         <view class='titleWarp flex_row'>
             <view class='title'>购买数量</view>
             <view class='number flex_row'>
-               <image src='/images/venuedetail/icon_reduce_on.png'></image>
-               <text class='input'>0</text>
-               <image src='/images/venuedetail/icon_add_on.png'></image>
+               <image src='/images/venuedetail/icon_reduce_on.png'bindtap='onReduce'></image>
+               <text class='input'>{{ticketNum}}</text>
+               <image src='/images/venuedetail/icon_add_on.png' bindtap='onAdd'></image>
             </view>
         </view>
     </view>
@@ -55,17 +57,17 @@
         <view class='titleWarp flex_row'>
             <view class='title'>服务共计</view>
             <view class='price flex_row'>
-               ￥80x8
+               ￥{{ticket.ticketPrice}}x{{ticketNum}}
             </view>
         </view>
     </view>
 
      <view class=' itemClass bottomClass '>
-        <view class='titleWarp borderNone flex_row'>
+        <view class='titleWarp borderNone flex_row' bindtap='onGoCoupon'>
             <view class='title'>优惠券</view>
             <view class='cuuponwarp flex_row'>
-              <view class='price'>￥38.00</view>
-              <view class='cuuponName'>健身馆门票优惠券</view>
+              <view class='price'>￥{{coupon.money}}</view>
+              <view class='cuuponName'>{{coupon.couponName}}</view>
               <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>
         </view>
@@ -74,8 +76,11 @@
     <view class='total'>
         <text>已优惠</text>
         <text>合计:</text>
-        <text class='price'>￥21600.00</text>
+        <text class='price'>￥{{util.filterMomey(total - coupon.money)}}</text>
     </view>
     
-    <view class='submit'>提交订单</view>
+    <view class='submit' bindtap='onSubmit'>提交订单</view>
 </view>
+
+<v-pay wx:if="{{payShow}}" bind:close="onClose" />
+<v-coupon class="coupon" wx:if="{{isCoupon}}"/>

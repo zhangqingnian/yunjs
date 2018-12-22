@@ -77,6 +77,13 @@ Page({
             url: '/pages/yuding/index?id=' + this.data.id + '&sportTypeId=' + this.data.sportTypeId,
         })
     },
+    //跳转优惠券列表
+    onGoCoupon(){
+        let venue = JSON.stringify(this.data.venue)
+        wx.navigateTo({
+            url: '/pages/coupon/index?venue=' + venue
+        })
+    },
     //查看地址 - 地图
     onMap(e){
         console.log(e.currentTarget.dataset);

@@ -1,0 +1,18 @@
+<!--pages/login/index.wxml-->
+<view class='containner'>
+    <view class=' item flex_row'>
+        <input class='iphone' focus='true' 
+            value='{{iphone}}'
+            bindinput='onIphoneInput'
+            maxlength = '11'
+            placeholder='请输入的手机号'></input>
+        <text class='code {{isOn ? "on":""}}' bindtap='onGetCode'>{{msg}}</text>
+    </view>
+    <view class=' item flex_row'>
+        <input  
+            bindinput='onCodeInput'
+            placeholder='请输入短信验证码'></input>
+    </view>
+
+    <view class='login' bindtap='onLogin'>登录</view>
+</view>

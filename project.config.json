@@ -37,7 +37,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 18,
 			"list": [
 				{
 					"id": -1,
@@ -90,7 +90,7 @@
 				{
 					"id": 8,
 					"name": "确认订单",
-					"pathName": "pages/confirmOrder/other/index",
+					"pathName": "pages/confirmOrder/ticket/index",
 					"query": ""
 				},
 				{
@@ -140,6 +140,18 @@
 					"name": "门票列表",
 					"pathName": "pages/venueTicket/index",
 					"query": "id=1320"
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "优惠券列表",
+					"pathName": "pages/coupon/index",
+					"query": "venueId=1320"
 				}
 			]
 		}
