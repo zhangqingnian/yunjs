@@ -1,21 +1,43 @@
 <!--components/pay/index.wxml-->
 <view class='mask'></view>
-<view class='playwarp'>
+<view class='playwarp' wx:if="{{!showPayPwdInput}}">
     <view class='topwarp'>
-    <view class='top'>
-        <text>支付方式</text>
-        <image class='close' bindtap='onClose' src='/images/close.png'></image>
-    </view>
-    <view class='playlist'>
-        <view class='flex_row item' wx:for="{{playlist}}" wx:key="idx">
-            <view class='flex_row' >
-                <image class='play-icon' src='{{item.src}}'></image>
-                <view>{{item.name}}</view>
+        <view class='top'>
+            <text>支付方式</text>
+            <image class='close' bindtap='onClose' src='/images/close.png'></image>
+        </view>
+        <view class='playlist'>
+            <view class='flex_row item' wx:for="{{playlist}}" wx:key="idx">
+                <view class='flex_row'>
+                    <image class='play-icon' src='{{item.src}}'></image>
+                    <view>{{item.name}}</view>
+                </view>
+                <image class='select' bindtap='onSelectPlay' data-name='{{item.name}}' src="{{item.isOn ? onSrc : offSrc}}"></image>
             </view>
-            <image class='select' bindtap='onSelectPlay' data-name='{{item.name}}'
-            src="{{item.isOn ? onSrc : offSrc}}"></image>
         </view>
     </view>
+    <view class='play' catchtap='onPay'>立即支付</view>
+</view>
+
+<view class='input_main' wx:if="{{showPayPwdInput}}">
+    <view class='input_title'>
+        <view class='input_back' catchtap='hidePayLayer'>
+            <text></text>
+        </view>
+        <text>输入支付密码</text>
     </view>
-    <view class='play'>立即支付</view>
+    <view class='input_tip'>
+        <text>使用余额支付需要验证身份，验证通过后才可进行支付。</text>
+    </view>
+    <view class='input_row' catchtap='getFocus'>
+        <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+            <text wx:if='{{pwdVal.length>i}}'></text>
+        </view>
+    </view>
+    <view class='forget_pwd' catchtap='_goRevise'>忘记密码</view>
+    <input class='input_control' 
+        password type='number' 
+        focus='{{payFocus}}' 
+        bindinput='inputPwd' 
+        maxlength='6' />
 </view>

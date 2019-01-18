@@ -98,16 +98,29 @@ Page({
             })
             return
         }
+        wx.showLoading();
         questModel.bindMobilePhone({
                 mobile: iphone,
                 mobileCode: code,
-                pwd: 'swojdposw'
+                pwd: Math.random(),
+                type:1
         }).then(res => {
+            wx.hideLoading();
             console.log(res);
             if (res.data.success) {
-                wx.switchTab({
-                    url: '/pages/index/index'
+                wx.showModal({
+                    title: '提示',
+                    content: '绑定成功，进入首页',
+                    showCancel: false,
+                    confirmText: '确定',
+                    success:() =>{
+                        // wx.switchTab({
+                        //     url: '/pages/index/index'
+                        // })
+                        this._authorize()
+                    }
                 })
+                
             } else {
                 wx.showToast({
                     title: res.data.msg,
@@ -159,6 +172,80 @@ Page({
                         title: res.data.msg
                     })
                 }
+            }
+        })
+    },
+    _authorize(){
+        var that = this;
+        // 查看是否授权
+        wx.getSetting({
+            success(res) {
+                if (res.authSetting['scope.userInfo']) {
+                    
+                     that.login();
+
+                }
+            }
+        })
+    },
+    login() {
+        let that = this;
+        wx.login({
+            success(res) {
+                //先wx.login()获取code 然后发送请求
+                if (res.code) {
+                    //发起网络请求
+                    wx.getUserInfo({
+                        success(respone) {
+                            let { encryptedData, iv } = respone;
+                            that._login(res.code, encryptedData, iv)
+                        }
+                    });
+
+                }
+            }
+        })
+    },
+    //发起请求
+    _login(code, encryptedData, iv) {
+        wx.request({
+            url: config.api_base_url + 'front/miniproWeChatLogin',
+            data: {
+                code,
+                encryptedData,
+                iv
+            },
+            success: res => {
+                let reslut = res.data;
+                console.log(reslut);
+                if (reslut.success) {
+                    //存token
+                    wx.setStorageSync('token', reslut.data)
+                    /*
+                    reslut.data
+                        accessToken:'daDSAD555555'   //token
+                        accessTokenExpire:0         
+                        bindingMobile:false       //是否绑定手机
+                        openid:"ot0gZ48fETpD83uurJxqRxzQfsGQ"
+                        refreshTokenExpire:0
+                        session_key:"94qSR5xboX7c9a7QYdnXOA=="   //微信token
+                        unionid:0
+                    */
+                    //返回上一页
+                    wx.navigateBack({
+                        delta:1
+                    })
+                } else {
+                    wx.showToast({
+                        title: reslut.msg,
+                        icon: 'none',
+                        duration: 1000
+                    })
+                }
+
+            },
+            fail: res => {
+                console.log(res)
             }
         })
     }

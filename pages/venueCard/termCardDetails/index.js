@@ -24,6 +24,21 @@ Page({
         let id = options.id;
         this._getCard(id);
     },
+    //进入场馆
+    onGoVenue() {
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/index?id=' + this.data.card.venueId,
+        })
+    },
+    onShareAppMessage(Object) {
+
+    },
+    onGoOrder(e){
+        let card = JSON.stringify(this.data.card);
+        wx.navigateTo({
+            url: '/pages/confirmOrder/termcard/index?card=' + card
+        })
+    },
     onMap(e){
         console.log(e.currentTarget.dataset);
         let { name, address, lat, lon } = e.currentTarget.dataset;

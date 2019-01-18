@@ -13,7 +13,8 @@ Page({
      */
     data: {
         imgUrl: config.base_img_url,
-        ticketList:[]
+        ticketList:[],
+        id:''
     },
 
     /**
@@ -21,18 +22,36 @@ Page({
      */
     onLoad: function(options) {
         let id = options.id;
+        this.setData({id})
         this._getTicket(id);
+    },
+    //下拉刷新
+    onPullDownRefresh() {
+        wx.showNavigationBarLoading() //在标题栏中显示加载
+
+        this._getTicket(this.data.id,function(){
+            // complete
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
+        });   
+       
+            
+       
+    },
+    onShareAppMessage(Object) {
+
     },
     onGoDetails(e){
         let ticket = e.currentTarget.dataset.ticket;
-        ticket = JSON.stringify(ticket);
+        //ticket = JSON.stringify(ticket);
         wx.navigateTo({
-            url: './venueTicketDetails/index?ticket='+ticket,
+            url: './venueTicketDetails/index?id='+ticket.id,
         })
     },
-    _getTicket(id) {
+    _getTicket(id,cb) {
         venueModel.getTicket(id).then(res => {
             console.log(res.data.items)
+            cb && cb();
             this.setData({
                 ticketList: res.data.items
             })

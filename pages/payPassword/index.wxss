@@ -1,0 +1,41 @@
+/* pages/payPassword/index.wxss */
+.containner{
+    padding: 100rpx 60rpx;
+}
+.item{
+    border-bottom: 1px solid #d5d5d5;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30rpx;
+}
+
+input{
+    font-size: 30rpx;
+    height: 80rpx;
+    width: 100%;
+}
+.iphone{
+    width: calc(100% - 150rpx);
+}
+.code{
+    font-size: 24rpx;
+    padding: 10rpx;
+    
+    color: #63AFE0;
+}
+
+.login{
+    width: 100%;
+    height: 80rpx;
+    font-size: 36rpx;
+    text-align: center;
+    background: #63E08C;
+    line-height: 80rpx;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 60rpx;
+}
+
+.on{
+    color: #bbb;
+}

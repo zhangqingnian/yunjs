@@ -1,0 +1,103 @@
+<!--pages/confirmOrder/other/index.wxml-->
+<view wx:if="{{!isCoupon}}" class='containner flex_column'>
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view >订单信息</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{venue.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>运动类型：</view>
+                <view class='value'>{{sportName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>时间：</view>
+                <view class='value'>{{area[0].currentDate.formatDate}}   
+                （{{area[0].currentDate.week}}）</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>场地：</view>
+                    <view class='value'>
+                        <view wx:for="{{area}}" wx:key="idx">
+                        {{item.area}}     {{item.cvaoStartTime}}-{{item.cvaoEndTime}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            
+        </view>
+    </view>
+
+    <view class=' itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>联系人信息</view>
+            <!-- <image class='icon_append' src='/images/venuedetail/icon_append.png'></image> -->
+        </view>
+        <view class='content'>
+            <view class='student flex_row' bindtap='onGoStudentList'>
+                <view class='type'>联系人</view>
+                <view class='news flex_row'>
+                    <view class='name'>{{currentContacts.name}}</view>
+                    <view class='iphone'>{{currentContacts.mobile}}</view>
+                </view>
+                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+    </view>
+
+    
+
+     <view class=' itemClass bottomClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>服务共计</view>
+            <view class='price flex_row'>
+               ￥{{total}}
+            </view>
+        </view>
+    </view>
+
+    <view class=' itemClass bottomClass '>
+        <view class='titleWarp borderNone flex_row' bindtap='onGoCoupon'>
+            <view class='title'>优惠券</view>
+            <view class='cuuponwarp flex_row'>
+              <view class='price'>{{coupon.money ? '￥' + coupon.money : couponLen+'张'}}</view>
+              <view class='cuuponName'>{{coupon.couponName}}</view>
+              <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+    </view>
+
+    <view class='total'>
+        <text>已优惠</text>
+        <text>合计:</text>
+        <text class='price'>￥{{discountTotal}}</text>
+    </view>
+
+    
+    
+    <view class='submit' bindtap='onSubmit'>提交订单</view>
+</view>
+
+
+
+
+<v-pay wx:if="{{payShow}}" 
+    bind:close = "onClose" 
+    currentType="{{currentType}}"
+    body = "{{total}}"
+    couponId = "{{coupon.couponId}}"
+    totalFee = "{{discountTotal}}"
+    orderCode= "{{orderCode}}"/>
+
+<v-coupon wx:if="{{isCoupon}}"  
+    aid="{{card.id}}" 
+    total = "{{total}}"
+    bind:coupon="onCouponBack"
+    couponList="{{couponList}}"
+    sportTypeId="{{sportTypeId}}"/>
+
+

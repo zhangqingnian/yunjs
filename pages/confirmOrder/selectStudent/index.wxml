@@ -1,0 +1,15 @@
+<!--pages/confirmOrder/selectStudent/index.wxml-->
+<view class='containner'>
+    <view class='item flex_column'
+        wx:for="{{list}}" wx:key="{{item.id}}"
+        bindtap='onSelect'  
+        data-item='{{item}}'>
+        <view class='top flex_row'>
+            <view class='userName'>{{item.name}}</view>
+            <view class='iphone'>{{item.mobile}}</view>
+        </view>
+    </view>
+    
+
+    <view class='add' bindtap='onAdd'>新增学员</view>
+</view>

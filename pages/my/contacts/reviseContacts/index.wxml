@@ -1,0 +1,20 @@
+<!--pages/my/contacts/addContacts/index.wxml-->
+
+<view class='containner'>
+    <view>
+        <view class='flex_row'>
+            <view class='left'>联系人</view>
+            <input placeholder='请输入联系人姓名' 
+                bindinput='onName'
+                value='{{name}}'></input>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>联系电话</view>
+            <input placeholder='请输入联系人号码' 
+            value='{{iphone}}'
+            bindinput='onIphone'
+            maxlength='11' type='number'></input>
+        </view>
+    </view>
+    <view class='add' bindtap='onBaocun'>保存</view>
+</view>

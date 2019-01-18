@@ -1,36 +1,36 @@
 <!--components/order/index.wxml-->
 <view class='order'>
     <view class='order-top flex_row'>
-        <text class='order-type'>场馆订单</text>
-        <view class='slotwarp flex_row'>
+        <text class='order-type'>场地订单</text>
+        <view class='slotwarp flex_row' >
             <slot name='text'></slot>
-            <slot name='delete'></slot>
+            <slot name='delete' catchtap="onDel"></slot>
         </view>
     </view>
     <view class='order-bottom flex_row'>
         <view class='list'>
             <view>
                 <text>场馆名称：</text>
-                <text>宁波蕊目马术俱乐部</text>
+                <text>{{order.venueName}}</text>
             </view>
             <view>
                 <text>场馆电话：</text>
-                <text>0574-88420555</text>
+                <text>{{order.venueMobile}}</text>
             </view>
             <view>
                 <text>预约时间：</text>
-                <text>2018/09/30  12:00</text>
+                <text>{{order.myVenueOrderAreaTimeList[0].areaTime}}</text>
             </view>
             <view>
                 <text>预约项目：</text>
-                <text>马术</text>
+                <text>{{order.sportType}}</text>
             </view>
         </view>
         <view class='btns flex_column'>
-            <!-- <text class='btn'>去支付</text> -->
-            <slot name='play'></slot>
-            <slot name='refund'></slot>
-            <slot name='code'></slot>
+            <slot name='play' catchtap="onPay"></slot>
+            <slot name='code' catchtap="onGoOrder"></slot>
+            <slot name='rating' catchtap="onRating"></slot>
+            <slot name='again' catchtap="onBuy"></slot>
         </view>
     </view>
 </view>

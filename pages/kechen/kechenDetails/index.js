@@ -28,7 +28,15 @@ Page({
         let id = options.id;
         this._getKcDetail(id);
     },
+    onShareAppMessage(Object) {
 
+    },
+    //进入场馆
+    onGoVenue() {
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/index?id=' + this.data.course.venueId,
+        })
+    },
     onSelectClass(e) {
         let classId = e.currentTarget.dataset.classid;
         this.data.classList.forEach(item => {
@@ -43,7 +51,7 @@ Page({
         })
         this._getClass(classId)
     },
-
+    //地图
     onMap(e){
         console.log(e.currentTarget.dataset)
         let { name, address, lat, lon } = e.currentTarget.dataset;
@@ -59,6 +67,14 @@ Page({
             }
         })
     },
+    onGoSubmit(e){
+        let courser = JSON.stringify(this.data.course) ,
+            classes = JSON.stringify(this.data.classes);
+        wx.navigateTo({
+            url: '/pages/confirmOrder/courser/index?courser=' + courser + '&classes=' + classes,
+        })
+    },
+    //课程详情
     _getKcDetail(id) {
         venueModel.getKcDetail(id).then(res => {
             let reslut = res.data.data;
@@ -75,64 +91,19 @@ Page({
             console.log(res.data.data);
             this.setData({
                 course: reslut,
-                classList: classList
+                classList: classList,
+                classId: fisrtId
             })
         })
     },
-
+    //班级详情
     _getClass(id) {
         venueModel.getClass(id).then(res => {
+            console.log(res);
             this.setData({
                 classes: res.data.data
             })
         })
-    },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
     }
+   
 })

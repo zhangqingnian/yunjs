@@ -7,7 +7,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+      order:Object
   },
 
   /**
@@ -21,6 +21,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+      onDel() {
+          this.triggerEvent('del', this.properties.order, {})
+      },
+      onPay() {
+          this.triggerEvent('pay', this.properties.order, {})
+      },
+      onRefund() {
+          this.triggerEvent('refund', this.properties.order, {})
+      },
+      onGoOrder() {
+          this.triggerEvent('goOrder', this.properties.order, {})
+      }
   }
 })

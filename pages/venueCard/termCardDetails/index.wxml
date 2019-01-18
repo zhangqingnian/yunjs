@@ -1,12 +1,12 @@
 <!--pages/venueCard/termCardDetails/index.wxml-->
 <view class='containner flex_column'>
     <view class='cardWarp'>
-        <image src='{{imgUrl + card.fileName}}'></image>
+        <image src='{{imgUrl + card.fileName}}' mode='aspectFit'></image>
         <!-- <text class='type'>学期卡</text>
         <text class='ID'>NO:785368392</text> -->
     </view>
 
-    <view class='category itemClass mtop30'>
+    <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{card.cardName}}</view>
             <view class='type'>类型：{{card.sportName}}</view>
@@ -68,5 +68,13 @@
 
 
 
-    <view class='baoming'>报名</view>
+    <view class='bottomwarp flex_row'>
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>进入场馆</view>
+        </view>
+        <view class='confirm' bindtap='onGoOrder'>
+            购买馆卡
+        </view>
+    </view>
 </view>

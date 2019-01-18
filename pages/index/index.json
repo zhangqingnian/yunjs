@@ -1,5 +1,6 @@
 {
     "navigationBarTitleText": "斤斗云健身",
+    "enablePullDownRefresh": false,
     "usingComponents": {
         "v-city": "/components/city/city"
     }

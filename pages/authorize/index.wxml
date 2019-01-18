@@ -10,7 +10,7 @@
     </view>
 
     <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-        授权登录
+        微信授权
     </button>
 </view>
 

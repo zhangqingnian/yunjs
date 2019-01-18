@@ -118,11 +118,25 @@ page {
     width: 100%;
     margin-bottom: 30rpx;
 }
+.card .imgWarp{
+    width: 200rpx;
+    height: 150rpx;
+     border-radius: 10rpx;
+     overflow: hidden;
+     position: relative;
+}
 
+.card .imgWarp .tj{
+    width: 76rpx;
+    height: 74rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 .card .venueImg {
     width: 200rpx;
     height: 150rpx;
-    border-radius: 10rpx;
+   
 }
 
 .venueNews {

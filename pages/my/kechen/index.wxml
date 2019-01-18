@@ -1,4 +1,5 @@
 <!--pages/my/kechen/index.wxml-->
+<wxs src="../../../utils/venue.wxs" module="util" />
 <view class='containner flex_column'>
     <view class='nav flex_row'>
         <view class='{{ valid ? "on" : "" }}' bindtap='onValid'>有效</view>
@@ -7,34 +8,35 @@
     </view>
 
     <view class='content'>
-        <view class='item flex_column'>
+        <view class='item flex_column' 
+            bindtap='onGoDetail' data-id='{{item.classId}}'
+            wx:for="{{courseList}}" wx:key="{{item.id}}">
             <view class='top flex_row'>
                 <view class='flex_row'>
                     <view class='imgwarp'>
-                        <image src='/images/vip.png'></image>
-                        <text class='name'>VIP课程卡</text>
-                        <text class='price'>¥289.00</text>
+                        <image src='{{imgUrl + item.fileName}}'></image>
+                        <text class='price'>¥{{item.coursePrice}}</text>
                     </view>
                     
                     <view class='news flex_column'>
-                        <text>游泳馆游泳1v1课</text>
-                        <text>游泳</text>
-                        <text>全民健身中心</text>
+                        <text>{{item.courseName}}</text>
+                        <text>{{item.sportType}}</text>
+                        <text>{{item.venueName}}</text>
                     </view>
                 </view>
                 <view class='btns flex_column'>
-                    <text>使用</text>
-                    <text>使用记录</text>
+                    <text wx:if="{{valid}}" catchtap='onUse' data-id='{{item.id}}'>使用</text>
+                    <text catchtap='onRecord' data-id='{{item.id}}'>使用记录</text>
                 </view>
             </view>
             <view class='bottom'>
                 <view>
                     <text>有效时间：</text>
-                    <text>2018/09/01至2018/09/01</text>
+                    <text>{{util.formatDateTime(item.classCertStartTime)}}至{{util.formatDateTime(item.classCertEndTime)}}</text>
                 </view>
                 <view>
                     <text>场馆地址：</text>
-                    <text>北京北京市东城区东方路1375号</text>
+                    <text>{{item.address}}</text>
                 </view>
             </view>
         </view>

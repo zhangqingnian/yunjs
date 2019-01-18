@@ -1,0 +1,7 @@
+<!--pages/venueList/venueDetail/fengcai/index.wxml-->
+<view class='warp'>
+    <view class='item' wx:for="{{venueFc}}" wx:key="idx" 
+        bindtap='onOpenImg' data-name='{{item.tfFileName}}'>
+        <image src='{{imgUrl + item.tfFileName}}'></image>
+    </view>
+</view>

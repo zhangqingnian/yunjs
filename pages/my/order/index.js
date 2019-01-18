@@ -1,126 +1,227 @@
 // pages/my/order/index.js
+import { MyOrderModel} from '../../../models/myOrder.js';
+
+let myOrderModel = new MyOrderModel();
+
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        res: [
-            {
-                orderType: 1,
-                iphone: '0574-88480555',
-                time: '2018/11/10',
-                address: '上海蕊目马术俱乐部',
-                project: '马术'
-            },
-            {
-                orderType: 2,
-                iphone: '0574-88480555',
-                address: '上海蕊目游泳馆',
-                name: '游泳月卡'
-            },
-            {
-                orderType: 3,
-                iphone: '0574-88480555',
-                address: '上海蕊目俱乐部',
-                name: '羽毛球门票'
-            },
-            {
-                orderType: 4,
-                iphone: '0574-88480555',
-                address: '上海蕊目',
-                name: '瑜伽课'
-            },
-            {
-                orderType: 1,
-                iphone: '0574-88480555',
-                time: '2018/11/10',
-                address: '上海蕊目马术俱乐部',
-                project: '马术'
-            }
-        ],
-        unpaid: true,
-        paid:false,
-        cancel:false
+        unpaid: false,
+        paid: true,
+        cancel:false,
+        currentType:'',//当前那种状态的订单
+        total:0,       //总数
+        loading:false, //loading显示隐藏 
+        orderList:[]   //结果
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        let currentType = options.currentType || 100;
+        this._getOrderList(currentType,0);
+        this.setData({
+            currentType,
+        })
     },
     //待支付
     onUnpaid() {
         this.setData({
             unpaid: true,
             paid: false,
-            cancel: false
+            cancel: false,
+            currentType:99
         })
+        this._getOrderList(99, 0);
     },
     //已支付
     onPaid() {
         this.setData({
             unpaid: false,
             paid: true,
-            cancel: false
+            cancel: false,
+            currentType:100
         })
+        this._getOrderList(100, 0);
     },
     //已取消
     onCancel() {
         this.setData({
             unpaid: false,
             paid: false,
-            cancel: true
+            cancel: true,
+            currentType:101
+        })
+        this._getOrderList(101, 0);
+    },
+    //去详情
+    onGoDetail(e){
+        let item = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: './areaDetail/index?item='+JSON.stringify(item),
         })
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    //我的 xxx
+    onGoOrder(e){
+        let orderType = e.detail.orderType;
+        if (orderType == 15) {
+            wx.navigateTo({
+                url: '/pages/my/area/index',
+            })
+        } else if (orderType == 16) {
+            wx.navigateTo({
+                url: '/pages/my/card/index',
+            })
+        } else if (orderType == 17) {
+            wx.navigateTo({
+                url: '/pages/my/kechen/index',
+            })
+        } else if (orderType == 24) {
+            wx.navigateTo({
+                url: '/pages/my/ticket/index',
+            })
+        }
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
+    //支付
+    onPay(e){
+        let item = e.detail;
+        wx.navigateTo({
+            url: './cashier/index?item='+JSON.stringify(item)
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
+    //退款
+    onRefund(e){
+        let item = e.detail;
+        if (item.orderType != 24){
+            wx.showModal({
+                title: '提示',
+                content: '请与场馆联系退款,场馆联系电话:' + item.venueMobile,
+            })
+            return;
+        }
+        //门票退款
+        myOrderModel.ticketOrderRefund({
+            type:1,
+            id:item.id
+        }).then(res => {
+            console.log(res);
+            wx.showToast({
+                title: res.data.msg,
+                icon:'none'
+            })
+            if(res.data.success){
+                this._getOrderList(100, 0);
+            }
+            
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
+    //再次购买
+    onBuy(e){
+        let id = e.detail.venueId;
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/index?id='+id
+        })
     },
+    //删除订单
+    onDel(e){
+        let orderId = e.detail.id;
+        wx.showModal({
+            title: '提示',
+            content: '确定删除订单?',
+            success: res => {
+                if (res.confirm){
+                    this._del(orderId)
+                }
+            }
+        })
+    },
+    //评论
+    onRating(e){
+        let item = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: './areaDetail/index?item=' + JSON.stringify(item)+'&showRating='+true,
+        })
+    },
+    _del(orderId){
+        myOrderModel.myOrderDel({
+            status: 2,
+            orderId
+        }).then(res => {
+            console.log(res);
+            wx.showToast({
+                title: res.data.msg,
+            })
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
+            if(res.data.data == 1){
+                this._getOrderList(this.data.currentType, 0);
+            }
+            
+        })
+    },
+    _orderType(orderType) {
+        let currentType = '';
+        if (orderType == 15) {
+            currentType = 'area'
+        } else if (orderType == 16) {
+            currentType = 'card'
+        } else if (orderType == 17) {
+            currentType = 'course'
+        } else if (orderType == 24) {
+            currentType = 'ticket'
+        }
+        this.setData({
+            currentType
+        })
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-        console.log('上拉加载')
+       
+        let start = this.data.orderList.length;
+        let status = this.data.currentType;
+        let total = this.data.total;
+        if(start >= total){
+            wx.showToast({
+                title: '没有数据了',
+                icon:'none'
+            })
+            return;
+        }
+        this.setData({ loading: true })
+        myOrderModel.myOrderList({
+            status,
+            limit: 20,
+            start
+        }).then(res => {
+            this.setData({ loading: false })
+            let temArr = this.data.orderList.concat(res.data.items)
+            this.setData({
+                orderList: temArr
+            })
+        })
+    },
+    _getOrderList(status, start){
+        //status 99待支付 100已支付 101已取消
+        wx.showLoading();
+        myOrderModel.myOrderList({
+            status,
+            start,
+            limit:20
+        }).then(res => {
+            wx.hideLoading();
+            this.setData({
+                orderList:res.data.items,
+                total:res.data.total
+            })
+        })
     },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
+    
 })

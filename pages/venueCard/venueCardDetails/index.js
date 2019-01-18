@@ -17,18 +17,22 @@ Page({
         card: {},
         time: [{
             name: '立即',
+            value:0,
             isOn: true
         }, {
             name: '1天',
+            value:1,
             isOn: false
         }, {
             name: '3天',
+                value: 3,
             isOn: false
         }, {
             name: '7天',
+                value: 7,
             isOn: false
         }],
-        currentTime:'立即'
+        currentTime:0
     },
 
     /**
@@ -38,6 +42,24 @@ Page({
         let id = options.id;
         this._getCard(id);
     },
+    onShareAppMessage(Object) {
+
+    },
+    //进入场馆
+    onGoVenue(){
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/index?id=' + this.data.card.venueId,
+        })
+    },
+    //跳转提交订单页
+    onGoOrder(e){
+        let card = JSON.stringify(this.data.card);
+        let currentTime = this.data.currentTime;
+        console.log(currentTime)
+        wx.navigateTo({
+            url: '/pages/confirmOrder/card/index?card=' + card + '&currentTime=' + currentTime,
+        })
+    },
     onSelectTime(e){
         let {isOn, name} = e.currentTarget.dataset.item;
         var currentTime = '';
@@ -46,7 +68,7 @@ Page({
             times.forEach(item => {
                 if(item.name == name){
                     item.isOn = true;
-                    currentTime = item.name;
+                    currentTime = item.value;
                 }else{
                     item.isOn = false
                 }

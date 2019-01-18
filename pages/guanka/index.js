@@ -7,7 +7,7 @@ import {
 } from '../../models/venue.js';
 
 let venueModel = new VenueModel();
-
+let app = getApp();
 
 Page({
 
@@ -20,23 +20,54 @@ Page({
         venueList:[],
         sportTypeId: "",
         sortPriceKey:false,
-        sortDistanceKey: false
+        sortDistanceKey: false,
+        total:0,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        
+    },
+    onShow(){
+
+        let sportTypeId = app.globalData.tuijian || '';
+
         this.setData({
-            sportTypeId: "" //默认为(综合)
+            sportTypeId //默认为(综合)
         })
-        this._getSportType("")
-        this._getNowData("");
+        this._getSportType(sportTypeId)
+        if (!sportTypeId) {
+            this._getNowData("")
+        }
+    },
+    onHide(){
+        this.setData({
+            venueList: [],
+            typeList:[]
+        })
+    },
+    onLoadMore(){
+        let id = this.data.sportTypeId;
+        let start = this.data.venueList.length;
+        let total = this.data.total;
+        if (start >= total){
+            // wx.showToast({
+            //     title: '没有数据了!',
+            //     icon:'none'
+            // })
+            return
+        }
+
+        this._getNowData(id)
     },
     //选择运动项目
     onSelectType(e) {
         let id = e.currentTarget.dataset.id; //运动类型Id
+        this.setData({
+            sportTypeId:id,
+            venueList:[]
+        })
         this._addClass(id);
         this._getNowData(id);
     },
@@ -45,6 +76,7 @@ Page({
         let keyWords = e.detail.value.trim();
         if(!keyWords)return;
         console.log(keyWords)
+        this.setData({ venueList:[]})
         this._addClass();
         this._getNowData('','',keyWords)
     },
@@ -68,10 +100,8 @@ Page({
             sortPriceKey: !sortPriceKey
         })
         if (sortPriceKey){
-            console.log(1)
             this._getNowData(sportTypeId, 1);
         }else{
-            console.log(2)
             this._getNowData(sportTypeId, 2);
         }
         
@@ -92,12 +122,11 @@ Page({
     _getSportType(id) {
         venueModel.getVenuetype().then(res => {
             let data = res.data.items;
-            console.log(data)
             data.unshift({
                 sort: 0,
                 sport_type_id: '',
                 type: 0,
-                typeName: "综合"
+                typeName: "全部"
             })
             data.forEach(item => {
                 item.isOn = false
@@ -110,19 +139,26 @@ Page({
     },
     //获取当前运动项目的场馆
     _getNowData(id = '', num = '', venueName = '') {
-        console.log(id)
+        wx.showLoading({
+            title: '拼命加载中...',
+        })
         let nodecode = wx.getStorageSync('city').nodecode;
+        let currentLocation = wx.getStorageSync('currentLocation');
         venueModel.getVenueCardList({
+            lon: currentLocation.longitude,
+            lat: currentLocation.latitude,
             sportId: id,
             city: nodecode,
             start: 0,
-            limit: 6,
+            limit: 10,
             types:num,
             venueName           
         }).then(res => {
-            console.log(res.data.items)
+            wx.hideLoading();
+            let temArr = this.data.venueList.concat(res.data.items)
             this.setData({
-                venueList: res.data.items
+                venueList: temArr,
+                total:res.data.total
             })
         })
     },

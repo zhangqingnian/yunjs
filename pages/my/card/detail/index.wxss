@@ -1,0 +1,203 @@
+/* pages/my/card/detail/index.wxss */
+page{
+    width: 100%;
+    height: 100%;
+}
+
+.mtop30 {
+    margin-top: 30rpx;
+}
+
+.containner {
+    width: 100%;
+    min-height: 100%;
+    background: #f5f5f5;
+    font-size: 28rpx;
+    color: #323232;
+    padding-bottom: 100rpx;
+    box-sizing: border-box;
+}
+
+.cardWarp {
+    position: relative;
+    width: 690rpx;
+    height: 300rpx;
+    margin: 0 auto;
+    font-size: 36rpx;
+    color: #fff;
+}
+
+.cardWarp image {
+    width: 690rpx;
+    height: 300rpx;
+    border-radius: 20rpx;
+}
+
+.cardWarp .type {
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+}
+
+.cardWarp .ID {
+    position: absolute;
+    bottom: 10rpx;
+    left: 10rpx;
+}
+
+.itemClass {
+    background: #fff;
+    padding: 25rpx 30rpx;
+}
+
+.titleWarp {
+    padding-bottom: 25rpx;
+    justify-content: space-between;
+    border-bottom: 1px solid #dcdcdc;
+    font-size: 32rpx;
+}
+
+.category .title {
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+}
+
+.category .type {
+    color: #63afe0;
+}
+
+.content {
+    padding-top: 20rpx;
+}
+
+.category .item {
+    line-height: 42rpx;
+}
+
+.item .name {
+    min-width: 90rpx;
+}
+
+.jihuo{
+    align-items:center;
+    margin: 10rpx 0;
+}
+
+.item .value text {
+    display: inline-block;
+    width: 64rpx;
+    height: 48rpx;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid #63AFE0;
+    color: #63AFE0;
+    border-radius: 10rpx;
+    text-align: center;
+    line-height: 48rpx;
+    margin-right: 20rpx;
+}
+
+.item .value text.on{
+    color: #fff;
+    background: #63AFE0;
+}
+
+.price {
+    color: #da0808;
+}
+
+.hasAddress {
+    justify-content: space-between;
+}
+
+.go {
+    align-items: center;
+    color: #63afe0;
+}
+
+.go image {
+    width: 20rpx;
+    height: 30rpx;
+    margin-left: 20rpx;
+}
+
+.scroll-view_H {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.scroll-view_H .flex_column {
+    display: inline-block;
+    width: 140rpx;
+    margin-right: 20rpx;
+}
+
+.scroll-view_H .types {
+    width: 140rpx;
+    height: 50rpx;
+    border: 1px solid #63afe0;
+    color: #63afe0;
+    font-size: 28rpx;
+    text-align: center;
+    line-height: 50rpx;
+    border-radius: 10rpx;
+}
+
+.scroll-view_H .surplus {
+    width: 140rpx;
+    font-size: 22rpx;
+    text-align: center;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: #969696;
+    margin-top: 15rpx;
+    margin-bottom: 5rpx;
+}
+
+.scroll-view_H .flex_column.on .types {
+    background: #63afe0;
+    color: #fff;
+}
+
+.scroll-view_H .flex_column.on .surplus {
+    color: #63afe0;
+}
+
+.selectClass .details view {
+    line-height: 42rpx;
+}
+
+.baoming {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    background: rgba(99, 224, 140, 1);
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 36rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.topwarp .item{
+    margin: 0;
+    padding:5rpx 0rpx;
+    font-size:30rpx;
+
+}
+
+.topwarp{
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    padding: 20rpx
+}
+
+.topwarp .left{
+    height: 240rpx;
+    width: 160rpx;
+    background: red;
+    margin-right: 20rpx;
+}

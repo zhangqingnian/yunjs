@@ -1,8 +1,8 @@
 <!--pages/kechen/kechenDetails/index.wxml-->
 <view class='containner flex_column'>
-    <image class='bannerimg' src="{{imgUrl+course.fileName}}"></image>
+    <image class='bannerimg' src="{{imgUrl+course.fileName}}" mode='aspectFit'></image>
     
-    <view class='category itemClass mtop30'>
+    <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{course.courseName}}</view>
             <view class='type'>类型：{{course.sportType}}</view>
@@ -10,7 +10,7 @@
         <view class='content flex_column'>
             <view class='item flex_row'>
                 <view class='name'>课程价格：</view>
-                <view class='value'>{{course.price}}</view>
+                <view class='value price'>￥{{course.price}}</view>
             </view>
             <view class='item flex_row'>
                 <view class='name'>招生对象：</view>
@@ -145,5 +145,14 @@
         </view>
     </view>
 
-    <view class='baoming'>报名</view>
+    <!-- <view class='baoming' bindtap='onGoSubmit'>报名</view> -->
+    <view class='bottomwarp flex_row'>
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>进入场馆</view>
+        </view>
+        <view class='confirm' bindtap='onGoSubmit'>
+            购买课程
+        </view>
+    </view>
 </view>

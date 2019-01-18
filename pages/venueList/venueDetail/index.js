@@ -37,20 +37,64 @@ Page({
         let { id, sportTypeId } = options;
         this.setData({
             id,
-            sportTypeId
+            sportTypeId: sportTypeId || ''
         })
-        this._getVenueDetail(id);
+        this._getVenueDetail(id, sportTypeId);
         this._getFc(id);
         this._getRating(id);
         this._getGk(id);
         this._getKc(id);
         this._getKKC(id);
     },
+    onShareAppMessage(Object) {
+
+    },
+    onVenueMobile(){
+        if (this.data.venue.venueMobile){
+            wx.makePhoneCall({
+                phoneNumber: this.data.venue.venueMobile
+            })
+        }
+        
+    },
+    //课程详情
+    onCourseDetail(e){
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '/pages/kechen/kechenDetails/index?id='+id,
+        })
+    },
+    //馆卡详情
+    onCardDetail(e){
+        let { cardsTypeStr, id } = e.currentTarget.dataset.item;
+        if (cardsTypeStr == '学期卡' || cardsTypeStr == '学期课') {
+            wx.navigateTo({
+                url: '/pages/venueCard/termCardDetails/index?id=' + id,
+            })
+        } else {
+            wx.navigateTo({
+                url: '/pages/venueCard/venueCardDetails/index?id=' + id,
+            })
+        }
+    },
+    //评论列表
+    onRating(){
+        wx.navigateTo({
+            url: './rating/index?id='+this.data.id
+        })
+    },
+    //场馆风采
+    onFengcai(){
+        wx.navigateTo({
+            url: './fengcai/index?id=' + this.data.id
+        })
+    },
     //选择运动类型
     onSelectSportType(e){
-        let sportTypeId = e.currentTarget.dataset.cvasporttypeid;
+        let { cvaSportTypeId, tvtTypeName } = e.currentTarget.dataset.item;
         this.setData({
-            sportTypeId
+            sportTypeId: cvaSportTypeId,
+            sportName: tvtTypeName
         })
     },
     //购买课程
@@ -73,8 +117,16 @@ Page({
     },
     //场地预约
     onBuyfield(e) {
+        let venue = JSON.stringify(this.data.venue);
+        if (!this.data.sportName){
+            wx.showToast({
+                title: '请先选择运动类型',
+                icon:'none'
+            })
+            return
+        }
         wx.navigateTo({
-            url: '/pages/yuding/index?id=' + this.data.id + '&sportTypeId=' + this.data.sportTypeId,
+            url: '/pages/yuding/index?id=' + this.data.id + '&sportTypeId=' + this.data.sportTypeId + '&venue=' + venue + '&sportName=' + this.data.sportName,
         })
     },
     //跳转优惠券列表
@@ -101,11 +153,20 @@ Page({
         })
     },
     //详情
-    _getVenueDetail(id) {
+    _getVenueDetail(id, sportTypeId) {
+        wx.showLoading();
         venueModel.getVenueDetail(id).then(res => {
+            wx.hideLoading();
             console.log(res.data.data)
+            let sportName = '';
+            res.data.data.venueAreaVo.forEach(item => {
+                if (item.cvaSportTypeId == sportTypeId){
+                    sportName = item.tvtTypeName
+                }
+            })
             this.setData({
-                venue: res.data.data
+                venue: res.data.data,
+                sportName
             })
         })
     },
@@ -120,7 +181,11 @@ Page({
 
     //风采
     _getFc(id) {
-        venueModel.getFc(id).then(res => {
+        venueModel.getFc({
+            id: id,
+            start: 0,
+            limit: 5
+        }).then(res => {
             this.setData({
                 venueFc: res.data.items
             })
@@ -128,7 +193,11 @@ Page({
     },
     //评论
     _getRating(id) {
-        venueModel.getRating(id).then(res => {
+        venueModel.getRating({
+            id,
+            start:0,
+            limit:3
+        }).then(res => {
             this.setData({
                 venueRating: res.data.items
             })
@@ -138,7 +207,8 @@ Page({
     _getGk(id) {
         venueModel.getGk(id).then(res => {
             this.setData({
-                venueGk: res.data.items
+                venueGk: res.data.items,
+                venueGkTotal: res.data.total
             })
         })
     },
@@ -146,7 +216,8 @@ Page({
     _getKc(id) {
         venueModel.getKc(id).then(res => {
             this.setData({
-                venueKc: res.data.items
+                venueKc: res.data.items,
+                venueKcTotal:res.data.total
             })
 
         })

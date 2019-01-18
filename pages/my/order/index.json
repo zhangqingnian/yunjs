@@ -1,9 +1,12 @@
 {
     "navigationBarTitleText": "我的订单",
+    "backgroundColor":"#cccccc",
+    "enablePullDownRefresh":false,
     "usingComponents": {
         "v-venue": "/components/order/venue/index",
         "v-card": "/components/order/card/index",
         "v-course": "/components/order/course/index",
-        "v-ticket": "/components/order/ticket/index"
+        "v-ticket": "/components/order/ticket/index",
+        "v-loading": "/components/loading/index"
     }
 }

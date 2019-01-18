@@ -1,0 +1,70 @@
+<!--pages/my/ticket/index.wxml-->
+<view class='containner flex_column'>
+    <view class='nav flex_row'>
+        <view class='{{ valid ? "on" : "" }}' bindtap='onValid'>有效</view>
+        <image src='/images/my/line.png'></image>
+        <view class='{{ invalid ? "on" : "" }}' bindtap='onInvalid'>无效</view>
+    </view>
+
+    <view class='content'>
+        <view class='item flex_column' 
+            bindtap='onGoDetail'
+            data-item='{{item}}'
+            wx:for="{{ticketList}}" wx:key="{{item.id}}">
+            <view class='top flex_row'>
+                <view class='flex_row left'>
+                    <view class='imgwarp'>
+                        <image src='{{imgUrl + item.ticketImg}}'></image>
+                        <text class='price'>¥{{item.ticketPrice}}</text>
+                    </view>
+                    <view class='news flex_column'>
+                        {{item.ticketName}}
+                    </view>
+                </view>
+                <view class='btns flex_column' wx:if="{{valid}}" 
+                    data-item='{{item}}'
+                    catchtap='onUser'>
+                    使用
+                </view>
+            </view>
+            <view class='bottom'>
+                <view>
+                    <text>场馆名称：</text>
+                    <text>{{item.venueName}}</text>
+                </view>
+                <view>
+                    <text>场馆地址：</text>
+                    <text>{{item.venueAddress}}</text>
+                </view>
+                <view>
+                    <text>限购数量：</text>
+                    <text>{{item.ticketBuyLimitAmount}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<v-code  wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}" dColor="{{ticket.dColor}}">
+    <view class='topwarp' slot='after'>
+        <view class='item flex_row'>
+            <view class='title'>{{ticket.ticketName}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>有效时间：</view>
+            <view class='value'>{{ticket.certTime}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>场馆名称：</view>
+            <view class='value'>{{ticket.venueName}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>运动项目：</view>
+            <view class='value'>{{ticket.sportTypeName}}</view>
+        </view> 
+        <view class='item flex_row'>
+            <view class='name'>剩余次数：</view>
+            <view class='value'>{{ticket.residualTimes}}次</view>
+        </view>     
+    </view>
+</v-code>

@@ -1,0 +1,9 @@
+/* pages/electronicProtocol/index.wxss */
+page{
+    width: 100%;
+    height: 100%
+}
+
+image{
+    width: 100%;
+}

@@ -1,0 +1,11 @@
+<!--pages/authorizeLocation/index.wxml-->
+<view class='contianner'>
+    <image src='/images/bg.jpg'></image>
+    <view class='btn'>
+        <button type='primary'  lang="zh_CN"  bindtap='onBtn'>
+            授权地理位置
+        </button>
+    </view>
+    
+</view>
+

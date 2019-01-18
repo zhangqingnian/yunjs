@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "收银台",
+    "usingComponents": {
+        "v-pay": "/components/pay/index"
+    }
+}

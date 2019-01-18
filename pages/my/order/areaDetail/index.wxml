@@ -1,0 +1,156 @@
+<!--pages/my/order/areaDetail/index.wxml-->
+<wxs src="../../../../utils/order.wxs" module="util" />
+<view class='containner flex_column'>
+    
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>下单时间: {{area.orderTime}}</view>
+            <view class='type'>{{util.orderStatus(area.status)}}</view>
+        </view>
+        <view class='content flex_column' >
+            <view class='item flex_row'>
+                <view class='name'>联系人：</view>
+                <view class='value'>{{area.linkMan}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>手机号码：</view>
+                <view class='value'>
+                    {{area.linkManMobile}}
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>订单信息</view>
+        </view>
+        <!-- 场地 -->
+        <view class='content flex_column' wx:if="{{area.orderType == 15}}">
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{area.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>类型：</view>
+                <view class='value'>{{area.sportType}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>时间：</view>
+                <view class='value'>{{area.openDate}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场地：</view>
+                <view class='value'>
+                    <view wx:for="{{areaName}}" wx:key="idx">{{item}}</view>
+                </view>
+            </view>
+        </view>
+        <!-- 馆卡 -->
+        <view class='content flex_column' 
+            wx:if="{{area.orderType == 16 || area.orderType == 25}}">
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{area.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>卡券名称：</view>
+                <view class='value'>{{area.venueCardName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效日期：</view>
+                <view class='value'>{{area.endingDate}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆地址：</view>
+                <view class='value'>{{area.address}}</view>
+            </view>
+        </view>
+        <!-- 课程 -->
+        <view class='content flex_column' wx:if="{{area.orderType == 17 }}">
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{area.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>课程名称：</view>
+                <view class='value'>{{area.courseName}} {{area.className}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效日期：</view>
+                <view class='value'>
+                    {{area.cvcCertStartTimeStr}} 至 {{area.cvcCertEndTimeStr}}
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆地址：</view>
+                <view class='value'>{{area.address}}</view>
+            </view>
+        </view>
+        <!-- 门票 -->
+        <view class='content flex_column' wx:if="{{area.orderType == 24}}">
+            
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{area.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>门票名称：</view>
+                <view class='value'>{{area.ticketName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效日期：</view>
+                <view class='value'>{{area.effectTime}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆地址：</view>
+                <view class='value'>{{area.address}}</view>
+            </view>
+        </view>
+    </view>
+   
+
+
+
+
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>消费信息</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>订单编号：</view>
+                <view class='value'>{{area.orderCode}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>服务总价：</view>
+                <view class='value'>￥{{area.orderMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>优惠券：</view>
+                <view class='value'>￥{{area.couponMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>订单总价：</view>
+                <view class='value'>￥{{area.orderMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>实付款：</view>
+                <view class='value'>￥{{area.payment}}</view>
+            </view>
+        </view>
+    </view>
+    
+
+
+    <view wx:if="{{area.status == 8}}" class='baoming' bindtap='onPay'>去支付</view>
+    <view wx:if="{{area.status == 0 && item.orderType == 15}}" 
+        class='baoming' bindtap='onRating'>{{item.ceid ? '查看评论':'评论'}}</view>
+</view>
+
+<v-rating wx:if="{{showRating}}" 
+bind:close = "onClose"
+ceid='{{item.ceid}}'
+stars='{{item.ceStars}}'
+content='{{item.content}}'
+    objectId='{{item.id}}'/>

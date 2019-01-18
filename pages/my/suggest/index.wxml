@@ -1,0 +1,11 @@
+<!--pages/my/suggest/index.wxml-->
+<view class='contain'>
+    <view>亲爱的顾客:</view>
+    <view class='ml60'>您有什么问题或建议想对我们说?</view>
+    <textarea value='{{val}}' placeholder='每一条反馈和投诉,都是我们进步的源泉!'
+    bindinput='onInput'></textarea>
+    <view>
+        请详细描述您遇到的问题,有助于我们快速定位并解决问题,或留下您宝贵的建议或意见，我们会认真进行评估!
+    </view>
+    <view class='btn' bindtap='onSubmit'>问题提交</view>
+</view>

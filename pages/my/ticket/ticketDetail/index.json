@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "我的门票详情",
+    "usingComponents": {
+        "v-code": "/components/code/index"
+    }
+}

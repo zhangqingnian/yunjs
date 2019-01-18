@@ -1,0 +1,98 @@
+<!--pages/my/card/detail/index.wxml-->
+<view class='containner flex_column'>
+    <view class='cardWarp'>
+        <image src='{{imgUrl + card.fileName}}'></image>
+    </view>
+
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>{{card.cardName}}</view>
+            <view class='type' wx:if="{{card.sportName}}">类型：{{card.sportName}}</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>馆卡价格：</view>
+                <view class='value price'>¥{{card.buyMoney}}</view>
+            </view>
+            <view class='item flex_row'  wx:if="{{card.type != 5 ? true : false}}">
+                <view class='name'>馆卡价值：</view>
+                <view class='value'>{{card.userTimes}}天</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>{{card.endingDate}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>场馆地址：</view>
+                    <view class='value'>{{card.address}}</view>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>馆卡规格：</view>
+                <view class='value'>{{card.description}}</view>
+            </view>
+            <!-- <view class='item flex_row'>
+                <view class='name'>剩余数量：</view>
+                <view class='value'>{{card.surplusAmount}}</view>
+            </view> -->
+            <view class='item flex_row jihuo' wx:if="{{card.type != 5 ? true : false}}">
+                <view class='name'>激活时间：</view>
+                <view class='value'>
+                    <text>{{card.activateDate == '0' ? '立即' : card.activateDate+'天'}}</text>
+                </view>
+            </view>
+            <!-- <view class='item flex_row'>
+                <view class='name'>提示：</view>
+                <view class='value'>
+                激活时间选择立即可直接使用，选择一天，一天后可使用
+                </view>
+            </view> -->
+        </view>
+    </view>
+
+    <!-- <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>购买须知</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{card.remark}}
+        </view>
+    </view> -->
+
+
+
+    <view wx:if="{{valid}}" class='baoming' bindtap='onUse' data-id='{{card.id}}'>使用</view>
+</view>
+
+<v-code wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}">
+    <view class='topwarp' slot='after'>
+        <image class='left' src='/images/logo.png'></image>
+        <view class='right'>
+            <view class='item flex_row'>
+                <view class='title'>{{card.cardName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>{{card.endingDate}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>姓名：</view>
+                <view class='value'>{{card.linkName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>手机号码：</view>
+                <view class='value'>{{card.linkMobile}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+        </view>
+
+    </view>
+</v-code>

@@ -1,0 +1,43 @@
+/* components/code/index.wxss */
+.mask{
+    background: rgba(0, 0, 0, .3);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    color: #4a4a4a;
+}
+
+.codewarp{
+    background: #fff;
+     padding-bottom:30rpx;
+     margin-top:30rpx;
+
+}
+
+.name{
+    font-size: 36rpx;
+    text-align: center;
+}
+
+.code{
+    width: 350rpx;
+    height: 350rpx;
+    margin: 0 auto;
+    padding:25rpx;
+    box-sizing:border-box;
+
+}
+
+.image{
+    width: 300rpx;
+    height: 300rpx;
+    background: #ccc;
+}
+
+.warp{
+   position:fixed;
+width:100%;
+bottom:0;
+
+}

@@ -20,7 +20,27 @@ export class Http {
                 let code = res.statusCode.toString();
                 if (code.startsWith('2')) {
                     resolve(res)
-                } else {
+                } else if(code == '401'){
+                    wx.hideLoading();
+                    wx.showModal({
+                        title: '提示',
+                        content: '请重新授权登录',
+                        showCancel: false,
+                        confirmText: '确定',
+                        success(){
+                            wx.navigateTo({
+                                url: '/pages/authorize/index',
+                            })
+                        }
+                    })
+
+                } else if (code == '403'){
+                    wx.showToast({
+                        title: '您暂无此权限!',
+                        icon:'none',
+                        duration:1000
+                    })
+                }else {
                     reject();
                     let error_code = res.data.error_code;
                     this._showerr(error_code)

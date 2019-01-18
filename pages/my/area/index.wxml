@@ -1,0 +1,70 @@
+<!--pages/my/area/index.wxml-->
+<view class='containner flex_column'>
+    <view class='nav flex_row'>
+        <view class='{{ valid ? "on" : "" }}' bindtap='onValid'>有效</view>
+        <image src='/images/my/line.png'></image>
+        <view class='{{ invalid ? "on" : "" }}' bindtap='onInvalid'>无效</view>
+    </view>
+
+    <view class='content'>
+        <view class='item flex_column' 
+            bindtap='onGoDetail'
+            data-item='{{item}}'
+            wx:for="{{ticketList}}" wx:key="{{item.id}}">
+            <view class='top flex_row'>
+                <view class='flex_row left'>
+                    <view class='imgwarp'>
+                        <image src='/images/vip.png'></image>
+                        <text class='price'>¥{{item.payment}}</text>
+                    </view>
+                    <view class='news flex_column'>
+                        场地预约
+                    </view>
+                </view>
+                <view class='btns flex_column' wx:if="{{valid}}" 
+                    data-item='{{item}}'
+                    catchtap='onUser'>
+                    使用
+                </view>
+            </view>
+            <view class='bottom'>
+                <view>
+                    <text>预约时间：</text>
+                    <text>{{item.openDate}}</text>
+                </view>
+                <view>
+                    <text>场馆名称：</text>
+                    <text>{{item.venueName}}</text>
+                </view>
+                <view>
+                    <text>预约项目：</text>
+                    <text>{{item.sportName}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<v-code  wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}" >
+    <view class='topwarp' slot='after'>
+        <view class='item flex_row'>
+            <view class='title'>场地预约</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>预约时间：</view>
+            <view class='value'>{{ticket.openDate}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>场馆名称：</view>
+            <view class='value'>{{ticket.venueName}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>运动项目：</view>
+            <view class='value'>{{ticket.sportName}}</view>
+        </view> 
+        <view class='item flex_row'>
+            <view class='name'>联系电话：</view>
+            <view class='value'>{{ticket.linkMobile}}次</view>
+        </view>     
+    </view>
+</v-code>

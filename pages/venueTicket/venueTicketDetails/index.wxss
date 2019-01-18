@@ -13,13 +13,13 @@
 .cardWarp {
     position: relative;
     width:100%;
-    height: 300rpx;
+    height: 375rpx;
     color: #fff;
 }
 
 .cardWarp image {
     width:100%;
-    height: 300rpx;
+    height: 375rpx;
 }
 
 .cardWarp .details{
@@ -167,4 +167,36 @@ border-radius:10rpx;
     font-family: PingFang-SC-Bold;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
+}
+
+
+.bottomwarp{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    
+}
+
+.news {
+    font-size: 24rpx;
+    color: #63AFE0;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 200rpx;
+    background: #fff;
+}
+.news image{
+    width: 48rpx;
+    height: 48rpx;
+    margin-bottom: 5rpx;
+}
+
+.confirm{
+    width: 100%;
+    background: #63E08C;
+    color: #fff;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 30rpx;
 }

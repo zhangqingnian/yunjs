@@ -23,13 +23,13 @@ page{
 }
 
 .searchLetter view {
-    margin-top: 20rpx;
+    margin-top: 10rpx;
 }
 
 .touchClass {
     background-color: #fff;
     color: #fff;
-    padding-top: 46rpx;
+    padding-top: 20rpx;
 }
 
 .showSlectedLetter {

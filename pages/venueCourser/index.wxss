@@ -31,7 +31,6 @@
 .venueTicket .content .vipImg {
     width: 330rpx;
     height: 220rpx;
-    background: red;
 }
 
 .bottom {

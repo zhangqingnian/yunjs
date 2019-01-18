@@ -1,0 +1,67 @@
+<!--pages/my/kechen/detail/index.wxml-->
+<view class='containner flex_column'>
+    
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>班级详情</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>班级全称：</view>
+                <view class='value'>{{classes.className}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>报名日期：</view>
+                <view class='value'>
+                    {{classes.enrollStartTimeStr}} - {{classes.enrollEndTimeStr}}
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效期：</view>
+                <view class='value'>
+                    {{classes.certStartTimeStr}} - {{classes.certEndTimeStr}}
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>课时安排：</view>
+                <view class='value'>{{classes.classDesc}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>班级人数：</view>
+                <view class='value'>{{classes.classSize}}</view>
+            </view>
+        </view>
+    </view>
+
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>班级说明</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{classes.classInstr}}
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>退款说明</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{classes.courseRefundInStr}}
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>课程内容</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{classes.courseDetail}}
+        </view>
+    </view>
+
+</view>

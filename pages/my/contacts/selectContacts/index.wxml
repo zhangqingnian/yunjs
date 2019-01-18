@@ -1,0 +1,15 @@
+<!--pages/my/contacts/index.wxml-->
+<view class='containner'>
+    <view class='item flex_column'  
+        bindtap='onSelect'
+        data-item='{{item}}'
+        wx:for="{{contactsList}}" wx:key="{{item.id}}">
+        <view class='top flex_row'>
+            <view class='userName'>{{item.name}}</view>
+            <view class='iphone'>{{item.phone}}</view>
+        </view>
+    </view>
+    
+
+    <view class='add'>新增常用联系人</view>
+</view>

@@ -7,15 +7,19 @@ export class IndexModel extends Http {
     //获取轮播图
     getBanner(){
         return this.request({
-            url:'m/sys/banner/front/selectBanner'
+            url:'m/mini/activity/front/pageActivity?activityType=1'
         })
     }
     //本月活动
     getBenyue(){
         return this.request({
-            url: 'm/sys/banner/front/selectBanner?type=1'
+            url: 'm/mini/activity/front/pageActivity?activityType=2'
         })
     }
+
+
+
+
     //推荐场馆
     getTuijian(city){
         return this.request({

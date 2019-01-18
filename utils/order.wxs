@@ -1,0 +1,17 @@
+var orderStatus = function(num){
+    switch(num){
+        case 8:
+            return '待支付';
+        case 9:
+            return '已支付';
+        case 1:
+            return '已取消';
+        case 0:
+            return '已完成';
+
+    }
+}
+
+module.exports = {
+    orderStatus: orderStatus
+}

@@ -1,12 +1,12 @@
 <!--pages/my/index.wxml-->
 <view class='containner'>
     <view class='topwarp'>
-        <view class='top flex_row'>
+        <view class='top  flex_row' bindtap='onUser'>
             <view class='flex_row left'>
-                <image class='avatar'></image>
+                <image class='avatar' src='{{userInfo.fileName}}'></image>
                 <view class='flex_column'>
-                    <text class='Nickname'>青柠树下微风吹过</text>
-                    <text class='iphone'>13876820134</text>
+                    <text class='Nickname'>{{userInfo.name}}</text>
+                    <text class='iphone'>{{mobile}}</text>
                 </view>
             </view>
             <image class='right' src='/images/venuedetail/icon_big.png'></image>

@@ -1,2 +1,13 @@
 <!--pages/webviwe/index.wxml-->
-<web-view src='{{htmlSrc}}'></web-view>
+<view class='warp'>
+    <image src='{{imgUrl + item.activityImg}}' mode='widthFix'></image>
+    <view class='bottomwarp flex_row' wx:if="{{item.activity == 2}}">
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>进入场馆</view>
+        </view>
+        <view class='confirm' bindtap='onGoDetail'>
+            点击购买
+        </view>
+    </view>
+</view>

@@ -23,7 +23,7 @@
         </block>
         <scroll-view scroll-y="true" style="height:{{winHeight}}px" bindscroll="onbindScroll" scroll-into-view="{{scrollTopId}}" scroll-top="{{scrollTop}}">
             <view class="hotcity-common thisCity">当前选择城市</view>
-            <view class="thisCityName">{{city}}</view>
+            <view class="thisCityName">{{currrentCity}}</view>
             <view wx:if="{{hotcityList.length}}">
                 <text class="hotcity hotcity-common">历史搜索城市</text>
                 <view class="weui-grids">

@@ -1,0 +1,11 @@
+<!--components/code/index.wxml-->
+<view class='mask' catchtap='onHide'></view>
+<view class='warp'>
+    <slot name="after"></slot>
+    <view class='codewarp'>
+        <view class='name'>消费码</view>
+        <view class='code' style='background:rgb({{dColor}})'>
+            <image class='image' src="{{codeUrl}}"></image>
+        </view>
+    </view>
+</view>

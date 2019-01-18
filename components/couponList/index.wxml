@@ -1,7 +1,6 @@
 <!--components/couponList/index.wxml-->
 <view class='containner'>
-    hello
-    <!-- <view class='coupon' 
+    <view class='coupon' 
         catchtap='onGoback'
         data-item='{{item}}'
         wx:for="{{couponList}}" wx:key="{{item.id}}">
@@ -17,5 +16,6 @@
             <text class='address'>{{item.venueName}}</text>
             <text class='term'>有效期至：{{item.effectiveTimeStr}}</text>
         </view>
-    </view> -->
+    </view>
+    <view class='backBtn' catchtap='onClose'>不使用优惠券</view>
 </view>

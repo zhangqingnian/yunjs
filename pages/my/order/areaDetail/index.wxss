@@ -1,0 +1,2 @@
+/* pages/my/order/areaDetail/index.wxss */
+@import '../../area/detail/index.wxss';

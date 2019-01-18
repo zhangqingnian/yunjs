@@ -48,7 +48,7 @@ page{
 
 swiper, swiper swiper-item image {
     width: 100%;
-    height: 300rpx;
+    height: 375rpx;
 }
 
 .venueNews {
@@ -103,6 +103,12 @@ swiper, swiper swiper-item image {
     margin: 20rpx 0;
 }
 
+.address{
+    justify-content: space-between;
+}
+.go{
+    color: #63afe0;
+}
 .telephone {
     margin-bottom: 0;
 }
@@ -236,7 +242,6 @@ swiper, swiper swiper-item image {
     height: 70rpx;
     border-radius: 50%;
     margin-right: 20rpx;
-    background: red;
     /* border: 1px solid #dcdcdc; */
 }
 
@@ -312,6 +317,10 @@ swiper, swiper swiper-item image {
 
 .price {
     color: #f26179;
+}
+
+.course .price {
+    color: #fff;
 }
 
 .state {

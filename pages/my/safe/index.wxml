@@ -1,0 +1,7 @@
+<!--pages/my/safe/index.wxml-->
+<view class='containner'>
+    <view class='flex_row' bindtap='onPayWord'>
+        <view>支付密码</view>
+        <image class='right' src='/images/venuedetail/icon_small.png'></image>
+    </view>
+</view>

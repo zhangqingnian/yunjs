@@ -1,0 +1,5 @@
+<!--pages/my/card/record/index.wxml-->
+<view class='flex_column warp'>
+    <view class='item' wx:for="{{list}}" wx:key="idx">核销时间：{{item.verficTime}}</view>
+    <view class='tip' wx:if="{{!list.length}}">暂无数据</view>
+</view>

@@ -4,15 +4,17 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
-		"nodeModules": true
+		"nodeModules": true,
+		"autoAudits": true,
+		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
+	"libVersion": "2.5.0",
 	"appid": "wx58248eb6a6468f9c",
 	"projectname": "yunjs",
 	"debugOptions": {
@@ -37,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 18,
+			"current": 40,
 			"list": [
 				{
 					"id": -1,
@@ -76,10 +78,10 @@
 					"query": "id=1320&sportTypeId=22"
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "场馆课程",
 					"pathName": "pages/venueCourser/index",
-					"query": ""
+					"query": "id=1320"
 				},
 				{
 					"id": 7,
@@ -90,7 +92,7 @@
 				{
 					"id": 8,
 					"name": "确认订单",
-					"pathName": "pages/confirmOrder/ticket/index",
+					"pathName": "pages/confirmOrder/courser/index",
 					"query": ""
 				},
 				{
@@ -152,6 +154,137 @@
 					"name": "优惠券列表",
 					"pathName": "pages/coupon/index",
 					"query": "venueId=1320"
+				},
+				{
+					"id": -1,
+					"name": "修改支付密码",
+					"pathName": "pages/payPassword/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "新增学员",
+					"pathName": "pages/my/student/addStudent/index",
+					"query": ""
+				},
+				{
+					"id": 21,
+					"name": "馆卡详情",
+					"pathName": "pages/venueCard/venueCardDetails/index",
+					"query": "id=324"
+				},
+				{
+					"id": 22,
+					"name": "新增联系人",
+					"pathName": "pages/my/contacts/addContacts/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "修改联系人",
+					"pathName": "pages/my/contacts/reviseContacts/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "选择联系人",
+					"pathName": "pages/my/contacts/selectContacts/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "个人资料",
+					"pathName": "pages/my/user/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "修改支付密码",
+					"pathName": "pages/payPassword/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/my/coupon/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的门票",
+					"pathName": "pages/my/ticket/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "馆卡详情",
+					"pathName": "pages/venueCard/venueCardDetails/index",
+					"query": "id=327"
+				},
+				{
+					"id": -1,
+					"name": "场地订单",
+					"pathName": "pages/confirmOrder/area/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "核销码",
+					"pathName": "pages/my/kechen/use/index",
+					"query": ""
+				},
+				{
+					"id": 32,
+					"name": "112",
+					"pathName": "pages/my/card/vipCard/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/my/order/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "场馆相册",
+					"pathName": "pages/venueList/venueDetail/fengcai/index",
+					"query": "id=1320"
+				},
+				{
+					"id": -1,
+					"name": "意见反馈",
+					"pathName": "pages/my/suggest/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "积分",
+					"pathName": "pages/my/jifen/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "余额",
+					"pathName": "pages/my/yue/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "记录",
+					"pathName": "pages/my/kechen/record/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "微信手机",
+					"pathName": "pages/bindMobile/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "webview",
+					"pathName": "pages/webviwe/index"
 				}
 			]
 		}

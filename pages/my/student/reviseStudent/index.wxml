@@ -1,0 +1,96 @@
+<!--pages/my/student/addStudent/index.wxml-->
+<view class='containner flex_clumon'>
+    <view class='base'>
+        <view class='title'>基础信息</view>
+        <view class='content'>
+            <view class='items flex_row'>
+                <view class='left'>姓名</view>
+                <input type='text w500' bindinput='onName' 
+                value='{{name}}'    
+                placeholder='请输入姓名'></input>
+            </view>
+            <view class='items flex_row'>
+                <view class='left'>生日</view>
+                <picker mode="date" value="{{date}}" bindchange="bindDateChange">
+                    <view class="weui-input w500">{{date}}</view>
+                </picker>
+            </view>
+            <view class='items flex_row sex'>
+                <view class='left'>性别</view>
+                <radio-group class="radio-group flex_row" bindchange="sexChange">
+                    <label class="radio flex_row" wx:for="{{sex}}" wx:key="{{item.id}}">
+                        <radio value="{{item.value}}" checked="{{item.checked}}" />
+                        <text>{{item.name}}</text>
+                    </label>
+                </radio-group>
+            </view>
+            <view class='items flex_row'>
+                <view class='left'>手机号</view>
+                <input type='number' class='w500' 
+                bindinput='onIphone'
+                value='{{iphone}}'
+                placeholder='请输入手机号码'  maxlength='11'></input>
+            </view>
+        </view>
+    </view>
+
+    <view class='other'>
+        <view class='title'>其它信息</view>
+        <view class='content'>
+            <view class='items flex_row'>
+                <view class='left'>身高</view>
+                <input type='number' class='w500' 
+                bindinput='onHeight'
+                value='{{height}}'
+                maxlength='3'
+                placeholder='请输入身高(cm)'></input>
+            </view>
+            <view class='items flex_row'>
+                <view class='left'>体重</view>
+                <input type='number' class="w500" 
+                maxlength='3'
+                value='{{weight}}'
+                bindinput='onWeight'
+                placeholder='请输入体重(kg)'></input>
+            </view>
+            <view class='items flex_row sex'>
+                <view class='left'>身体状况</view>
+                <radio-group class="radio-group flex_row" bindchange="bodyChange">
+                    <label class="radio flex_row" wx:for="{{body}}" wx:key="{{item.id}}">
+                        <radio value="{{item.value}}" checked="{{item.checked}}" />
+                        <text>{{item.name}}</text>
+                    </label>
+                </radio-group>
+            </view>
+        </view>
+    </view>
+
+    <view class='urgent'>
+        <view class='title'>紧急联系人</view>
+        <view class='content'>
+            <view class='items flex_row'>
+                <view class='left'>姓名</view>
+                <input type='text' class='w500' 
+                value='{{urgentName}}'
+                bindinput='onUrgentName'
+                placeholder='请输入姓名'></input>
+            </view>
+            <view class='items flex_row'>
+                <view class='left'>手机号</view>
+                <input type='number' class='w500' 
+                value='{{urgentIphone}}'
+                bindinput='onUrgentIphone'
+                placeholder='请输入手机号码'  maxlength='11'></input>
+            </view>
+        </view>
+    </view>
+
+    <view class='upimg'>
+        <view class='title'>添加学员正面照</view>
+        <view class='content flex_row'>
+            <image class='img' bindtap='onUpimg' src='{{img}}'></image>
+        </view>
+    </view>
+
+    <view class='add' bindtap='onBaocun'>保存</view>
+</view>

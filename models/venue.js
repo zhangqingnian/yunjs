@@ -3,6 +3,15 @@ import {
 } from '../utils/http.js';
 
 export class VenueModel extends Http {
+    //前三场馆
+    getRanking(data) {
+        return this.request({
+            url: 'm/crm/venue/front/getRanking',
+            method: 'POST',
+            data
+        })
+    }
+
     //场馆列表
     getVenueList(data) {
         return this.request({
@@ -25,25 +34,17 @@ export class VenueModel extends Http {
     }
 
     //场馆详情-风采
-    getFc(id) {
+    getFc(data) {
         return this.request({
             url: 'm/crm/venue/front/selectVenueImgDetail',
-            data: {
-                id: id,
-                start: 0,
-                limit: 5
-            }
+            data
         })
     }
     //场馆详情-用户评论
-    getRating(id) {
+    getRating(data) {
         return this.request({
             url: 'm/crm/venue/front/selectVenueEvaluation',
-            data: {
-                id: id,
-                start: 0,
-                limit: 3
-            }
+            data
         })
     }
 
@@ -108,7 +109,14 @@ export class VenueModel extends Http {
             method:'POST'
         })
     }
-
+    //门票详情
+    getTicketDetail(data){
+        return this.request({
+            url: 'm/crm/entranceticketPublish/front/getEntranceticketDetail',
+            data,
+            method: 'POST'
+        })
+    }
     //订场
     getField(id, sportTypeId, openDate){
         return this.request({

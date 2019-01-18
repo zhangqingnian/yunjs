@@ -1,0 +1,2 @@
+<!--pages/electronicProtocol/index.wxml-->
+<image src='{{imgSrc}}'></image>

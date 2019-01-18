@@ -1,4 +1,5 @@
 <!--pages/yuding/index.wxml-->
+<wxs src="../../utils/venue.wxs" module="util" />
 <view class='container'>
     <view class='date'>
         <!-- 日期 -->
@@ -20,7 +21,7 @@
                 <view wx:for="{{hour}}" wx:key="{{idx}}">{{item}}</view>
         </view>
         <view class='right'>
-            <scroll-view class='scroll-view-y' scroll-x style='white-space:nowrap;width: 560rpx;'>
+            <scroll-view class='scroll-view-y' scroll-x style='white-space:nowrap;'>
                 <view class='area'>
                     <!-- 场地 -->
                     <text wx:for="{{field}}" wx:key="{{item.id}}">{{item.areaName}}</text>
@@ -36,7 +37,7 @@
                             wx:for="{{item.venueAreaOpenTimes}}" 
                             wx:for-item="itemName"
                             wx:key="{{idx}}">
-                                {{itemName.cvaoIsOpen ? '￥'+itemName.cvaoPrice+'预约' : '不可预约'}}
+    {{itemName.cvaoIsOpen ? (itemName.isSelect ? '已预约':'￥'+itemName.cvaoPrice+'预约') : '不可预约'}}
                             </view>
                         </view>
                     </block>
@@ -50,7 +51,7 @@
             <image src='/images/dingchang.png'></image>
             <view>订场信息</view>
         </view>
-        <view class='confirm'>
+        <view class='confirm' bindtap='onGoOrder'>
             确认订场
         </view>
     </view>

@@ -19,6 +19,14 @@
     display:flex;
     flex-direction: row;
     align-items: center;
+    position:absolute;
+    top:10rpx;
+    left: 10rpx;
+    z-index:999;
+    border:1px solid #0000ff;
+    padding:5rpx 10rpx;
+    border-radius:5px;
+
 }
 .area image{
     width: 30rpx;
@@ -28,6 +36,8 @@
 .area text{
     line-height: 40rpx;
     color: #fff;
+    font-size:30rpx;
+
 }
 
 .date image{
@@ -96,7 +106,36 @@ swiper,swiper swiper-item image{
     margin-bottom: 10rpx;
 }
 
+.hot .content .hotItem{
+    width: 340rpx;
+    height: 200rpx;
+    margin-bottom: 10rpx;
+    position: relative;
+}
+.hot .content .hotItem image{
+     width: 340rpx;
+    height: 200rpx;
+}
+
+.hot .content .hotItem .title{
+    position: absolute;
+    background: rgba(40,100,170,.8);
+    width: 100%;
+    bottom: 0;
+    color: #fff;
+    font-size: 30rpx;
+    text-align: right;
+    height:60rpx;
+    display: block;
+    line-height: 60rpx;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+    letter-spacing:1px;
+}
 .benyuehuodong .content image:nth-child(odd){
+    margin-right: 10rpx;
+}
+.hot .content view:nth-child(odd){
     margin-right: 10rpx;
 }
 
@@ -108,13 +147,36 @@ swiper,swiper swiper-item image{
     flex-direction: column;
     align-items: center;
     margin-bottom: 0rpx;
+    margin-right: 25rpx;
+}
+.venues .content view:nth-child(3n){
+    margin-right: 0rpx;
 }
 
-.venues .content view image{
-    width: 220rpx;
-    height: 150rpx;
-    background:red;
+.venues .content image{
+    width: 214rpx;
+    height: 155rpx;
 
+}
+
+.venues .content .dots, .benyuehuodong .content .dots{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction:row;
+  margin: 0;
+  margin-top:20rpx;
+}
+.venues .content .dots .dot,.benyuehuodong .content .dots .dot{
+  margin: 0 10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  background: #DCDCDC;
+  border-radius: 50%;
+  text-align: center;
+}
+.venues .content .dots .dot.active, .benyuehuodong .content .dots .dot.active{
+  background: #2EE66B;
 }
 
 .venues .content image:nth-child(odd){
@@ -123,7 +185,7 @@ swiper,swiper swiper-item image{
 
 .venues .content view text{
     font-size: 24rpx;
-    width:220rpx;
+    width:150rpx;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;

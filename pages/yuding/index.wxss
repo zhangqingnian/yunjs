@@ -10,7 +10,7 @@ page {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background: rgba(245, 245, 245, 1);
+    background: #F5F5F5;
     padding: 100rpx 0;
     box-sizing: border-box;
 }
@@ -22,7 +22,7 @@ page {
     position: fixed;
     top:0;
     z-index: 9999;
-    background: rgba(245, 245, 245, 1);
+    background: #fff;
     width: 100%;
 }
 
@@ -32,6 +32,8 @@ page {
     font-size: 28rpx;
     color: #969696;
     margin: 0 30rpx;
+    text-align:center;
+
 }
 
 .date .item.on {
@@ -46,17 +48,17 @@ page {
     height: calc(100% - 70rpx);
 }
 .left{
-    width: 190rpx;
+    width: 120rpx;
+    background:#fff;
+
 }
 .right{
-    width: calc(100% - 190rpx);
-    background: #fff;
+    width: calc(100% - 120rpx);
     /* overflow-x: scroll; */
 }
 
 .area{
     height: 70rpx;
-    background:rgba(255,255,255,1);
 }
 
 .area text{
@@ -149,7 +151,9 @@ page {
 }
 
 .item-warp view.on{
-    color: #63AFE0
+    background: #63AFE0;
+    color: #fff;
+    border-color: #63AFE0;
 }
 
 .news {

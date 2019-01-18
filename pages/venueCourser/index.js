@@ -33,6 +33,9 @@ Page({
             url: '/pages/kechen/kechenDetails/index?id='+id,
         })
     },
+    onShareAppMessage(Object) {
+
+    },
 
     //课程
     _getKc(id) {

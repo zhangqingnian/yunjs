@@ -1,0 +1,36 @@
+/* pages/venueList/venueDetail/rating/index.wxss */
+.content {
+    padding: 0 20rpx;
+}
+
+.content .item {
+    padding: 20rpx 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.userInfo {
+    color: #323232;
+}
+
+.avatar {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    /* border: 1px solid #dcdcdc; */
+}
+
+.userName {
+    font-size: 28rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+}
+
+.ratingTime {
+    font-size: 24rpx;
+}
+
+.ratingContent {
+    font-size: 24rpx;
+    margin: 20rpx 0 0 90rpx;
+}

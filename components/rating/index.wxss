@@ -1,0 +1,91 @@
+/* components/rating/index.wxss */
+.flex_row {
+    display: flex;
+    flex-direction: row;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+.playwarp {
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    width: 100%;
+    
+    box-sizing: border-box;
+}
+.topwarp{
+    padding: 0 30rpx;
+}
+.playwarp .top {
+    position: relative;
+    text-align: center;
+    color: #323232;
+    font-size: 36rpx;
+    padding: 25rpx 0;
+    box-sizing: border-box;
+}
+
+.close {
+    position: absolute;
+    width: 38rpx;
+    height: 38rpx;
+    right: 0;
+    top: 30rpx;
+}
+
+.play-icon {
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 20rpx;
+}
+
+.level {
+    font-size: 30rpx;
+    color: #4a4a4a;
+    align-items: center;
+}
+
+.level text{
+    display: inline-block;
+    padding: 10rpx 20rpx;
+    margin-left: 20rpx;
+    color: #666;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.level text.on{
+    color:#63E08C;
+}
+
+textarea{
+    width:100%;
+    border:1px solid #666;
+    height: 200rpx;
+    margin-top: 10rpx;
+    margin-bottom: 30rpx;
+    background: #f5f5f5;
+    padding: 10rpx;
+    box-sizing: border-box;
+}
+
+.play {
+    width: 100%;
+    height: 100rpx;
+    font-size: 36rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 100rpx;
+    background: #63E08C;
+}

@@ -1,0 +1,73 @@
+/* pages/my/contacts/index.wxss */
+page{
+    width: 100%;
+    height: 100%;
+}
+
+.containner{
+    width: 100%;
+    min-height: 100%;
+    background: #F5F5F5;
+    font-size: 32rpx;
+    padding-top: 30rpx;
+    color: #323232;
+    box-sizing: border-box;
+}
+
+image{
+    width: 44rpx;
+    height: 44rpx;
+}
+
+.item{
+    background: #fff;
+    margin-bottom: 30rpx;
+    padding: 0 30rpx;
+}
+
+.top{
+    padding: 25rpx 0;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.iphone{
+    margin-left: 180rpx;
+}
+
+.bottom{
+    padding: 10rpx 0;
+    font-size: 28rpx;
+    color: #969696;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select{
+    align-items: center;
+}
+
+.select image{
+    margin-right: 10rpx;
+}
+
+.action image{
+    margin-left: 30rpx;
+}
+
+.on{
+    color: #2BB1FF;
+}
+
+.add{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    background: rgba(99, 224, 140, 1);
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 36rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}

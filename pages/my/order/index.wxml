@@ -6,48 +6,120 @@
         <image src='/images/my/line.png'></image>
         <view class='{{ paid ? "on" : "" }}' bindtap='onPaid'>已支付</view>
         <image src='/images/my/line.png'></image>
-        <view class='{{ cancel ? "on" : "" }}' bindtap='onCancel'>已取消</view>
+        <view class='{{ cancel ? "on" : "" }}' bindtap='onCancel' >已取消</view>
     </view>
 
     <view class='orderlist'>
-        <block wx:for="{{res}}" wx:key='idx'>
-            <v-venue wx:if="{{item.orderType == 1}}">
-                <image class='icon' wx:if="{{unpaid}}"  slot='delete' src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{cancel}}" slot='text' >已取消</text>
-                <text  class='text' wx:if="{{paid}}" slot='text' >已支付</text>
-                <text class='btn' wx:if="{{unpaid}}" slot="play">去支付</text>
-                <text class='btn' wx:if="{{paid}}" slot='refund'>申请退款</text>
-                <text class='btn' wx:if="{{paid}}" slot='code'>核销码</text>
+        <!-- status:支付状态（待支付8，已支付9，已完成0，已取消1, 已退款14） -->
+        <block wx:for="{{orderList}}" wx:key='{{item.id}}'>
+            <!-- 场地  -->   
+            <v-venue wx:if="{{item.orderType == 15}}" 
+                catchtap ='onGoDetail'
+                data-item = "{{item}}"
+                bind:del="onDel"
+                bind:pay="onPay"
+                bind:buy="onBuy"
+                bind:rating="onRating"
+                bind:goOrder='onGoOrder'
+                order="{{item}}">
+                <image class='icon' 
+                    wx:if="{{item.status != 9}}"  
+                    slot='delete' src='/images/my/icon_delete.png'></image>
+                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
+                <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
+                <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
+                <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
+
+                <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
+                <text class='btn' wx:if="{{item.status == 9}}" slot='code'>我的场地</text>
+                <text class='btn' wx:if="{{item.status == 0}}" slot='rating'>评价</text>
+                <text class='btn' wx:if="{{item.status == 0 || item.status == 14}}" 
+                    slot='again'>再次购买</text>
             </v-venue>
+        
+            <!-- 馆卡 -->
+            <v-card 
+                catchtap='onGoDetail'
+                data-item = "{{item}}"
+                bind:del="onDel"
+                bind:pay="onPay"
+                bind:goOrder='onGoOrder'
+                bind:refund='onRefund'
+                order="{{item}}"
+                wx:if="{{item.orderType == 16}}">
+                <image class='icon'
+                 wx:if="{{item.status != 9}}"  slot='delete'  
+                 src='/images/my/icon_delete.png'></image>
+                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
+                <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
+                <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
+                <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
 
-
-            <v-card wx:if="{{item.orderType == 2}}">
-                <image class='icon' wx:if="{{unpaid || paid}}"  slot='delete' src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{cancel}}" slot='text' >已取消</text>
-                <text  class='text' wx:if="{{paid}}" slot='text' >已完成</text>
-                <text class='btn' wx:if="{{unpaid}}" slot="play">去支付</text>
-                <text class='btn' wx:if="{{paid}}" slot='refund'>申请退款</text>
-                <text class='btn' wx:if="{{paid}}" slot='card'>我的馆卡</text>
+                <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
+                <text class='btn' wx:if="{{item.status == 9 || item.status == 0}}" 
+                    slot='refund'>申请退款</text>
+                <text class='btn' wx:if="{{item.status == 9 || item.status == 0}}"
+                    slot='code'>我的馆卡</text>
             </v-card>
            
-            <v-ticket wx:if="{{item.orderType == 3}}">
-                <image class='icon' wx:if="{{unpaid || paid}}"  slot='delete' src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{cancel}}" slot='text' >已取消</text>
-                <text  class='text' wx:if="{{paid}}" slot='text' >已完成</text>
-                <text class='btn' wx:if="{{unpaid}}" slot="play">去支付</text>
-                <text class='btn' wx:if="{{paid}}" slot='again'>再次购买</text>
+            <!-- 门票 -->
+            <v-ticket 
+                catchtap='onGoDetail'
+                data-item = "{{item}}"
+                bind:refund='onRefund'
+                bind:del="onDel"
+                bind:pay="onPay"
+                bind:buy="onBuy"
+                bind:goOrder='onGoOrder'
+                order="{{item}}"
+                wx:if="{{item.orderType == 24}}">
+                <image class='icon' wx:if="{{item.status != 9}}"   slot='delete'
+                    src='/images/my/icon_delete.png'></image>
+                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
+                <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
+                <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
+                <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
+
+                <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
+                <text class='btn' wx:if="{{item.status == 9}}" slot='refund'>申请退款</text>
+                <text class='btn' wx:if="{{item.status == 9}}" slot='code'>我的门票</text>
+                <text class='btn' 
+                    wx:if="{{item.status == 0 || item.status == 9 || item.status == 14}}" 
+                    slot='again'>再次购买</text>
             </v-ticket>
              
-            <v-course wx:if="{{item.orderType == 4}}">
-                <image class='icon' wx:if="{{unpaid || paid}}"  slot='delete' src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{cancel}}" slot='text' >已取消</text>
-                <text  class='text' wx:if="{{paid}}" slot='text' >已完成</text>
-                <text class='btn' wx:if="{{unpaid}}" slot="play">去支付</text>
-                <text class='btn' wx:if="{{paid}}" slot='again'>再次购买</text>
-                 <text class='btn' wx:if="{{paid}}" slot='rating'>评价</text>
+            <!--课程-->
+            <v-course 
+                catchtap='onGoDetail'
+                data-item = "{{item}}"
+                bind:del="onDel"
+                bind:pay="onPay"
+                bind:goOrder='onGoOrder'
+                 bind:refund='onRefund'
+                order="{{item}}"
+                wx:if="{{item.orderType == 17}}">
+                <image class='icon' wx:if="{{item.status != 9}}"  
+                    slot='delete' src='/images/my/icon_delete.png'></image>
+               <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
+                <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
+                <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
+                <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
+
+                <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
+                <text class='btn' wx:if="{{item.status == 9 || item.status == 0}}" 
+                    slot='code'>我的课程</text>
+                <text class='btn' wx:if="{{item.status == 9 || item.status == 0}}" 
+                    slot='refund'>申请退款</text>
             </v-course>
-        </block>    
+             
+        </block> 
+        <view class='tip' wx:if="{{!orderList.length}}">暂无数据!</view> 
     </view>
+    <v-loading wx:if="{{loading}}" /> 
 </view>
 
 

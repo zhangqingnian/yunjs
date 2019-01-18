@@ -1,0 +1,28 @@
+<!--pages/my/card/vipCard/index.wxml-->
+<view class='containner'>
+    <view class='topwarp'>
+        <image class='img'></image>
+        <view>卡内余额</view>
+        <view>￥{{vipCard.surplusMoney}}</view>
+    </view>
+    <view class='bottomwarp'>
+        <view class='flex_row'>
+            <view>消费金额</view>
+            <input focus='true' 
+                bindinput='inputMoney'
+                value='{{money}}'
+            placeholder='请输入本次消费金额(具体金额询问场馆)'></input>
+        </view>
+        <view class='paw'>支付密码</view>
+        <view class='input_main'>
+            <view class='input_row' catchtap='getFocus'>
+                <view class='pwd_item' wx:for='{{6}}' wx:key='item' wx:for-index='i'>
+                    <text wx:if='{{pwdVal.length>i}}'></text>
+                </view>
+            </view>
+            <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6' />
+        </view>
+
+        <view class='baoming' bindtap='onPay'>支付</view>
+    </view>
+</view>

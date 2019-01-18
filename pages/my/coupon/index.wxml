@@ -1,0 +1,46 @@
+<!--pages/my/coupon/index.wxml-->
+<view class='containner'>
+    <view class='nav flex_row'>
+        <view class='{{item.isOn ? "on":""}}' wx:for="{{nav}}" 
+            bindtap='onSelectType'
+            data-id='{{item.id}}'
+            wx:key="{{item.id}}">{{item.name}}</view>
+    </view>
+    <scroll-view class='content' scroll-y="true">
+        <view class='coupon' wx:for="{{couponList}}" wx:key="{{item.id}}">
+            <image class='couponImg' src='/images/coupon.png'></image>
+            <view class='couponContent flex_column'>
+                <view class='head flex_row'>
+                    <view class='valueWarp flex_column'>
+                        <text class='price'>￥{{item.money}}</text>
+                        <text class='condition'>(满{{item.consume}}元使用)</text>
+                    </view>
+                    <view class='couponName'>{{item.couponName}}</view>
+                </view>
+                <text class='address'>{{item.venueName}}</text>
+                <text class='term'>有效期至：{{item.effecEndTimeStr}}</text>
+            </view>
+        </view>
+    </scroll-view>
+    <view class='bottomNav flex_row'>
+        <view bindtap='onExchange'>兑换优惠券</view>
+        <view>领取优惠券</view>
+    </view>
+</view>
+
+
+
+<view class='mask' wx:if="{{show}}">
+    <view class='box'>
+        <view class='top flex_cloumn'>
+            <view class='title'>请输入优惠券兑换码</view>
+            <input class='couponInput' 
+                bindinput='onInput'
+                placeholder='请输入优惠券兑换码' focus='true'></input>
+        </view>
+        <view class='bottom flex_row'>
+            <view bindtap='cancelExchange' >取消</view>
+            <view bindtap='confirmExchange'>兑换</view>
+        </view>
+    </view>
+</view>

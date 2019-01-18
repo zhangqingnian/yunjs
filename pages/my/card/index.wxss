@@ -1,0 +1,27 @@
+/* pages/my/card/index.wxss */
+@import '../kechen/index.wxss';
+
+.red{
+    color: red;
+}
+
+.topwarp .item{
+    margin: 0;
+    padding:5rpx 0rpx;
+    font-size:30rpx;
+
+}
+
+.topwarp{
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    padding: 20rpx
+}
+
+.topwarp .left{
+    height: 240rpx;
+    width: 160rpx;
+    background: red;
+    margin-right: 20rpx;
+}

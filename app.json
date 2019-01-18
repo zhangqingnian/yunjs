@@ -1,5 +1,7 @@
 {
     "pages": [
+        "pages/authorizeLocation/index",
+        "pages/index/index",
         "pages/authorize/index",
         "pages/venueList/index",
         "pages/venueTicket/index",
@@ -9,7 +11,6 @@
         "pages/venueCourser/index",
         "pages/venueList/venueDetail/index",
         "pages/yuding/index",
-        "pages/index/index",
         "pages/guanka/index",
         "pages/kechen/index",
         "pages/my/index",
@@ -22,17 +23,51 @@
         "pages/my/contacts/index",
         "pages/my/student/index",
         "pages/venueCard/termCardDetails/index",
-        "pages/confirmOrder/other/index",
+        "pages/confirmOrder/courser/index",
         "pages/confirmOrder/ticket/index",
         "pages/login/index",
-        "pages/coupon/couponList/index"
+        "pages/coupon/couponList/index",
+        "pages/payPassword/index",
+        "pages/confirmOrder/area/index",
+        "pages/confirmOrder/card/index",
+        "pages/confirmOrder/termcard/index",
+        "pages/my/student/addStudent/index",
+        "pages/my/student/reviseStudent/index",
+        "pages/my/contacts/addContacts/index",
+        "pages/my/contacts/selectContacts/index",
+        "pages/my/contacts/reviseContacts/index",
+        "pages/my/user/index",
+        "pages/my/safe/index",
+        "pages/my/coupon/index",
+        "pages/my/ticket/index",
+        "pages/my/ticket/ticketDetail/index",
+        "pages/electronicProtocol/index",
+        "pages/confirmOrder/selectContacts/index",
+        "pages/confirmOrder/selectStudent/index",
+        "pages/my/kechen/use/index",
+        "pages/my/kechen/detail/index",
+        "pages/my/card/index",
+        "pages/my/card/detail/index",
+        "pages/my/card/vipCard/index",
+        "pages/my/area/index",
+        "pages/my/area/detail/index",
+        "pages/my/order/areaDetail/index",
+        "pages/my/order/cashier/index",
+        "pages/venueList/venueDetail/fengcai/index",
+        "pages/venueList/venueDetail/rating/index",
+        "pages/my/suggest/index",
+        "pages/my/jifen/index",
+        "pages/my/yue/index",
+        "pages/my/kechen/record/index",
+        "pages/my/card/record/index",
+        "pages/bindMobile/index",
+        "pages/cityList/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#63afe0",
         "navigationBarTitleText": "",
-        "navigationBarTextStyle": "#fff",
-        "enablePullDownRefresh": true
+        "navigationBarTextStyle": "#fff"
     },
     "tabBar": {
         "list": [
@@ -61,5 +96,10 @@
                 "selectedIconPath": "/images/icon-我的-选中@2x.png"
             }
         ]
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
     }
 }

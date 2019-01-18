@@ -3,11 +3,11 @@
 <view class='containner flex_column'>
     <swiper indicator-dots='true' autoplay="true" indicator-color="#fff" indicator-active-color="#2ee66b">
         <swiper-item wx:for="{{venue.venueImgVo}}" wx:key="{{idx}}" bindtap='goWebview'>
-            <image src="{{imgUrl+item.tfFileName}}"></image>
+            <image src="{{imgUrl+item.tfFileName}}" mode='aspectFit'></image>
         </swiper-item>
     </swiper>
 
-    <view class='venueNews mtop_30'>
+    <view class='venueNews'>
         <view class='one flex_row'>
             <text class='venueNanme'>{{venue.venueName}}</text>
             <view class='venueType flex_row'>
@@ -29,10 +29,13 @@
         <view class='address flex_row' bindtap='onMap' 
             data-name='{{venue.venueName}}' data-address='{{venue.address}}'
             data-lat='{{venue.lat}}' data-lon='{{venue.lon}}'>
-            <image class='icon1' src='/images/venuedetail/icon_1.png'></image>
-            <text>{{venue.address}}</text>
+            <view class='flex_row' style='align-items: center;'>
+                <image class='icon1' src='/images/venuedetail/icon_1.png'></image>
+                <text>{{venue.address}}</text>
+            </view>
+            <view class='go'>去这里</view>
         </view>
-        <view class='telephone flex_row'>
+        <view class='telephone flex_row' bindtap='onVenueMobile'>
             <image class='icon1' src='/images/venuedetail/icon_2.png'></image>
             <text>{{venue.venueMobile}}</text>
         </view>
@@ -44,7 +47,7 @@
             <block wx:for="{{venue.venueAreaVo}}" wx:key="{{item.cvaSportTypeId}}">          
                 <text class='{{item.cvaSportTypeId == sportTypeId ? "on":""}}' 
                 bindtap='onSelectSportType'
-                data-cvaSportTypeId='{{item.cvaSportTypeId}}' >{{item.tvtTypeName}}</text>
+                data-item='{{item}}' >{{item.tvtTypeName}}</text>
             </block>
         </scroll-view>
     </view>
@@ -65,22 +68,14 @@
             <block wx:for="{{venue.venueServiceImgVo}}" wx:key="{{idx}}">
                 <image src='{{imgUrl + item.tfsFile}}'></image>
             </block>
-            <!--  
-            <image src='/images/venuedetail/icon_3.png'></image>
-            <image src='/images/venuedetail/icon_4.png'></image>
-            <image src='/images/venuedetail/icon_5.png'></image>
-            <image src='/images/venuedetail/icon_6.png'></image>
-            <image src='/images/venuedetail/icon_7.png'></image>
-            <image src='/images/venuedetail/icon_8.png'></image>
-            <image src='/images/venuedetail/icon_9.png'></image>
-            -->
+            
         </view>
     </view>
 
     <view class='fengcai mtop_30'>
         <view class='top flex_row'>
             <text class='title'>场馆风采</text>
-            <view class='flex_row warp'>
+            <view class='flex_row warp' bindtap='onFengcai'>
                 <text class='text'>查看更多</text>
                 <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>
@@ -97,7 +92,7 @@
     <view class='rating mtop_30' wx:if="{{venueRating.length}}">
         <view class='top flex_row'>
             <text class='title'>用户评论</text>
-            <view class='flex_row warp'>
+            <view class='flex_row warp' bindtap='onRating'>
                 <text class='text'>查看更多</text>
                 <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>
@@ -105,11 +100,11 @@
         <view class='content'>
             <view class='item' wx:for="{{venueRating}}" wx:key="{{idx}}">
                 <view class='userInfo flex_row'>
-                    <image class='avatar' ></image>
-                    <!-- src='{{imgUrl + item.tfPath}}' -->
+                    <image class='avatar'src='{{imgUrl + item.venueImgVo[0].tfFileName}}'></image>
+
                     <view class='flex_column'>
                         <text class='userName'>{{item.crLoginName}}</text>
-                        <text class='ratingTime'>{{item.ceCreateTime}}</text>
+                        <text class='ratingTime'>{{util.formatDateTime(item.ceCreateTime)}}</text>
                     </view>
                 </view>
                 <view class='ratingContent'>
@@ -117,21 +112,21 @@
                 </view>
             </view>
         </view>
-        <view class='more'>
-            查看更多
-        </view>
     </view>
 
     <view class='course mtop_30' wx:if="{{venueKc.length}}">
         <view class='top flex_row'>
-            <text class='title'>课程培训( {{venueKc.length}} )</text>
-            <view class='flex_row warp'>
+            <text class='title'>课程培训( {{venueKcTotal}} )</text>
+            <view class='flex_row warp' bindtap='onBuyCourse'>
                 <text class='text'>查看更多</text>
                 <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>
         </view>
         <view class='content flex_row'>
-            <view class='item flex_column' wx:for="{{venueKc}}" wx:key="{{item.id}}">
+            <view class='item flex_column' 
+                bindtap='onCourseDetail'
+                data-id='{{item.id}}'
+                wx:for="{{venueKc}}" wx:key="{{item.id}}">
                 <view class='imgwarp'>
                     <image class='vipImg' src='{{imgUrl + item.fileName}}'></image>
                     <text class='cardName'>{{item.courseName}}</text>
@@ -143,39 +138,25 @@
                 <view class='courseName'>{{item.courseName}}</view>
                 <view class='footer flex_row'>
                     <view class='courseAddress'>{{item.venueName}}</view>
-                    <!-- <view class='range'>123m(暂无)</view> -->
                 </view>
             </view>
-            <!--  
-                <view class='item flex_column'>
-                    <view class='imgwarp'>
-                        <image class='vipImg' src='/images/vip.png'></image>
-                        <text class='cardName'>VIP课程卡</text>
-                        <view class='bottom flex_row'>
-                            <text class='price'>￥289.00</text>
-                            <text class='state'>报名中</text>
-                        </view>
-                    </view>
-                    <view class='courseName'>游泳馆游泳1v1课</view>
-                    <view class='footer flex_row'>
-                        <view class='courseAddress'>全民健身中心</view>
-                        <view class='range'>123m</view>
-                    </view>
-                </view>
-            -->
+           
         </view>
     </view>
 
     <view class='venueTicket mtop_30' wx:if="{{venueGk.length}}">
         <view class='top flex_row'>
-            <text class='title'>场馆卡券({{venueGk.length}})</text>
-            <view class='flex_row warp'>
+            <text class='title'>场馆卡券({{venueGkTotal}})</text>
+            <view class='flex_row warp' bindtap='onBuyVenueCard'>
                 <text class='text'>查看更多</text>
                 <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>
         </view>
         <view class='content flex_row'>
-            <view class='item flex_column' wx:for="{{venueGk}}" wx:key="{{item.id}}">
+            <view class='item flex_column' 
+                bindtap='onCardDetail'
+                data-item='{{item}}'
+                wx:for="{{venueGk}}" wx:key="{{item.id}}">
                 <view class='imgwarp'>
                     <image class='vipImg' src='{{imgUrl + item.fileName }}'></image>
                     <view class='bottom flex_row'>

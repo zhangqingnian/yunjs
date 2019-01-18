@@ -1,0 +1,90 @@
+<!--pages/my/ticket/ticketDetail/index.wxml-->
+<view class='containner flex_column'>
+    <view class='cardWarp'>
+        <image src='{{imgUrl +ticket.ticketImg}}'></image>
+    </view>
+
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>{{ticket.ticketName}}</view>
+            <view class='type'>类型：{{ticket.sportTypeName}}</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>馆卡价格：</view>
+                <view class='value price'>¥{{ticket.ticketPrice}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>{{ticket.certTime}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{ticket.venueName}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>地址：</view>
+                    <view class='value'>{{ticket.venueAddress}}</view>
+                </view>
+            </view>
+            <view class='item jihuo flex_row'>
+                <view class='name'>二维码颜色：</view>
+                <view class='value color' style='background:rgb({{ticket.dColor}})'></view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>限购数量：</view>
+                <view class='value'>{{ticket.ticketBuyLimitAmount}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>退款须知</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            购票后未使用3天内可退
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>购买须知</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{ticket.buyRemark}}
+        </view>
+    </view>
+    <view class='baoming' bindtap='onUse' 
+        wx:if="{{valid}}"
+        data-orderCode='{{ticket.orderCode}}'>使用</view>
+</view>
+
+
+<v-code  wx:if="{{show}}" bind:hide="onHide" 
+    codeUrl="{{codeUrl}}" dColor="{{ticket.dColor}}">
+    <view class='topwarp' slot='after'>
+        <view class='item flex_row'>
+            <view class='title'>{{ticket.ticketName}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>有效时间：</view>
+            <view class='value'>{{ticket.certTime}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>场馆名称：</view>
+            <view class='value'>{{ticket.venueName}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>运动项目：</view>
+            <view class='value'>{{ticket.sportTypeName}}</view>
+        </view>   
+        <view class='item flex_row'>
+            <view class='name'>剩余次数：</view>
+            <view class='value'>{{ticket.residualTimes}}次</view>
+        </view>      
+    </view>
+</v-code>

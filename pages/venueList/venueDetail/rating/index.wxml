@@ -1,0 +1,18 @@
+<!--pages/venueList/venueDetail/rating/index.wxml-->
+<wxs src="../../../../utils/venue.wxs" module="util" />
+
+<view class='content'>
+    <view class='item' wx:for="{{venueRating}}" wx:key="{{idx}}">
+        <view class='userInfo flex_row'>
+            <image class='avatar' src='{{imgUrl + item.venueImgVo[0].tfFileName}}'></image>
+            <!-- src='{{imgUrl + item.venueImgVo[0].tfFileName}}' -->
+            <view class='flex_column'>
+                <text class='userName'>{{item.crLoginName}}</text>
+                <text class='ratingTime'>{{util.formatDateTime(item.ceCreateTime)}}</text>
+            </view>
+        </view>
+        <view class='ratingContent'>
+            {{item.ceContent}}
+        </view>
+    </view>
+</view>

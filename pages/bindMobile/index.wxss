@@ -1,0 +1,25 @@
+/* pages/bindMobile/index.wxss */
+page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    margin-top: 50rpx;
+    width: 350rpx;
+    
+}
+
+image{
+    margin-top: 100rpx;
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 10px;
+}
+
+.tip{
+    font-size:25rpx;
+    margin-top:30rpx;
+
+}

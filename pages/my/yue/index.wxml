@@ -1,0 +1,13 @@
+<!--pages/my/jifen /index.wxml-->
+<wxs src="../../../utils/venue.wxs" module="util" />
+<view class='containner flex_column'>
+    <view class='item' wx:for="{{list}}" wx:key="idx">
+        <view class='top flex_row'>
+            <view class='name'>{{item.description}}</view>
+            <view class='num {{ util.filterTypeClass(item) }}'>{{util.filterType(item)}}</view>
+        </view>
+        <view class='date'>{{item.releaseTime}}</view>
+    </view>
+    
+</view>
+<view class='noMore' wx:if="{{more}}">没有更多数据了</view>

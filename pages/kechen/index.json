@@ -1,4 +1,4 @@
 {
     "navigationBarTitleText": "课程",
-    "disableScroll": true
+    "enablePullDownRefresh": false
 }

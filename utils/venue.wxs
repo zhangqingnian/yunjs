@@ -31,6 +31,10 @@ var filterVenueName = function (str) {
     return str.length > 6 ? str.slice(0, 6) + '...' : str
 }
 
+var filterVenueName3 = function (str) {
+    return str.length > 2 ? str.slice(0, 2) + '...' : str
+}
+
 var filterCardTime = function (str) {
     return str.split(' ')[0];
 }
@@ -39,14 +43,61 @@ var filterMomey = function (num) {
     return num.toFixed(2)
 }
 
+var formatDateTime = function (inputTime) {
+    var date = getDate(inputTime);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '/' + m + '/' + d;
+}
+
+var filterType = function (item) {
+    if (item.tradeType == 0 || item.tradeType == 3){
+        return '+' + item.tradeMoney
+    }else if (item.tradeType == 5 ) {
+        return '-' + item.tradeMoney
+    }else{
+        return item.tradeMoney
+    }
+}
+
+var filterTypeClass = function (item) {
+    if (item.tradeType == 0 || item.tradeType == 3) {
+        return  'add'
+    } else if (item.tradeType == 5) {
+        return 'reduce'
+    } else {
+        return ''
+    }
+}
 
 
+var filterStatus = function (item) {
+    if (item.cvaoIsOpen) {
+        return item.isSelect ? '已预约' : '￥' + itemName.cvaoPrice + '预约'      
+    } else {
+        return '不可预约'
+    }
+      
+}
 module.exports = {
     filterStar: filterStar,
     filterDistance: filterDistance,
     filterCardName: filterCardName, 
     filterCardName2: filterCardName2,
+    filterVenueName3: filterVenueName3,
     filterCardTime: filterCardTime,
     filterVenueName: filterVenueName,
-    filterMomey: filterMomey
+    filterMomey: filterMomey,
+    formatDateTime: formatDateTime,
+    filterType: filterType,
+    filterTypeClass: filterTypeClass
 }

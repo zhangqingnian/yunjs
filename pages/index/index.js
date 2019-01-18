@@ -13,7 +13,7 @@ import {
 let history = new HistoryCity();
 let indexModel = new IndexModel();
 
-
+let app = getApp();
 
 Page({
 
@@ -32,7 +32,9 @@ Page({
         province:'',
         city:'',                      //当前城市
         latitude:'',                  //纬度
-        longitude:''                  //经度
+        longitude:'',                  //经度
+        TjCurrent: 0,
+        ByCurrent: 0
     },
 
     /**
@@ -43,19 +45,38 @@ Page({
             key: 'F4VBZ-CBM3U-O7IVA-2ROG5-IQLE5-HGBUQ'
         });
         
-        this.getUserLocation();
-        let { city, nodecode } = wx.getStorageSync('city') || {city:'',nodecode:''};
         this.getbanner();
         this.getbenyue();
-        this.gettuijian(nodecode);
         this.getVenuetype();
         this.getHot();
+    },
+    onShow: function () {
+        let {nodecode,city }= wx.getStorageSync('city'); 
+        console.log(nodecode)
+        this.setData({
+            city
+        })
+        this.gettuijian(nodecode)
+    },
+    onShareAppMessage(Object){
+
+    },
+    swiperChange(e){
+        this.setData({
+            TjCurrent: e.detail.current
+        })
+    },
+    swiperChangeBy(e) {
+        this.setData({
+            ByCurrent: e.detail.current
+        })
     },
     //轮播
     getbanner() {
         indexModel.getBanner().then(res => {
+            console.log(res)
             this.setData({
-                banner: res.data
+                banner: res.data.items
             })
         })
     },
@@ -63,7 +84,7 @@ Page({
     getVenuetype(){
         indexModel.getVenuetype().then(res => {
             this.setData({
-                venuetype: res.data.items
+                venuetype: res.data.items.slice(0,9)
             })
         })
     },
@@ -71,7 +92,7 @@ Page({
     getbenyue() {
         indexModel.getBenyue().then(res => {
             this.setData({
-                benyue: res.data
+                benyue:this._formatData(res.data.items,4)
             })
         })
     },
@@ -79,7 +100,7 @@ Page({
     gettuijian(nodeCode) {
         indexModel.getTuijian(nodeCode).then(res => {
             this.setData({
-                tuijian: res.data.data || []
+                tuijian: this._formatData(res.data.data,3)
             })
         })
     },
@@ -93,42 +114,55 @@ Page({
     },
     //webview
     goWebview(e) {
-        let path = e.currentTarget.dataset.path;
+        let item = e.currentTarget.dataset.item;
         wx.navigateTo({
-            url: '/pages/webviwe/index?path=' + path
+            url: '/pages/webviwe/index?item=' + JSON.stringify(item)
         })
     },
-    //选择城市
+    //选择城市 点击
     onSelectCity(e){ 
-        this.setData({
-            selectCity:true
+        wx.navigateTo({
+            url: '/pages/cityList/index',
         })
+        
+        
     },
-    //监听"取消"
-    onCancel(){
-        this.setData({
-            selectCity: false
-        })
-    },
-    //监听选择城市
+    
+    //监听选择城市  调用
     onCity(e){
         let {city, nodecode} = e.detail;
+        console.log(e.detail)
         wx.setStorageSync('city', e.detail)
         this.setData({
             selectCity: false,
             city:city
         })
+        this.gettuijian(nodecode);
     },
     //点击icon 跳转场馆列表
     onGoVenuelist(e){
-        let id = e.currentTarget.dataset.id;
+        let id = e.currentTarget.dataset.id || '';
         wx.navigateTo({
             url:'/pages/venueList/index?id='+id
         })
     },
-    onShow: function () {
-        //this.getUserLocation();
+   
+    //热门课程点击
+    onHotCourse(e){
+        let item = e.currentTarget.dataset.item;
+        app.globalData.hotCourse = item.venueTypeId;
+        wx.switchTab({
+            url: '/pages/kechen/index',
+        })
     },
+    //推荐场馆点击
+    onTuijian(e){
+        let item = e.currentTarget.dataset.item;
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/index?id='+item.id,
+        })
+    },
+    /* 
     getUserLocation: function () {
         let vm = this;
         wx.getSetting({
@@ -188,21 +222,20 @@ Page({
                 var longitude = res.longitude
                 var speed = res.speed
                 var accuracy = res.accuracy;
-                console.log("获得经纬度")
+                wx.setStorageSync('currentLocation', { latitude, longitude})
                 vm.getLocal(latitude, longitude)
             }
         })
     },
     // 获取当前地理位置
     getLocal: function (latitude, longitude) {
-        console.log("获取当前地理位置")
         let vm = this;
         qqmapsdk.reverseGeocoder({
             location: {
                 latitude: latitude,
                 longitude: longitude
             },
-            success: function (res) {
+            success: (res) => {
                 let province = res.result.ad_info.province
                 let city = res.result.ad_info.city
                 console.log(city);
@@ -215,6 +248,7 @@ Page({
                                 "city":item.city,
                                 nodecode:item.nodeCode
                             })
+                            this.gettuijian(item.nodeCode)
                         }
                     })
 
@@ -230,9 +264,94 @@ Page({
 
             }
         });
+    },*/
+    //格式化数据
+    _formatData(arr, amount) {
+        let num = arr.length % amount;
+        var _arr = [];
+        var _item = [];
+        arr.forEach((e, i) => {
+            _item.push(e)
+            if (_item.length == amount) {
+                _arr.push(_item);
+                _item = [];
+            }
+        });
+        if (num != 0) {
+            _arr.push(arr.slice(arr.length - num))
+        }
+        return _arr
     },
-    //获取城市列表
-    getCity(){
-        
+    login(encryptedData, iv) {
+        let that = this;
+        wx.login({
+            success(res) {
+                //先wx.login()获取code 然后发送请求
+                if (res.code) {
+                    //发起网络请求
+                    that._login(res.code, encryptedData, iv)
+                }
+            }
+        })
+    },
+    //发起请求
+    _login(code, encryptedData, iv,cb) {
+        wx.showLoading({
+            title: '登录中',
+        })
+        wx.request({
+            url: config.api_base_url + 'front/miniproWeChatLogin',
+            header: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            data: {
+                code,
+                encryptedData,
+                iv
+            },
+            success: res => {
+                let reslut = res.data;
+                console.log(reslut);
+                if (reslut.success) {
+                    //存token
+                    wx.setStorageSync('token', reslut.data)
+                    /*
+                    reslut.data
+                        accessToken:'daDSAD555555'   //token
+                        accessTokenExpire:0         
+                        bindingMobile:false       //是否绑定手机
+                        openid:"ot0gZ48fETpD83uurJxqRxzQfsGQ"
+                        refreshTokenExpire:0
+                        session_key:"94qSR5xboX7c9a7QYdnXOA=="   //微信token
+                        unionid:0
+                    */
+                    //是否绑定手机
+                    if (!reslut.data.bindingMobile) {
+                        wx.navigateTo({
+                            url: '/pages/login/index',
+                        })
+                    } else {
+                        // wx.switchTab({
+                        //     url: '/pages/index/index'
+                        // })
+                        cb && cb();
+                    }
+                    
+                } else {
+                    wx.showToast({
+                        title: reslut.msg,
+                        icon: 'none',
+                        duration: 1000
+                    })
+                }
+
+            },
+            fail: res => {
+                console.log(res)
+            },
+            complete: res => {
+                wx.hideLoading();
+            }
+        })
     }
 })

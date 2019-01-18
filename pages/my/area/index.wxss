@@ -1,0 +1,2 @@
+/* pages/my/area/index.wxss */
+@import '../ticket/index.wxss'

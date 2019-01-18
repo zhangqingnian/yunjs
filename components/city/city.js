@@ -11,7 +11,7 @@ Component({
      * 组件的属性列表
      */
     properties: {
-        city:String,
+        currrentCity:String,
         cityLists:Array
     },
 
@@ -32,6 +32,7 @@ Component({
         isSearch: false
     },
     attached(){
+        console.log('attached')
         var searchLetter = city.searchLetter; //首字母列表
         let cityList = this.filtercity(searchLetter, this.properties.cityLists) //格式化后的数据
         

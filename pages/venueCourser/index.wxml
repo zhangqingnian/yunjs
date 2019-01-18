@@ -1,7 +1,9 @@
 <!--pages/venueCourser/index.wxml-->
 <view class='containner venueTicket flex_column'>
     <view class='content flex_row'>
-        <view class='item flex_column' wx:for="{{venueKc}}" wx:key="{{item.id}}">
+        <view class='item flex_column' 
+            bindtap='onGoDetail' data-id='{{item.id}}'
+            wx:for="{{venueKc}}" wx:key="{{item.id}}">
             <view class='imgwarp'>
                 <image class='vipImg' src='{{imgUrl + item.fileName}}'></image>
                 <view class='bottom flex_row'>
@@ -14,42 +16,42 @@
                     <text>{{item.courseName}}</text>
                     <text>{{item.sportType}}</text>
                 </view>
-                <view class='order' bindtap='onGoDetail' data-id='{{item.id}}'>订购</view>
+                <view class='order'>订购</view>
             </view>
         </view>
         <!-- 
-        <view class='item flex_column'>
-            <view class='imgwarp'>
-                <image class='vipImg'></image>
-                <view class='bottom flex_row'>
-                    <text class='price'>￥289.00</text>
-                    <text class='state'>在售中</text>
+            <view class='item flex_column'>
+                <view class='imgwarp'>
+                    <image class='vipImg'></image>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥289.00</text>
+                        <text class='state'>在售中</text>
+                    </view>
+                </view>
+                <view class='bottomContent flex_row'>
+                    <view class='flex_column'>
+                        <text>羽毛球私教(24课时)</text>
+                        <text>羽毛球</text>
+                    </view>
+                    <view class='order'>订购</view>
                 </view>
             </view>
-            <view class='bottomContent flex_row'>
-                <view class='flex_column'>
-                    <text>羽毛球私教(24课时)</text>
-                    <text>羽毛球</text>
+            <view class='item flex_column'>
+                <view class='imgwarp'>
+                    <image class='vipImg'></image>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥289.00</text>
+                        <text class='state'>在售中</text>
+                    </view>
                 </view>
-                <view class='order'>订购</view>
-            </view>
-        </view>
-        <view class='item flex_column'>
-            <view class='imgwarp'>
-                <image class='vipImg'></image>
-                <view class='bottom flex_row'>
-                    <text class='price'>￥289.00</text>
-                    <text class='state'>在售中</text>
+                <view class='bottomContent flex_row'>
+                    <view class='flex_column'>
+                        <text>羽毛球私教(24课时)</text>
+                        <text>羽毛球</text>
+                    </view>
+                    <view class='order'>订购</view>
                 </view>
             </view>
-            <view class='bottomContent flex_row'>
-                <view class='flex_column'>
-                    <text>羽毛球私教(24课时)</text>
-                    <text>羽毛球</text>
-                </view>
-                <view class='order'>订购</view>
-            </view>
-        </view>
          -->
     </view>
 </view>

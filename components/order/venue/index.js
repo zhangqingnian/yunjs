@@ -8,7 +8,7 @@ Component({
      * 组件的属性列表
      */
     properties: {
-
+        order:Object
     },
 
     /**
@@ -22,8 +22,20 @@ Component({
      * 组件的方法列表
      */
     methods: {
-        onTap(){
-            console.log(123)
+        onDel(){
+            this.triggerEvent('del',this.properties.order,{})
+        },
+        onPay(){
+            this.triggerEvent('pay', this.properties.order, {})
+        },
+        onBuy() {
+            this.triggerEvent('buy', this.properties.order, {})
+        },
+        onRating(e){
+            this.triggerEvent('rating', this.properties.order, {})
+        },
+        onGoOrder() {
+            this.triggerEvent('goOrder', this.properties.order, {})
         }
     }
 })

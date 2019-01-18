@@ -1,0 +1,13 @@
+<!--pages/confirmOrder/other/index.wxml-->
+
+
+<v-pay
+    bind:close = "onClose" 
+    currentType="{{currentType}}"
+    body = "{{body}}"
+    couponId = "{{couponId}}"
+    totalFee = "{{totalFee}}"
+    orderCode= "{{orderCode}}"/>
+
+
+

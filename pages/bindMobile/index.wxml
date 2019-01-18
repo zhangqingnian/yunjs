@@ -1,0 +1,7 @@
+<!--pages/bindMobile/index.wxml-->
+<image src='/images/logo.png'></image>
+<view class='tip'>请授权手机号码,以便快速订场、购票、购卡、购课!</view>
+ <button 
+ type='primary'
+ open-type="getPhoneNumber" 
+ bindgetphonenumber="getPhoneNumber">马上授权</button>

@@ -17,23 +17,13 @@ Page({
         wx.getSetting({
             success(res) {
                 if (res.authSetting['scope.userInfo']) {
-                    wx.getUserInfo({
-                        success(res) {
-                            let { encryptedData, iv } = res
-                            that.login(encryptedData, iv);
-                            //从数据库获取用户信息
-                            //that.queryUsreInfo();
-                            //用户已经授权过
-                            // wx.switchTab({
-                            //     url: '/pages/index/index'
-                            // })
-                        }
-                    });
-                }
+                    that.login();
+                } 
             }
         })
     },
     bindGetUserInfo: function(e) {
+        wx.removeStorageSync('token')
         let { encryptedData , iv} = e.detail
         if (e.detail.userInfo) {
             //用户按了允许授权按钮
@@ -48,22 +38,34 @@ Page({
             })
         }
     },
-    login(encryptedData, iv){
+    login(){
         let that = this;
         wx.login({
             success(res) {
                 //先wx.login()获取code 然后发送请求
                 if (res.code) {
                     //发起网络请求
-                    that._login(res.code, encryptedData,iv)
+                    wx.getUserInfo({
+                        success(respone) {
+                            let { encryptedData, iv } = respone;
+                            that._login(res.code, encryptedData, iv)
+                        }
+                    });
+                    
                 } 
             }
         })
     },
     //发起请求
     _login(code, encryptedData,iv){
+        wx.showLoading({
+            title: '登录中',
+        })
         wx.request({
             url: config.api_base_url + 'front/miniproWeChatLogin',
+            header:{
+                'content-type': 'application/x-www-form-urlencoded'
+            },  
             data: {
                 code,
                 encryptedData,
@@ -86,15 +88,16 @@ Page({
                         unionid:0
                     */
                     //是否绑定手机
-                    if (!reslut.data.bindingMobile) {
+                    wx.setStorageSync('isBindMobile', reslut.data.bindingMobile);
+                    if (!reslut.data.bindingMobile){
                         wx.navigateTo({
-                            url: '/pages/login/index',
+                            url: '/pages/bindMobile/index',
                         })
-                    } else {
-                        wx.switchTab({
-                            url: '/pages/index/index'
-                        })
+                        return
                     }
+                    wx.navigateBack({
+                        delta: 1,
+                    })
                 } else {
                     wx.showToast({
                         title: reslut.msg,
@@ -110,8 +113,10 @@ Page({
             },
             fail: res => {
                 console.log(res)
+            },
+            complete:res=> {
+                wx.hideLoading();
             }
         })
     }
-
 })

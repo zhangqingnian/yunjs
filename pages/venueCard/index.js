@@ -26,6 +26,9 @@ Page({
         let id = options.id;
         this._getGk(id);
     },
+    onShareAppMessage(Object) {
+
+    },
     onGoDetail(e){
         let {cardtype, id}= e.currentTarget.dataset;
         console.log(id)

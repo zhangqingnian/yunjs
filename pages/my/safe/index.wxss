@@ -1,0 +1,25 @@
+/* pages/my/safe/index.wxss */
+page{
+    width: 100%;
+    height: 100%;
+}
+
+.containner {
+    width: 100%;
+    min-height: 100%;
+    background: #f5f5f5;
+    color: #323232;
+    font-size: 30rpx;
+}
+
+ .right{
+    width: 16rpx;
+    height: 26rpx;
+}
+
+.flex_row{
+    align-items: center;
+    justify-content: space-between;
+    padding: 20rpx 30rpx;
+    background: #fff;
+}

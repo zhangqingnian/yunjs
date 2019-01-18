@@ -1,0 +1,107 @@
+<!--pages/my/area/detail/index.wxml-->
+<view class='containner flex_column'>
+    
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>下单时间: {{area.orderTime}}</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>联系人：</view>
+                <view class='value'>{{area.linkMan}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>手机号码：</view>
+                <view class='value'>
+                    {{area.linkManMobile}}
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>订单信息</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{area.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>类型：</view>
+                <view class='value'>{{area.sportType}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>时间：</view>
+                <view class='value'>{{area.openDate}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场地：</view>
+                <view class='value'>
+                    
+                    <view wx:for="{{areaName}}" wx:key="idx">{{item}}</view>
+                   
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>消费信息</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>订单编号：</view>
+                <view class='value'>{{area.orderCode}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>服务总价：</view>
+                <view class='value'>￥{{area.orderMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>优惠券：</view>
+                <view class='value'>￥{{area.couponMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>订单总价：</view>
+                <view class='value'>￥{{area.orderMoney}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>实付款：</view>
+                <view class='value'>￥40</view>
+            </view>
+        </view>
+    </view>
+     -->
+
+
+    <view wx:if="{{valid}}" class='baoming' bindtap='onUse'>生成核销码</view>
+</view>
+
+
+
+<v-code  wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}" >
+    <view class='topwarp' slot='after'>
+        <view class='item flex_row'>
+            <view class='title'>场地预约</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>预约时间：</view>
+            <view class='value'>{{ticket.openDate}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>场馆名称：</view>
+            <view class='value'>{{ticket.venueName}}</view>
+        </view>
+        <view class='item flex_row'>
+            <view class='name'>运动项目：</view>
+            <view class='value'>{{ticket.sportType}}</view>
+        </view> 
+        <view class='item flex_row'>
+            <view class='name'>联系电话：</view>
+            <view class='value'>{{ticket.linkManMobile}}</view>
+        </view>     
+    </view>
+</v-code>

@@ -2,6 +2,16 @@
 import {
     config
 } from '../../../config.js';
+import {
+    OrderModel
+} from '../../../models/order.js';
+
+let orderModel = new OrderModel();
+
+import {
+    VenueModel
+} from '../../../models/venue.js';
+let venueModel = new VenueModel();
 Page({
 
     /**
@@ -16,12 +26,27 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        //174 162
-        let ticket = JSON.parse(options.ticket);
-        console.log(ticket)
-        this.setData({
-            ticket
+        let id = options.id;
+        this.getTicketDetail(id)
+    },
+    onShareAppMessage(Object) {
+
+    },
+    //进入场馆
+    onGoVenue() {
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/index?id=' + this.data.ticket.venueId,
         })
+    },
+    onShow(){
+        let _ticket = wx.getStorageSync('ticket');
+        if(!_ticket)return;
+        if(_ticket.ispay){
+            wx.removeStorageSync('ticket')
+        }else{
+            this.cancelOrder(_ticket.orderCode);
+        }
+       
     },
     onMap(e) {
         console.log(e.currentTarget.dataset);
@@ -48,5 +73,26 @@ Page({
         wx.navigateTo({
             url:'/pages/confirmOrder/ticket/index?ticket='+ticket,
         })
+    },
+    //取消订单
+    cancelOrder(orderCode) {
+        orderModel.cancelTicketOrder({
+            orderCode
+        }).then(res => {
+            wx.removeStorageSync('ticket')
+            wx.showToast({
+                title: res.data.msg,
+            })
+        })
+    },
+    getTicketDetail(id){
+        venueModel.getTicketDetail({
+            id
+        }).then(res => {
+            this.setData({
+                ticket:res.data.data
+            })
+        })
     }
+
 })

@@ -11,7 +11,7 @@ Page({
      */
     data: {
     
-        selectArr: [], //预约
+        selectArr: [], //预约 最多4个
         isShowNews: false, 
         hour: [],
         date: [],
@@ -26,25 +26,60 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        console.log(options)
         let openDate = new Date().getTime();
         let {
             id,
-            sportTypeId
+            sportTypeId,
+            venue,
+            sportName
         } = options;
         id = Number(id);
         sportTypeId = Number(sportTypeId);
-        let hour = this._hour(0, 24);
+        let hour = this._hour(9, 24);
         let date = this._date(14);
         this.setData({
             id,
             sportTypeId,
             hour,
             date,
-            currentDate: date[0]
+            currentDate: date[0],
+            venue,
+            sportName
         });
         this._getField(id, sportTypeId, openDate);
     },
+    //跳转 提交订单页
+    onGoOrder(){
+        let arr = this.data.selectArr;
+        let venue = this.data.venue;
+        let venueObj = JSON.parse(venue);
+        if(!arr.length){
+            wx.showToast({
+                title: '请先预定场地',
+                icon:'none'
+            })
+            return
+        }
+        wx.showModal({
+            title: '提示',
+            content: '预定场地不可退款\r\n场馆电话' + venueObj.venueMobile,
+            success: res => {
+                if (res.confirm) {
+                    wx.navigateTo({
+                        url: '/pages/confirmOrder/area/index?arr=' + JSON.stringify(arr) + '&venue=' + venue + '&sportName=' + this.data.sportName + '&sportTypeId=' + this.data.sportTypeId
+                    })
+                } 
+            }    
+        })
+        
+    },
+    //选择日期
     onSelectDate(e){
+        
+        this.setData({
+            selectArr: []   //清空
+        })
         let { dateId, isOn } = e.currentTarget.dataset.item;
         if(isOn)return;
         let { id, sportTypeId}= this.data;
@@ -64,6 +99,7 @@ Page({
         })
         
     },
+    //选择场次
     onSelect(e) {
         let _arr = this.data.selectArr; //已经预约的
         let maxLen = 4; //最大预约数
@@ -103,7 +139,6 @@ Page({
                 }
             })
         })
-        console.log(_arr)
         this.setData({
             field,
             selectArr:_arr
@@ -129,9 +164,10 @@ Page({
         })
     },
     _getField(id, sportTypeId, openDate) {
+        wx.showLoading();
         venueModel.getField(id, sportTypeId, openDate).then(res => {
+            wx.hideLoading();
             let area = res.data;
-            
             console.log(area)
             this._setWidrh(area.length);
             this._default(area)
@@ -140,70 +176,6 @@ Page({
     _default(area) {
         let arr = [
                         {
-                            "cvaoEndTime": "01:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "00:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "02:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "01:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "03:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "02:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "04:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "03:00",
-                            "id": 496823
-                        }, {
-
-                            "cvaoEndTime": "05:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "04:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "06:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "05:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "07:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "06:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "08:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "07:00",
-                            "id": 496823
-                        }, {
-                            "cvaoEndTime": "09:00",
-                            "cvaoIsOccupy": 0,
-                            "cvaoIsOpen": 0,
-                            "cvaoPrice": 0,
-                            "cvaoStartTime": "08:00",
-                            "id": 496823
-                        }, {
                             "cvaoEndTime": "10:00",
                             "cvaoIsOccupy": 0,
                             "cvaoIsOpen": 0,
@@ -347,8 +319,6 @@ Page({
                 for (let j = 0; j < one.length; j++) {
                     if (arr[i].cvaoStartTime == one[j].cvaoStartTime) {
                         arr[i] = one[j];
-                        console.log(arr[i].cvaoStartTime)
-
                     }
 
                 }

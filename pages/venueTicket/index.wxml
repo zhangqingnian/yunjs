@@ -9,7 +9,7 @@
                 <image class='vipImg' src='{{imgUrl + item.ticketImg}}'></image>
                 <view class='bottom flex_row'>
                     <text class='price'>￥{{item.ticketPrice}}</text>
-                    <text class='state'>剩余{{item.ticketPublishAmount - item.soldAmount}}</text>
+                    <text class='state'>{{(item.ticketPublishAmount - item.soldAmount) > 10 ? '在售中' : "剩余:"+(item.ticketPublishAmount - item.soldAmount)}}</text>
                 </view>
             </view>
             <view class='ticketName'>{{item.ticketName}}</view>

@@ -1,0 +1,81 @@
+<!--pages/my/card/index.wxml-->
+<view class='containner flex_column'>
+    <view class='nav flex_row'>
+        <view class='{{ valid ? "on" : "" }}' bindtap='onValid'>有效</view>
+        <image src='/images/my/line.png'></image>
+        <view class='{{ invalid ? "on" : "" }}' bindtap='onInvalid'>无效</view>
+    </view>
+
+    <view class='content'>
+        <view class='item flex_column' catchtap='onGoDetail' data-item='{{item}}' wx:for="{{cardList}}" wx:key="{{item.id}}">
+            <view class='top flex_row'>
+                <view class='flex_row'>
+                    <view class='imgwarp'>
+
+                        <image src='{{imgUrl + item.fileName}}'></image>
+                        <text class='price'>¥{{item.buyMoney}}</text>
+                    </view>
+
+                    <view class='news flex_column'>
+                        <text>{{item.cardName}}</text>
+                        <!-- 次数卡 -->
+                        <text wx:if="{{item.type == 0 || item.type == 7 ? true : false}}">剩余{{item.userTimes}}次</text>
+                        <!-- 月 季 年 -->
+                        <text wx:if="{{item.type == 1 || item.type == 2 || item.type == 3 ? true : false}}">剩余{{item.userTimes}}天</text>
+                        <text wx:if="{{item.type == 5 ? true : false}}">价值{{item.userTimes}}天</text>
+                        <!-- 会员卡 -->
+                        <text wx:if="{{item.type == 4 ? true : false}}">剩余{{item.surplusMoney}}元</text>
+                        <text wx:if="{{item.type !=  5 ? true : false}}">{{item.description}}</text>
+
+                        <text class='{{item.signTotal == item.times ? "red":""}}' wx:if="{{item.type ==  5 ? true : false}}">{{'('+item.signTotal+'/'+item.times+')总课时'+item.times+'次'}}</text>
+
+
+                        <text>{{item.cardsTypeStr}}</text>
+                    </view>
+                </view>
+                <view class='btns flex_column'>
+                    <text wx:if="{{valid}}" catchtap='onUse' data-item='{{item}}'>使用</text>
+                    <text wx:if="{{valid}}" catchtap='onRecord' data-item='{{item}}'>使用记录</text>
+                </view>
+            </view>
+            <view class='bottom'>
+                <view>
+                    <text>有效时间：</text>
+                    <text>{{item.endingDate}}</text>
+                </view>
+                <view>
+                    <text>场馆地址：</text>
+                    <text>{{item.address}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+
+
+<v-code wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}">
+    <view class='topwarp' slot='after'>
+        <image class='left' src='/images/logo.png'></image>
+        <view class='right'>
+            <view class='item flex_row'>
+                <view class='title'>{{card.cardName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>{{card.endingDate}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>姓名：</view>
+                <view class='value'>{{card.linkName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>手机号码：</view>
+                <view class='value'>{{card.linkMobile}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+        </view>
+
+    </view>
+</v-code>

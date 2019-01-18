@@ -1,34 +1,32 @@
 <!--components/order/ticket/index.wxml-->
-<view class='order my-class'>
+<view class='order'>
     <view class='order-top flex_row'>
         <text class='order-type'>门票订单</text>
         <view class='slotwarp flex_row'>
             <slot name='text'></slot>
-            <slot name='delete'></slot>
+            <slot name='delete' catchtap="onDel"></slot>
         </view>
     </view>
     <view class='order-bottom flex_row'>
         <view class='list'>
             <view>
+                <text>门票名称：</text>
+                <text>{{order.ticketName}}</text>
+            </view>
+            <view>
                 <text>场馆名称：</text>
-                <text>宁波蕊目马术俱乐部</text>
+                <text>{{order.venueName}}</text>
             </view>
             <view>
                 <text>场馆电话：</text>
-                <text>0574-88420555</text>
-            </view>
-            <view>
-                <text>预约时间：</text>
-                <text>2018/09/30  12:00</text>
-            </view>
-            <view>
-                <text>预约项目：</text>
-                <text>马术</text>
+                <text>{{order.venueMobile}}</text>
             </view>
         </view>
         <view class='btns flex_column'>
-            <slot name='play'></slot>
-            <slot name='again'></slot>
+            <slot name='play' catchtap="onPay"></slot>
+            <slot name='refund' catchtap="onRefund"></slot>
+            <slot name='code' catchtap="onGoOrder"></slot>
+            <slot name='again' catchtap="onBuy"></slot>
         </view>
     </view>
 </view>

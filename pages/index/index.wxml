@@ -1,71 +1,105 @@
 <!--index.wxml-->
-<view wx:if="{{!selectCity}}" class="container">
+<view class="container">
     <!-- 位置 -->
-    <view class='index-top'>
+    <!-- <view class='index-top'>
         <view class='area' bindtap='onSelectCity'>
             <image src='/images/area.png'></image>
             <text>{{city}}</text>
         </view>
+    </view> -->
+    <view class='area' bindtap='onSelectCity'>
+        <image src='/images/icon-city.png'></image>
+        <text>{{city}}</text>
     </view>
     <!-- 轮播 -->
     <swiper indicator-dots='true' autoplay="true" indicator-color="#fff" indicator-active-color="#2ee66b">
-        <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}" bindtap='goWebview' data-path="{{item.linkAddr}}">
-            <image src="{{imgUrl+item.path}}"></image>
+        <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}" 
+            bindtap='goWebview' data-item="{{item}}">
+            <image src="{{imgUrl+item.headImg}}"></image>
         </swiper-item>
     </swiper>
     <!-- 运动类型列表 -->
     <view class='types'>
         <view  wx:for="{{venuetype}}" wx:key="item.sport_type_id" 
             bindtap='onGoVenuelist' data-id='{{item.sport_type_id}}'>
-            <!-- src="{{'/images/nav/' + item.sport_type_id + '.png'}}" -->
-            <image src="{{'/images/nav/' + 22 + '.png'}}"></image>
+            <image src="{{'/images/nav/' + item.sport_type_id + '.png'}}"></image>
             <text>{{item.typeName}}</text>
+        </view>
+        <view bindtap='onGoVenuelist'>
+            <image src='/images/nav/more.png'></image>
+            <text>更多</text>
         </view>
     </view>
     <!-- 本月活动 -->
-    <view class='benyuehuodong mtop30'>
+    <view class='benyuehuodong mtop30' wx:if="{{benyue.length}}">
         <view class='title'>
             <text>本月活动</text>
-            <text>更多</text>
         </view>
         <view class='content'>
-            <image wx:for="{{benyue}}" src="{{imgUrl + item.path}}" 
-            wx:key="{{item.id}}" bindtap='goWebview' data-path="{{item.linkAddr}}"></image>
+            <swiper style='height:420rpx;' bindchange="swiperChangeBy">
+                <swiper-item wx:for-item="itemName"
+                    wx:for="{{benyue}}" wx:key="idx">
+                    <image wx:for="{{itemName}}" wx:key="idx" 
+                        bindtap='goWebview' data-item="{{item}}"
+                        src="{{imgUrl + item.headImg}}" ></image>
+                </swiper-item>
+            </swiper>
+            <view class="dots">
+                <view class="dot{{index == ByCurrent ? ' active' : ''}}"
+                    wx:for="{{benyue}}" wx:key="idx"></view>
+            </view>
+            <!-- <image wx:for="{{benyue}}" src="{{imgUrl + item.path}}" 
+            wx:key="{{item.id}}" bindtap='goWebview' data-path="{{item.linkAddr}}"></image> -->
         </view>
     </view>
     <!-- 推荐场馆 -->
-    <view class='benyuehuodong mtop30 venues'>
+    <view class='benyuehuodong mtop30 venues' wx:if="{{tuijian.length}}">
         <view class='title'>
             <text>推荐场馆</text>
-            <text>更多</text>
         </view>
         <view class='content'>
-            <view wx:for="{{tuijian}}" wx:key="{{item.id}}">
+            <swiper style='height:200rpx' current='{{TjCurrent}}' 
+                bindchange="swiperChange">
+                <swiper-item class="flex_row" 
+                    wx:for-item="itemName"
+                    wx:for="{{tuijian}}" wx:key="idx">
+                    <view wx:for="{{itemName}}" wx:key="idx" 
+                        data-item='{{item}}'
+                        bindtap='onTuijian'>
+                        <image src='{{imgUrl + item.path}}'></image>
+                        <text>{{item.venueName}}</text>
+                    </view>
+                </swiper-item>
+            </swiper>
+            <view class="dots">
+                <view 
+                    wx:for="{{tuijian}}" wx:key="idx"
+                    class="dot{{index == TjCurrent ? ' active' : ''}}"></view>
+            </view>
+            <!-- <view wx:for="{{tuijian}}" wx:key="{{item.id}}" 
+                data-item='{{item}}'
+                bindtap='onTuijian'>
                 <image src='{{imgUrl + item.path}}'></image>
                 <text>{{item.venueName}}</text>
-            </view>
-            
+            </view>            -->
         </view>
     </view>
     <!-- 热门课程 -->
-    <view class='benyuehuodong mtop30'>
+    <view class='benyuehuodong hot mtop30' wx:if="{{hot.length}}">
         <view class='title'>
             <text>热门课程</text>
-            <text>更多</text>
         </view>
         <view class='content'>
-            <!-- <block wx:for="{{hot}}" wx:key="{{item.id}}">
+            <view class='hotItem'
+                bindtap='onHotCourse' 
+                data-item='{{item}}'
+                wx:for="{{hot}}" wx:key="{{item.id}}">
                 <image src='{{imgUrl + item.img}}'></image> 
-            </block> -->
-             
-            <image src='/images/1.png'></image>
-            <image src='/images/1.png'></image>
-            <image src='/images/1.png'></image>
-            <image src='/images/1.png'></image>
-           
+                <view class='title'>{{item.hotTypeName}}</view>
+            </view>
         </view>
     </view>
 </view>
 
-<v-city bind:cancel="onCancel" bind:city="onCity" wx:if="{{selectCity}}" 
-        city="{{city}}" cityLists="{{cityLists}}"/>
+<!-- <v-city bind:cancel="onCancel" bind:city="onCity" wx:if="{{selectCity}}" 
+        currrentCity="{{city}}" cityLists="{{cityLists}}"/> -->

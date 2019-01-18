@@ -34,7 +34,6 @@ page{
     width: 160rpx;
     height: 160rpx;
     border-radius: 50%;
-    background: red;
     margin-right: 30rpx;
 }
 

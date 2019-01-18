@@ -84,13 +84,22 @@ page{
     flex-direction: row;
     height:calc(100% - 208rpx);
 }
-
+.type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding-top: 20rpx; */
+}
 .type-item{
-    height: 60rpx;
+    width: 140rpx;
+    height: 50rpx;
     font-size: 28rpx;
-    text-align: left;
-    line-height: 60rpx;
-    padding-left: 30rpx;
+    text-align: center;
+    line-height: 50rpx;
+    color: #63afe0;
+    border: 1px solid #63afe0;
+    border-radius: 10rpx;
+    margin-bottom: 20rpx;
 }
 
 .cardwarp{
@@ -149,9 +158,8 @@ page{
 }
 
 .cardName{
-    font-size:28rpx;
+    font-size:24rpx;
     line-height: 44rpx;
-    text-align: center;
 }
 .cardAddress{
     font-size: 22rpx;
@@ -163,12 +171,34 @@ page{
     flex-direction: row;
     font-size: 22rpx;
     justify-content: space-between;
-    padding: 0 15rpx;
+    align-items: center;
 }
 
-.on{
-    background-color: #63AFE0;
+.on {
+    background-color: #63afe0;
     color: #fff;
 }
 
-/* // "enablePullDownRefresh": false */
+.tip{
+    text-align:center;
+    width:100%;
+    margin-top:200rpx;
+    font-size:32rpx;
+    color:#666;
+
+}
+.imgBottom{
+    position: absolute;
+    width: 100%;
+    bottom:0;
+    height: 40rpx;
+    background:rgba(38,191,89,.5);
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size:20rpx;
+    color: #fff;
+    line-height: 40rpx;
+    padding: 0 10rpx;
+}

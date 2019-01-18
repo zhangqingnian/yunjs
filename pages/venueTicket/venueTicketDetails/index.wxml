@@ -1,7 +1,7 @@
 <!--pages/venueTicket/venueTicketDetails/index.wxml-->
 <view class='containner flex_column'>
     <view class='cardWarp'>
-        <image src='{{imgUrl +ticket.ticketImg}}'></image>
+        <image src='{{imgUrl +ticket.ticketImg}}' mode='aspectFit'></image>
         <!--  
         <view class='details flex_row'>
             <view class='left'>
@@ -18,7 +18,7 @@
         -->
     </view>
 
-    <view class='category itemClass mtop30'>
+    <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{ticket.ticketName}}</view>
             <view class='type'>类型：{{ticket.sportName}}</view>
@@ -83,6 +83,14 @@
 
 
 
-    <view class='baoming' bindtap='onGoOrder'>报名</view>
+    <view class='bottomwarp flex_row'>
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>进入场馆</view>
+        </view>
+        <view class='confirm' bindtap='onGoOrder'>
+            购买门票
+        </view>
+    </view>
 </view>
 

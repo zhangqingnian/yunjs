@@ -19,7 +19,7 @@
     box-sizing: border-box;
 }
 .prices {
-    color: #f26179;
+    color: #fff;
     font-size: 22rpx;
 }
 

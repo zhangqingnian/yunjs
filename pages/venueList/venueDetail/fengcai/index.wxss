@@ -1,0 +1,21 @@
+/* pages/venueList/venueDetail/fengcai/index.wxss */
+.warp{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item{
+    width: 33.33%;
+    height: 250rpx;
+    background: #fff;
+    box-sizing: border-box;
+    padding: 10rpx;
+    
+}
+
+image {
+    width:100%;
+    height: 100%;
+    border-radius: 5px;
+}

@@ -1,0 +1,88 @@
+/* pages/my/student/addStudent/index.wxss */
+page{
+    width: 100%;
+    height: 100%;
+}
+.containner{
+    min-height: 100%;
+    background: rgb(245, 245, 245);
+    padding-bottom: 100rpx;
+    box-sizing: border-box;
+    font-size: 30rpx;
+    color: #323232;
+}
+
+.title{
+    font-size: 24rpx;
+    padding: 20rpx 30rpx;
+    color: #999;
+}
+
+.content{
+    background: #fff;
+    padding: 0 30rpx;
+}
+
+.content .items{
+    align-items: center;
+    border-bottom: 1px solid #DCDCDC;
+    padding: 15rpx 0;
+}
+.content .items:last-child{
+    border-bottom: none;
+}
+
+.left{
+    width: 150rpx;
+}
+
+radio{
+    transform:scale(0.7);
+
+}
+
+.sex label{
+    margin-right: 30rpx;
+    align-items: center;
+}
+.sex label:last-child{
+    margin-right: 0;
+}
+
+.img{
+    width: 120rpx;
+    height: 120rpx;
+    background: red;
+}
+
+.upimg{
+    margin-bottom: 50rpx;
+}
+
+.w500{
+    width: 500rpx;
+}
+
+.weui-input{
+    color:#888;
+}
+
+
+
+
+
+
+
+.add{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    background: rgba(99, 224, 140, 1);
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 36rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}

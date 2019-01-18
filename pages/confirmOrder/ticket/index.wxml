@@ -66,7 +66,7 @@
         <view class='titleWarp borderNone flex_row' bindtap='onGoCoupon'>
             <view class='title'>优惠券</view>
             <view class='cuuponwarp flex_row'>
-              <view class='price'>￥{{coupon.money}}</view>
+              <view class='price'>{{coupon.money ? '￥' + coupon.money : couponLen+'张'}}</view>
               <view class='cuuponName'>{{coupon.couponName}}</view>
               <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
             </view>
@@ -76,11 +76,23 @@
     <view class='total'>
         <text>已优惠</text>
         <text>合计:</text>
-        <text class='price'>￥{{util.filterMomey(total - coupon.money)}}</text>
+        <text class='price'>￥{{discountTotal}}</text>
     </view>
     
     <view class='submit' bindtap='onSubmit'>提交订单</view>
 </view>
 
-<v-pay wx:if="{{payShow}}" bind:close="onClose" />
-<v-coupon class="coupon" wx:if="{{isCoupon}}"/>
+<v-pay wx:if="{{payShow}}" 
+    bind:close = "onClose" 
+    currentType="{{currentType}}"
+    body = "{{ticket.ticketName}}"
+    couponId = "{{coupon.couponId}}"
+    totalFee = "{{discountTotal}}"
+    orderCode= "{{orderCode}}"/>
+
+<v-coupon wx:if="{{isCoupon}}"  
+    aid="{{ticket.id}}" 
+    total = "{{total}}"
+    bind:coupon="onCouponBack"
+    couponList="{{couponList}}"
+    sportTypeId="{{ticket.sportTypeId}}"/>

@@ -1,0 +1,64 @@
+<!--pages/my/user/index.wxml-->
+<view class='containner'>
+    <view>
+        <view class='flex_row'>
+            <view class='left'>头像</view>
+            <image bindtap="onImg" src='{{img}}'></image>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>昵称</view>
+            <input placeholder='请输入昵称' bindblur="onNickname" value='{{nickName}}'></input>
+        </view>
+        <view class='items flex_row sex'>
+            <view class='left'>性别</view>
+            <radio-group class="radio-group flex_rows" bindchange="sexChange">
+                <label class="radio flex_rows" wx:for="{{sex}}" wx:key="{{item.id}}">
+                    <radio value="{{item.value}}" checked="{{item.checked}}" />
+                    <text>{{item.name}}</text>
+                </label>
+            </radio-group>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>身份证号</view>
+            <input placeholder='请输入身份证号码' maxlength='18' value='{{IDcard}}' 
+                bindblur='onIDcard'></input>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>出生日期</view>
+            <input placeholder='输入身份证号可得' disabled='true' value='{{birthday}}'></input>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>身高</view>
+            <input placeholder='请输入身高(cm)' 
+                bindblur="onHeight"
+                value='{{height}}'
+                maxlength='3'  type='number'></input>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>体重</view>
+            <input placeholder='请输入体重(kg)'
+                value='{{weight}}'
+                bindblur="onWeight"
+                maxlength='3' type='number'></input>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>所在地区</view>
+            <picker mode="region" 
+            bindchange="bindRegionChange" value="{{region}}" >
+                <view class="picker">
+                    {{region[0]}}，{{region[1]}}，{{region[2]}}
+                </view>
+            </picker>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>真实姓名</view>
+            <input placeholder='请输入真实姓名' bindblur="onRealName" value='{{realName}}'></input>
+        </view>
+        <view class='flex_row'>
+            <view class='left'>个人爱好</view>
+            <input placeholder='请输入个人爱好' bindblur="onHobby" value='{{hobby}}'></input>
+        </view>
+    </view>
+
+    <view class='add' bindtap='onBaocun'>保存</view>
+</view>

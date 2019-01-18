@@ -1,26 +1,30 @@
 <!--pages/my/contacts/index.wxml-->
 <view class='containner'>
-    <view class='item flex_column'  wx:for="{{arr}}" wx:key="{{idx}}">
+    <view class='item flex_column'  wx:for="{{list}}" wx:key="{{item.id}}">
       
         <view class='top flex_row'>
-            <view class='userName'>{{item.username}}</view>
-            <view class='iphone'>{{item.iphone}}</view>
+            <view class='userName'>{{item.name}}</view>
+            <view class='iphone'>{{item.mobile}}</view>
         </view>
         <view class='bottom flex_row'>
             <view class='flex_row select' bindtap='onSelectDefault' data-id='{{item.id}}'>
-                <image src='{{item.isDefault ? onImgSrc : imgSrc}}'></image>
-                <view class='{{item.isDefault ? "on" : ""}}'>
-                {{ item.isDefault ? '默认联系人' :'设为默认联系人'}}
+                <image src='{{item.status ? onImgSrc : imgSrc}}'></image>
+                <view class='{{item.status ? "on" : ""}}'>
+                {{ item.status ? '默认联系人' :'设为默认联系人'}}
                 </view>
             </view>
             <view class='flex_row action'>
-                <image src='/images/my/icon_7.png'></image>
-                <image src='/images/my/icon_8.png'></image>
+                <image src='/images/my/icon_7.png' 
+                data-item='{{item}}'
+                bindtap='onRevise'></image>
+                <image src='/images/my/icon_8.png' 
+                data-item='{{item}}'
+                bindtap='onDelete'></image>
             </view>
         </view>
         
     </view>
     
 
-    <view class='add'>新增常用联系人</view>
+    <view class='add' bindtap='onAdd'>新增常用联系人</view>
 </view>

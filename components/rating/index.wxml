@@ -1,0 +1,29 @@
+<!--components/rating/index.wxml-->
+<view class='mask'></view>
+<view class='playwarp' wx:if="{{!showPayPwdInput}}">
+    <view class='topwarp'>
+        <view class='top'>
+            <text>评价订单</text>
+            <image class='close' bindtap='onClose' src='/images/close.png'></image>
+        </view>
+        <view class='level flex_row'>
+            <view>服务评分:</view>
+            <view class='flex_row'>
+                <text wx:for="{{level}}" wx:key="idx" 
+                    class='{{item.isOn ? "on":""}}'
+                    bindtap='onSelecLevel'
+                    data-item='{{item}}'
+                    >{{item.name}}</text>
+            </view>
+        </view>
+        <view class='level'>
+            <view>评价内容:</view>
+            <textarea 
+            bindinput="onIput"
+            value='{{content}}'
+            disabled='{{ceid}}'
+            placeholder='请输入评价内容，且不超过50个字'></textarea>
+        </view>
+    </view>
+    <view wx:if="{{!ceid}}" class='play' catchtap='onSubmit'>评论</view>
+</view>
