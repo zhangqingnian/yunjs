@@ -28,3 +28,9 @@
     margin: 70rpx 50rpx;
     font-size: 35rpx;
 }
+
+.official{
+     position: absolute;
+     top: 0;
+     width: 100%;
+}

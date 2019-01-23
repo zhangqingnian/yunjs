@@ -23,7 +23,8 @@ image {
 
 button{
     width:300rpx;
-height:80rpx;
-line-height:80rpx;
+    height:80rpx;
+    line-height:80rpx;
 
 }
+

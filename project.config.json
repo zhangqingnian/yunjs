@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 40,
+			"current": 41,
 			"list": [
 				{
 					"id": -1,
@@ -75,7 +75,8 @@
 					"id": 5,
 					"name": "场馆详情",
 					"pathName": "pages/venueList/venueDetail/index",
-					"query": "id=1320&sportTypeId=22"
+					"query": "id=1320",
+					"scene": "1001"
 				},
 				{
 					"id": 6,
@@ -284,7 +285,15 @@
 				{
 					"id": -1,
 					"name": "webview",
-					"pathName": "pages/webviwe/index"
+					"pathName": "pages/webviwe/index",
+					"query": ""
+				},
+				{
+					"id": 41,
+					"name": "绑定",
+					"pathName": "pages/bindMobile/index",
+					"query": "",
+					"scene": "1001"
 				}
 			]
 		}

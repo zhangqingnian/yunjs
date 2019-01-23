@@ -1,4 +1,5 @@
 <!--pages/venueTicket/index.wxml-->
+<wxs src="../../utils/venue.wxs" module="util" />
 <view class='venueTicket'>
     <view class='content flex_row'>
         <view class='item flex_column' 
@@ -9,43 +10,11 @@
                 <image class='vipImg' src='{{imgUrl + item.ticketImg}}'></image>
                 <view class='bottom flex_row'>
                     <text class='price'>￥{{item.ticketPrice}}</text>
-                    <text class='state'>{{(item.ticketPublishAmount - item.soldAmount) > 10 ? '在售中' : "剩余:"+(item.ticketPublishAmount - item.soldAmount)}}</text>
+                    <text class='state'>{{ util.ticketStatus( item ) }}</text>
                 </view>
             </view>
             <view class='ticketName'>{{item.ticketName}}</view>
         </view>
-        <!-- 
-        <view class='item flex_column'>
-            <view class='imgwarp'>
-                <image class='vipImg'></image>
-                <view class='bottom flex_row'>
-                    <text class='price'>￥289.00</text>
-                    <text class='state'>在售中</text>
-                </view>
-            </view>
-            <view class='ticketName'>游泳馆门票</view>
-        </view>
-        <view class='item flex_column'>
-            <view class='imgwarp'>
-                <image class='vipImg'></image>
-                <view class='bottom flex_row'>
-                    <text class='price'>￥289.00</text>
-                    <text class='state'>在售中</text>
-                </view>
-            </view>
-            <view class='ticketName'>游泳馆门票</view>
-        </view>
-        <view class='item flex_column'>
-            <view class='imgwarp'>
-                <image class='vipImg'></image>
-                <view class='bottom flex_row'>
-                    <text class='price'>￥289.00</text>
-                    <text class='state'>在售中</text>
-                </view>
-            </view>
-            <view class='ticketName'>游泳馆门票</view>
-        </view>
-         -->
     </view>
 
 </view>

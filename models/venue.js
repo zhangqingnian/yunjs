@@ -49,14 +49,10 @@ export class VenueModel extends Http {
     }
 
     //课程
-    getKc(id, limit = 2) {
+    getKc(data) {
         return this.request({
             url: 'm/crm/venueCourse/front/getVeneuCourseByVenueId',
-            data: {
-                venueId: id,
-                start: 0,
-                limit: limit
-            },
+            data,
             method: 'POST'
         })
     }
@@ -76,14 +72,10 @@ export class VenueModel extends Http {
     }
 
     //馆卡
-    getGk(id, limit = 2) {
+    getGk(data) {
         return this.request({
             url: 'm/crm/venueCards/front/getVenueCardsByVenueId',
-            data: {
-                venueId: id,
-                start: 0,
-                limit: limit
-            },
+            data,
             method: 'POST'
         })
     }
@@ -99,13 +91,10 @@ export class VenueModel extends Http {
     }
 
     //门票列表 级 详情
-    getTicket(id){
+    getTicket(data){
         return this.request({
             url: 'm/crm/entranceticketPublish/front/pageListVenueEntranceticket',
-            data: {
-                venueId: id,
-                type:1
-            },
+            data,
             method:'POST'
         })
     }

@@ -1,4 +1,5 @@
 <!--pages/authorizeLocation/index.wxml-->
+ 
 <view class='contianner'>
     <image src='/images/bg.jpg'></image>
     <view class='btn'>

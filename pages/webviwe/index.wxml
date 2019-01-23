@@ -1,5 +1,5 @@
 <!--pages/webviwe/index.wxml-->
-<view class='warp'>
+<view class='warp {{item.activity == 2 ? "paddingbottom":""}}' >
     <image src='{{imgUrl + item.activityImg}}' mode='widthFix'></image>
     <view class='bottomwarp flex_row' wx:if="{{item.activity == 2}}">
         <view class='news flex_column' bindtap='onGoVenue'>

@@ -10,7 +10,7 @@
             <view class='imgwarp'>
                 <image class='vipImg' 
                 src='{{imgUrl + item.fileName}}'></image>
-                <view class='type'>{{item.cardsTypeStr}}</view>
+                <!-- <view class='type'>{{item.cardsTypeStr}}</view> -->
                 <view class='bottom flex_row'>
                     <text class='price'>￥{{item.buyMoney}}</text>
                     <text class='state'>{{item.status?'销售中':''}}</text>

@@ -45,18 +45,32 @@ Page({
             key: 'F4VBZ-CBM3U-O7IVA-2ROG5-IQLE5-HGBUQ'
         });
         
-        this.getbanner();
-        this.getbenyue();
-        this.getVenuetype();
-        this.getHot();
+        
     },
     onShow: function () {
         let {nodecode,city }= wx.getStorageSync('city'); 
         console.log(nodecode)
+        if (!nodecode) {
+            wx.showModal({
+                title: '提示',
+                content: '请重新授权位置信息',
+                showCancel: false,
+                success: () => {
+                    wx.navigateTo({
+                        url: '/pages/authorizeLocation/index',
+                    })
+                }
+            })
+            return;
+        }
         this.setData({
             city
         })
         this.gettuijian(nodecode)
+        this.getbanner();
+        this.getbenyue();
+        this.getVenuetype();
+        this.getHot();
     },
     onShareAppMessage(Object){
 
@@ -124,10 +138,13 @@ Page({
         wx.navigateTo({
             url: '/pages/cityList/index',
         })
-        
-        
     },
-    
+    //搜索场馆
+    onSeacrhVenue(){
+        wx.navigateTo({
+            url: '/pages/venueList/index?id=' + "" +'&focus='+true
+        })
+    },
     //监听选择城市  调用
     onCity(e){
         let {city, nodecode} = e.detail;

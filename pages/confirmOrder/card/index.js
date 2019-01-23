@@ -227,7 +227,7 @@ Page({
     //获取联系人
     _getContacts() {
         wx.showLoading()
-        myModel.getContacts({
+        myModel.myContacts({
             start: 0,
             limit: 20
         }).then(res => {

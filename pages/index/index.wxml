@@ -1,15 +1,15 @@
 <!--index.wxml-->
 <view class="container">
     <!-- 位置 -->
-    <!-- <view class='index-top'>
-        <view class='area' bindtap='onSelectCity'>
-            <image src='/images/area.png'></image>
-            <text>{{city}}</text>
+    <view class='index-top'>
+        <view class='area flex_row' bindtap='onSelectCity'>
+            <view>{{city}}</view>
+            <view class='arrow'></view>
         </view>
-    </view> -->
-    <view class='area' bindtap='onSelectCity'>
-        <image src='/images/icon-city.png'></image>
-        <text>{{city}}</text>
+        <view class='search flex_row' bindtap='onSeacrhVenue'>
+            <image class='searchImg' src='/images/search.png'></image>
+            <view class='searchText'>请输入您要搜索的场馆</view>
+        </view>
     </view>
     <!-- 轮播 -->
     <swiper indicator-dots='true' autoplay="true" indicator-color="#fff" indicator-active-color="#2ee66b">
@@ -22,7 +22,7 @@
     <view class='types'>
         <view  wx:for="{{venuetype}}" wx:key="item.sport_type_id" 
             bindtap='onGoVenuelist' data-id='{{item.sport_type_id}}'>
-            <image src="{{'/images/nav/' + item.sport_type_id + '.png'}}"></image>
+            <image src="{{imgUrl + item.typeImg}}"></image>
             <text>{{item.typeName}}</text>
         </view>
         <view bindtap='onGoVenuelist'>

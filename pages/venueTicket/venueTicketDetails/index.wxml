@@ -39,7 +39,7 @@
             <view class='item hasAddress flex_row'>
                 <view class='flex_row'>
                     <view class='name'>地址：</view>
-                    <view class='value'>{{ticket.venueAddress}}</view>
+                    <view class='value' style='width:420rpx;'>{{ticket.venueAddress}}</view>
                 </view>
                 <view class='go flex_row'  bindtap='onMap' 
                 data-name='{{ticket.venueName}}'
@@ -89,7 +89,7 @@
             <view>进入场馆</view>
         </view>
         <view class='confirm' bindtap='onGoOrder'>
-            购买门票
+            立即购买
         </view>
     </view>
 </view>

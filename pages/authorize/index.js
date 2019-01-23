@@ -47,6 +47,7 @@ Page({
                     //发起网络请求
                     wx.getUserInfo({
                         success(respone) {
+                            console.log(respone)
                             let { encryptedData, iv } = respone;
                             that._login(res.code, encryptedData, iv)
                         }
@@ -73,7 +74,18 @@ Page({
             },
             success: res => {
                 let reslut = res.data;
-                console.log(reslut);
+                console.log(res);
+                if (reslut.code == "FOCUS_ON_THE_PUBLIC_NUMBER"){
+                    this.setData({
+                        codes: "FOCUS_ON_THE_PUBLIC_NUMBER"
+                    })
+                    wx.showToast({
+                        title: reslut.msg,
+                        icon:'none',
+                        duration:5000
+                    })
+                    return
+                }    
                 if (reslut.success) {
                     //存token
                     wx.setStorageSync('token', reslut.data)

@@ -4,7 +4,9 @@
     <view class='header'>
         <view class="search-container">
             <image class="search" src="/images/icon-搜索@2x.png" />
-            <input class='input' bindconfirm='onSearch' placeholder='请输入您要搜索的场馆名称' />
+            <input class='input' bindconfirm='onSearch' 
+                focus='{{isFocus}}'
+                placeholder='请输入您要搜索的场馆名称' />
         </view>
     </view>
     <view class='sort'>
@@ -13,16 +15,16 @@
             <view class='warp'  bindtap='onSortPrice'>
                 <text>价格</text>
                 <view>
-                    <image src='/images/icon_up.png'></image>
-                    <image src='/images/icon_down.png'></image>
+                    <image src='{{types == 3 ? upOn:upOff}}'></image>
+                    <image src='{{types == 4 ? downOn:downOff}}'></image>
                 </view>
             </view>
 
             <view class='warp' bindtap='onSortDistance'>
                 <text>距离</text>
                 <view>
-                    <image src='/images/icon_up.png'></image>
-                    <image src='/images/icon_down.png'></image>
+                    <image src='{{types == 5 ? upOn:upOff}}'></image>
+                    <image src='{{types == 6 ? downOn:downOff}}'></image>
                 </view>
             </view>
         </view>

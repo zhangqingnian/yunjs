@@ -51,12 +51,8 @@ Page({
             nav:this.data.nav
         })
     },
-    //兑换
-    onExchange() {
-        this.setData({
-            show: true
-        })
-    },
+  
+    
     //输入兑换码
     onInput(e) {
         let exchangeCode = e.detail.value.trim();
@@ -64,12 +60,7 @@ Page({
             exchangeCode
         })
     },
-    //取消兑换
-    cancelExchange() {
-        this.setData({
-            show: false
-        })
-    },
+    
     //确定兑换
     confirmExchange() {
         if (!this.data.exchangeCode) {
@@ -80,9 +71,6 @@ Page({
             return;
         }
         this._exchangeCoupon()
-        this.setData({
-            show: false
-        })
     },
     /**
      * 页面上拉触底事件的处理函数
@@ -114,7 +102,9 @@ Page({
         couponModel.exchangeCoupon({
             customerCode
         }).then(res =>{
-            console.log(res);
+            this.setData({
+                exchangeCode:""
+            })
             wx.showToast({
                 title: res.data.msg,
             })

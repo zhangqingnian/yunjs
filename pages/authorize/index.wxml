@@ -1,5 +1,7 @@
 <!--pages/authorize/index.wxml-->
 <view wx:if="{{canIUse}}">
+    <official-account 
+    wx:if="{{codes == 'FOCUS_ON_THE_PUBLIC_NUMBER'}}" class="official"></official-account>
     <view class='header'>
         <image src='/images/logo.png'></image>
     </view>
@@ -12,6 +14,7 @@
     <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
         微信授权
     </button>
+   
 </view>
 
 <view wx:else>请升级微信版本</view>

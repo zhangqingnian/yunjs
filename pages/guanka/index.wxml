@@ -16,16 +16,16 @@
             <view class='warp' bindtap='onSortPrice'>
                 <text>价格</text>
                 <view>
-                    <image src='/images/icon_up.png'></image>
-                    <image src='/images/icon_down.png'></image>
+                    <image src='{{types == 1 ? upOn:upOff}}'></image>
+                    <image src='{{types == 2 ? downOn:downOff}}'></image>
                 </view>
             </view>
 
             <view class='warp' bindtap='onSortDistance'>
                 <text>距离</text>
                 <view>
-                    <image src='/images/icon_up.png'></image>
-                    <image src='/images/icon_down.png'></image>
+                    <image src='{{types == 3 ? upOn:upOff}}'></image>
+                    <image src='{{types == 4 ? downOn:downOff}}'></image>
                 </view>
             </view>
         </view>
@@ -62,8 +62,8 @@
                         <text class='cardName'>{{util.filterCardName(item.cardName)}}</text>
                         
                         <view class='num'>
-                            <text class='cardAddress'>{{util.filterCardName2(item.venueName)}}</text>
-                            <!-- <text>{{util.filterVenueName3(item.sportName)}}</text> -->
+                            <text class='cardAddress'>{{util.filterVenueName(item.venueName)}}</text>
+                            <text>{{util.filterDistance(item.distance)}}</text>
                         </view>
                     </view>
                     <view class='tip' wx:if="{{!venueList.length}}">暂无数据!</view>

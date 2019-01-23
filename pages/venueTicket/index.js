@@ -23,23 +23,18 @@ Page({
     onLoad: function(options) {
         let id = options.id;
         this.setData({id})
-        this._getTicket(id);
-    },
-    //下拉刷新
-    onPullDownRefresh() {
-        wx.showNavigationBarLoading() //在标题栏中显示加载
-
-        this._getTicket(this.data.id,function(){
-            // complete
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.stopPullDownRefresh() //停止下拉刷新
-        });   
-       
-            
-       
+        let start = this.data.ticketList.length;
+        this._getTicket(id, start);
     },
     onShareAppMessage(Object) {
 
+    },
+    onReachBottom(){
+        let start = this.data.ticketList.length;
+        let total = this.data.total;
+        let id = this.data.id;
+        if (start >= total) return;
+        this._getTicket(id, start)
     },
     onGoDetails(e){
         let ticket = e.currentTarget.dataset.ticket;
@@ -48,13 +43,20 @@ Page({
             url: './venueTicketDetails/index?id='+ticket.id,
         })
     },
-    _getTicket(id,cb) {
-        venueModel.getTicket(id).then(res => {
-            console.log(res.data.items)
-            cb && cb();
-            this.setData({
-                ticketList: res.data.items
-            })
+    _getTicket(id,start) {
+        wx.showLoading()
+        venueModel.getTicket({
+                venueId: id,
+                type:1,
+                start,
+                limit:20
+            }).then(res => {
+                wx.hideLoading()
+                let temArr = res.data.items.concat(this.data.ticketList)
+                this.setData({
+                    ticketList: temArr,
+                    total: res.data.total
+                })
         })
     }
 })

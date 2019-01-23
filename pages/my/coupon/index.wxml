@@ -6,6 +6,12 @@
             data-id='{{item.id}}'
             wx:key="{{item.id}}">{{item.name}}</view>
     </view>
+    <view class='inputWarp flex_row'>
+        <input class='exchangeCode' 
+        value='{{exchangeCode}}'
+        bindinput='onInput' placeholder='请输入兑换码'></input>
+        <view class='exchangeBtn' bindtap='confirmExchange'>兑换</view>
+    </view>
     <scroll-view class='content' scroll-y="true">
         <view class='coupon' wx:for="{{couponList}}" wx:key="{{item.id}}">
             <image class='couponImg' src='/images/coupon.png'></image>
@@ -22,25 +28,11 @@
             </view>
         </view>
     </scroll-view>
-    <view class='bottomNav flex_row'>
+    <!-- <view class='bottomNav flex_row'>
         <view bindtap='onExchange'>兑换优惠券</view>
-        <view>领取优惠券</view>
-    </view>
+        <view bindtap='onGet'>领取优惠券</view>
+    </view> -->
 </view>
 
 
 
-<view class='mask' wx:if="{{show}}">
-    <view class='box'>
-        <view class='top flex_cloumn'>
-            <view class='title'>请输入优惠券兑换码</view>
-            <input class='couponInput' 
-                bindinput='onInput'
-                placeholder='请输入优惠券兑换码' focus='true'></input>
-        </view>
-        <view class='bottom flex_row'>
-            <view bindtap='cancelExchange' >取消</view>
-            <view bindtap='confirmExchange'>兑换</view>
-        </view>
-    </view>
-</view>

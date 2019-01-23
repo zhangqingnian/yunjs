@@ -7,13 +7,13 @@ export class IndexModel extends Http {
     //获取轮播图
     getBanner(){
         return this.request({
-            url:'m/mini/activity/front/pageActivity?activityType=1'
+            url:'m/mini/activity/front/pageActivity?activityType=1&programType=1'
         })
     }
     //本月活动
     getBenyue(){
         return this.request({
-            url: 'm/mini/activity/front/pageActivity?activityType=2'
+            url: 'm/mini/activity/front/pageActivity?activityType=2&programType=1'
         })
     }
 

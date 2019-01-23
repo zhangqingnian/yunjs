@@ -110,7 +110,7 @@ Page({
             if (res.data.success) {
                 wx.showModal({
                     title: '提示',
-                    content: '绑定成功，进入首页',
+                    content: '绑定成功',
                     showCancel: false,
                     confirmText: '确定',
                     success:() =>{
@@ -232,8 +232,9 @@ Page({
                         unionid:0
                     */
                     //返回上一页
+                    wx.setStorageSync('isBindMobile', reslut.data.bindingMobile)
                     wx.navigateBack({
-                        delta:1
+                        delta:3
                     })
                 } else {
                     wx.showToast({

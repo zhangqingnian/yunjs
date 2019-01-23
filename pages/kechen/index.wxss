@@ -12,7 +12,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    background:rgba(0,0,0,.5);
+    background:rgba(38,191,89,.5);
     display: flex;
     justify-content: space-between;
     padding: 5rpx 10rpx;

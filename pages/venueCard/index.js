@@ -24,7 +24,11 @@ Page({
      */
     onLoad: function(options) {
         let id = options.id;
-        this._getGk(id);
+        let start = this.data.venueCard.length;
+        this.setData({
+            id
+        })
+        this._getGk(id,start);
     },
     onShareAppMessage(Object) {
 
@@ -42,54 +46,32 @@ Page({
             })
         }
     },
-    _getGk(id) {
-        venueModel.getGk(id,10).then(res => {
+    _getGk(id,start) {
+        wx.showLoading()
+        venueModel.getGk({
+                venueId: id,
+                start,
+                limit: 10
+            }).then(res => {
+                wx.hideLoading()
             console.log(res.data.items)
+            let temArr = res.data.items.concat(this.data.venueCard)
             this.setData({
-                venueCard: res.data.items
+                venueCard: temArr,
+                total:res.data.total
             })
         })
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
+    
     /**
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        let start = this.data.venueCard.length;
+        let total = this.data.total;
+        let id = this.data.id;
+        if(start >= total)return;
+        this._getGk(id,start)
     },
 
     /**

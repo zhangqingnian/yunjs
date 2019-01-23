@@ -31,7 +31,7 @@
             data-lat='{{venue.lat}}' data-lon='{{venue.lon}}'>
             <view class='flex_row' style='align-items: center;'>
                 <image class='icon1' src='/images/venuedetail/icon_1.png'></image>
-                <text>{{venue.address}}</text>
+                <text style='width:500rpx;display: inline-block;'>{{venue.address}}</text>
             </view>
             <view class='go'>去这里</view>
         </view>

@@ -16,16 +16,16 @@
             <view class='warp' bindtap='onSortPrice'>
                 <text>价格</text>
                 <view>
-                    <image src='/images/icon_up.png'></image>
-                    <image src='/images/icon_down.png'></image>
+                    <image src='{{types == 1 ? upOn:upOff}}'></image>
+                    <image src='{{types == 2 ? downOn:downOff}}'></image>
                 </view>
             </view>
 
             <view class='warp' bindtap='onSortDistance'>
                 <text>距离</text>
                 <view>
-                    <image src='/images/icon_up.png'></image>
-                    <image src='/images/icon_down.png'></image>
+                    <image src='{{types == 3 ? upOn:upOff}}'></image>
+                    <image src='{{types == 4 ? downOn:downOff}}'></image>
                 </view>
             </view>
         </view>

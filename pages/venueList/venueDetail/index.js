@@ -205,7 +205,11 @@ Page({
     },
     //馆卡
     _getGk(id) {
-        venueModel.getGk(id).then(res => {
+        venueModel.getGk({
+            venueId: id,
+            start: 0,
+            limit: 2
+        }).then(res => {
             this.setData({
                 venueGk: res.data.items,
                 venueGkTotal: res.data.total
@@ -214,7 +218,11 @@ Page({
     },
     //课程
     _getKc(id) {
-        venueModel.getKc(id).then(res => {
+        venueModel.getKc({
+            venueId: id,
+            start: 0,
+            limit:2
+        }).then(res => {
             this.setData({
                 venueKc: res.data.items,
                 venueKcTotal:res.data.total

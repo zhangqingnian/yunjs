@@ -23,8 +23,9 @@ Page({
    */
   onLoad: function (options) {
       let id = options.id;
-      console.log(id);
-      this._getKc(id);
+      this.setData({ id })
+      let start = this.data.venueKc.length;
+      this._getKc(id, start);
   },
 
     onGoDetail(e){
@@ -36,64 +37,33 @@ Page({
     onShareAppMessage(Object) {
 
     },
+    onReachBottom() {
+        let start = this.data.venueKc.length;
+        let total = this.data.total;
+        let id = this.data.id;
+        if (start >= total) return;
+        this._getKc(id, start);
+    },
 
     //课程
-    _getKc(id) {
-        venueModel.getKc(id, 6).then(res => {
-            console.log(res.data.items)
+    _getKc(id, start) {
+        wx.showLoading()
+        venueModel.getKc({
+            venueId: id,
+            start,
+            limit: 10
+        }).then(res => {
+            wx.hideLoading()
+            let temArr = res.data.items.concat(this.data.venueKc)
             this.setData({
-                venueKc: res.data.items
+                venueKc: temArr,
+                total: res.data.total
             })
-
         })
     },
-    
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  
+ 
+    onShareAppMessage: function () {
 
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+    }
 })

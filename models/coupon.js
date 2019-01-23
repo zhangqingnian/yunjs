@@ -51,4 +51,13 @@ export class CouponModel extends Http {
             data
         })
     }
+
+    //领取更多优惠券
+    getCoupon(data) {
+        return this.request({
+            url: 'm/crm/orienteeringCoupons/front/getAllCouponList',
+            method: 'POST',
+            data
+        })
+    }
 }

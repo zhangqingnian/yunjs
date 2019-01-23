@@ -80,7 +80,6 @@ Page({
         }
     },
     onMap(e) {
-        console.log(e.currentTarget.dataset);
         let {
             name,
             address,

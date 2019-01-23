@@ -27,7 +27,6 @@ Page({
         
         this.getUserLocation()
     },
-
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -88,16 +87,21 @@ Page({
                     console.log(22222)
                 } else {
                     //调用wx.getLocation的API
-                    wx.switchTab({
-                        url: '/pages/index/index'
-                    })
+                    let { nodecode, city } = wx.getStorageSync('city');
+                    if (nodecode) {
+                        wx.switchTab({
+                            url: '/pages/index/index'
+                        })
+                        return
+                    }
+                    vm.getLocation();
                 }
             }
         })
     },
     // 微信获得经纬度
     getLocation: function() {
-        wx.showLoading()
+        
         let vm = this;
         wx.getLocation({
             type: 'wgs84',
@@ -110,16 +114,14 @@ Page({
                     latitude,
                     longitude
                 })
-                vm.getLocal(latitude, longitude, function(){
-                    wx.hideLoading();
-                })
+                vm.getLocal(latitude, longitude)
                 
             }
         })
     },
     // 获取当前地理位置
-    getLocal: function(latitude, longitude,cb) {
-        console.log(44444444444)
+    getLocal: function(latitude, longitude) {
+        wx.showLoading()
         let vm = this;
         qqmapsdk.reverseGeocoder({
             location: {
@@ -145,7 +147,7 @@ Page({
                         city:city,
                         cityLists: cityList
                     })
-                    cb && cb();
+                    wx.hideLoading();
                     wx.switchTab({
                         url: '/pages/index/index'
                     })

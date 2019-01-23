@@ -88,6 +88,64 @@ var filterStatus = function (item) {
     }
       
 }
+
+var ticketStatus = function (obj) {
+    if (obj.status == 1) {
+        return '暂停销售'
+    } else if (obj.status == 2) {
+        return '已下架'
+    } else if (obj.status == 0) {
+        if ( (obj.ticketPublishAmount - obj.soldAmount) > 10) {
+            return '在售中'
+        } else {
+            if ((obj.ticketPublishAmount - obj.soldAmount) <= 0) {
+                return '已售罄'
+            }
+
+            return "剩余:" + shengyu
+        }
+    }
+}
+
+
+var cardStatus =  function(obj){
+    /*0, "次数卡"
+        1, "月卡"
+        2, "季卡"
+        3, "年卡"
+        4, "会员卡"
+        5, "学期课"
+        6, "自由卡"
+        7, "活动次数卡"
+        */
+    if (obj.type == 0 || obj.type == 7){
+        return obj.times + '次'
+    } else if (obj.type == 1 || obj.type == 2 || obj.type == 3 || obj.type == 6){
+        return obj.activeTime + '天'
+    }  else if (obj.type == 4) {
+        return obj.money + '元'
+    }
+}
+
+var cardTime = function (obj) {
+    /*0, "次数卡"
+        1, "月卡"
+        2, "季卡"
+        3, "年卡"
+        4, "会员卡"
+        5, "学期课"
+        6, "自由卡"
+        7, "活动次数卡"
+        */
+    if (obj.type == 0 || obj.type == 7) {
+        return obj.activeTime + '天' 
+    } else if (obj.type == 1 || obj.type == 2 || obj.type == 3 || obj.type == 6) {
+        return obj.activeTime + '天'
+    } else if (obj.type == 4) {
+        return obj.activeTime + '元'
+    }
+}
+
 module.exports = {
     filterStar: filterStar,
     filterDistance: filterDistance,
@@ -99,5 +157,8 @@ module.exports = {
     filterMomey: filterMomey,
     formatDateTime: formatDateTime,
     filterType: filterType,
-    filterTypeClass: filterTypeClass
+    filterTypeClass: filterTypeClass,
+    ticketStatus: ticketStatus,
+    cardStatus: cardStatus,
+    cardTime: cardTime
 }
