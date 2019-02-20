@@ -247,70 +247,117 @@ Page({
         let _this = this;
         questModel.getMyUserInfo().then(res => {
             let relsut = res.data.data;
-            let province , city , district ;
-            relsut.province = relsut.district || '北京';
-            relsut.city = relsut.city || '北京市';
-            relsut.district = relsut.district || '东城区';
+
+            //性别
+            let sex = []
+            if (!relsut.sex || (relsut.sex == 1)) {
+                sex = [{
+                    value: 1,
+                    name: '男',
+                    checked: true
+                },
+                {
+                    value: 2,
+                    name: '女',
+                    checked: false
+                },
+                ]
+            } else {
+                sex = [{
+                    value: 1,
+                    name: '男',
+                    checked: false
+                },
+                {
+                    value: 2,
+                    name: '女',
+                    checked: true
+                },
+                ]
+            }
+            this.setData({
+                sex: sex,
+                id: relsut.id,
+                customerId: relsut.customerId,
+                IDcard: relsut.idCard || '',     //身份证
+                birthday: _this._getBirthdayFromIdCard(relsut.idCard) || '',   //生日
+                nickName: relsut.name || '',   //昵称
+                realName: relsut.realName || '',   //真实姓名
+                hobby: relsut.hobby || '',      //爱好
+                height: relsut.height || '',
+                weight: relsut.weight || '',
+                img: relsut.fileName ? config.base_img_url + relsut.fileName : ''
+            })
+
+
+            console.log(relsut)
+            //获取返回城市code  默认 北京北京市东城区
+            let provinceCode = relsut.province || 11;
+            let cityCode = relsut.city || 1101;
+            let districtCode = relsut.district || 110101;
+            let provinceName, cityName, districtName;
             this.data.provinceList.forEach(item => {
-                if (item.nodeCode == relsut.province){
-                    province = item.city;
+                if (item.nodeCode == provinceCode) {
+                    provinceName = item.city;
+                    console.log(provinceName)
                     return;
                 }
             })
-            this._getCity(relsut.province,function(cityList){
-                cityList.forEach(item =>{
-                    if(item.nodeCode == relsut.city){
-                        city = item.city;
-                        _this._getCity(relsut.city, function (cityList) {
+
+            this._getCity(provinceCode, function (cityList) {
+                cityList.forEach(item => {
+                    if (item.nodeCode == cityCode) {
+                        cityName = item.city;
+                        console.log(cityName)
+                        _this._getCity(cityCode, function (cityList) {
+                            
                             cityList.forEach(item => {
-                                if (item.nodeCode == relsut.district) {
-                                    district = item.city
+                                if (item.nodeCode == districtCode) {
+                                    districtName = item.city
+                                    console.log(districtName)
+                                    
+                                    let _region = [provinceName, cityName, districtName];
+                                    console.log(_region)
+                                    _this.setData({
+                                        region: _region, //默认地址
+                                    })
+                                }
+                            })
+                        })
+                    }
+                })
+            })
+            /* 
+            let provinceCode , cityCode , districtCode ;
+            relsut.province = relsut.province || '北京';
+            relsut.city = relsut.city || '北京市';
+            relsut.district = relsut.district || '东城区';
+            this.data.provinceList.forEach(item => {
+                if (item.city == relsut.province){
+                    province = item.nodeCode;
+                    return;
+                }
+            })
+            console.log(province)
+            this._getCity(province,function(cityList){
+                cityList.forEach(item =>{
+                    if(item.city == relsut.city){
+                        city = item.nodeCode;
+                        _this._getCity(city, function (cityList) {
+                            console.log(city)
+                            cityList.forEach(item => {
+                                if (item.city == relsut.district) {
+                                    district = item.nodeCode
 
-                                    relsut.province = province || '北京市'
-                                    relsut.city = city || '北京市'
-                                    relsut.district = district || '东城区'
-                                    let _region = [province, city, district];
-                                    let sex = []
-                                    if (!relsut.sex || (relsut.sex == 1)) {
-                                        sex = [{
-                                            value: 1,
-                                            name: '男',
-                                            checked: true
-                                        },
-                                        {
-                                            value: 2,
-                                            name: '女',
-                                            checked: false
-                                        },
-                                        ]
-                                    } else {
-                                        sex = [{
-                                            value: 1,
-                                            name: '男',
-                                            checked: false
-                                        },
-                                        {
-                                            value: 2,
-                                            name: '女',
-                                            checked: true
-                                        },
-                                        ]
-                                    }
-
+                                    // relsut.province = province || '北京市'
+                                    // relsut.city = city || '北京市'
+                                    // relsut.district = district || '东城区'
+                                    let _region = [relsut.province, relsut.city, relsut.district];
+                                    
+                                    console.log(123456)
                                     _this.setData({
                                         currentNodeCode: 110101,  //默认地址的nodeCode
                                         region: _region, //默认地址
-                                        sex: sex,
-                                        id: relsut.id,
-                                        customerId: relsut.customerId,
-                                        IDcard: relsut.idCard || '',     //身份证
-                                        birthday: _this._getBirthdayFromIdCard(relsut.idCard) || '',   //生日
-                                        nickName: relsut.name || '',   //昵称
-                                        realName: relsut.realName || '',   //真实姓名
-                                        hobby: relsut.hobby || '',      //爱好
-                                        height: relsut.height || '',
-                                        weight: relsut.weight || '',
-                                        img: relsut.fileName ? config.base_img_url + relsut.fileName : ''
                                     })
                                 }
                             })
@@ -319,7 +366,7 @@ Page({
                 })
             })
 
-            
+            */
 
             
         })

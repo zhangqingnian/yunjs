@@ -26,14 +26,14 @@ Page({
         venueGk: [],
         venueKKC: {},
         id:'',
-        sportTypeId:''
+        sportTypeId:'',
+        sportName:''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options)
         let { id, sportTypeId } = options;
         this.setData({
             id,
@@ -118,7 +118,7 @@ Page({
     //场地预约
     onBuyfield(e) {
         let venue = JSON.stringify(this.data.venue);
-        if (!this.data.sportName){
+        if (!this.data.sportTypeId){
             wx.showToast({
                 title: '请先选择运动类型',
                 icon:'none'
@@ -138,7 +138,6 @@ Page({
     },
     //查看地址 - 地图
     onMap(e){
-        console.log(e.currentTarget.dataset);
         let { name, address, lat, lon } = e.currentTarget.dataset;
         wx.getLocation({//获取当前经纬度
             type: 'wgs84', //返回可以用于wx.openLocation的经纬度，
@@ -157,17 +156,27 @@ Page({
         wx.showLoading();
         venueModel.getVenueDetail(id).then(res => {
             wx.hideLoading();
-            console.log(res.data.data)
             let sportName = '';
             res.data.data.venueAreaVo.forEach(item => {
                 if (item.cvaSportTypeId == sportTypeId){
-                    sportName = item.tvtTypeName
+                    sportName = item.tvtTypeName;
                 }
             })
-            this.setData({
-                venue: res.data.data,
-                sportName
-            })
+            if (!sportTypeId){
+                let cvaSportTypeId = res.data.data.venueAreaVo[0].cvaSportTypeId || "";
+                let tvtTypeName = res.data.data.venueAreaVo[0].tvtTypeName || "";
+                this.setData({ 
+                    sportTypeId: cvaSportTypeId,
+                    sportName: tvtTypeName,
+                    venue: res.data.data
+                })
+            }else{
+                this.setData({
+                    venue: res.data.data,
+                    sportName
+                })
+            }
+            
         })
     },
     //课卡场

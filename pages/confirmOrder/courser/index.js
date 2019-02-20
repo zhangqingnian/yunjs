@@ -79,6 +79,14 @@ Page({
     },
     //选择联系人或学员
     onGoStudentList() {
+        let isBindMobile = wx.getStorageSync('isBindMobile');
+        if (!isBindMobile) {
+            wx.navigateTo({
+                url: '/pages/bindMobile/index'
+            })
+            return
+        }
+        
         wx.navigateTo({
             url: '../selectStudent/index?contactsList'
         })

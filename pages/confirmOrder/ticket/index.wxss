@@ -76,7 +76,9 @@ page {
     color: #da0808;
     font-size: 24rpx;
 }
-
+.number{
+    margin-right:60rpx;
+}
 .number image{
     width: 40rpx;
     height: 40rpx;

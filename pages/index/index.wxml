@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <view class="container">
     <!-- 位置 -->
+    
     <view class='index-top'>
         <view class='area flex_row' bindtap='onSelectCity'>
             <view>{{city}}</view>
