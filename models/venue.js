@@ -142,6 +142,12 @@ export class VenueModel extends Http {
             url: 'm/crm/venue/front/selectAllVenueType'
         })
     }
-
-    
+    //分享朋友圈的太阳码  type 1馆卡 2课程 3门票 goodId 
+    sunCode(data){
+        return this.request({
+            url: 'm/wxaCode/front/getSubCode',
+            method: 'POST',
+            data
+        })
+    }
 }

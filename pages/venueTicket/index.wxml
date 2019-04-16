@@ -1,7 +1,7 @@
 <!--pages/venueTicket/index.wxml-->
 <wxs src="../../utils/venue.wxs" module="util" />
 <view class='venueTicket'>
-    <view class='content flex_row'>
+    <view class='content flex_row' wx:if="{{ticketList.length}}">
         <view class='item flex_column' 
         bindtap='onGoDetails'
         data-ticket='{{item}}'
@@ -16,5 +16,5 @@
             <view class='ticketName'>{{item.ticketName}}</view>
         </view>
     </view>
-
+    <view class="nodata" wx:if="{{isData}}">暂无数据!</view>
 </view>

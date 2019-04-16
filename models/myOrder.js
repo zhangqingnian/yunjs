@@ -22,6 +22,14 @@ export class MyOrderModel extends Http {
             data
         })
     }
+
+    shareOrderDel(data){
+        return this.request({
+            url: 'm/mini/venueGoodsOrder/removeVenueGoodsOrder',
+            method: 'POST',
+            data
+        })
+    }
     //门票 申请退款
     ticketOrderRefund(data){
         return this.request({

@@ -17,7 +17,13 @@ Page({
           imgSrc
       })
   },
-
+    onOpen(e) {
+        let url = e.currentTarget.dataset.name;
+        wx.previewImage({
+            current: url, // 当前显示图片的http链接
+            urls: [url] // 需要预览的图片http链接列表
+        })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

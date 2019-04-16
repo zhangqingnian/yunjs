@@ -15,7 +15,8 @@ Page({
    */
   data: {
       imgUrl: config.base_img_url,
-      venueKc:[]
+      venueKc:[],
+      isData: false
   },
 
   /**
@@ -57,7 +58,8 @@ Page({
             let temArr = res.data.items.concat(this.data.venueKc)
             this.setData({
                 venueKc: temArr,
-                total: res.data.total
+                total: res.data.total,
+                isData: !temArr.length
             })
         })
     },

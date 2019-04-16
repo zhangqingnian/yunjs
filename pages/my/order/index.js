@@ -16,7 +16,8 @@ Page({
         currentType:'',//当前那种状态的订单
         total:0,       //总数
         loading:false, //loading显示隐藏 
-        orderList:[]   //结果
+        orderList:[],   //结果
+        isData:false
     },
 
     /**
@@ -35,7 +36,8 @@ Page({
             unpaid: true,
             paid: false,
             cancel: false,
-            currentType:99
+            currentType:99,
+            isData: false
         })
         this._getOrderList(99, 0);
     },
@@ -45,7 +47,8 @@ Page({
             unpaid: false,
             paid: true,
             cancel: false,
-            currentType:100
+            currentType:100,
+            isData: false
         })
         this._getOrderList(100, 0);
     },
@@ -55,7 +58,8 @@ Page({
             unpaid: false,
             paid: false,
             cancel: true,
-            currentType:101
+            currentType:101,
+            isData: false
         })
         this._getOrderList(101, 0);
     },
@@ -104,21 +108,34 @@ Page({
             })
             return;
         }
-        //门票退款
-        myOrderModel.ticketOrderRefund({
-            type:1,
-            id:item.id
-        }).then(res => {
-            console.log(res);
-            wx.showToast({
-                title: res.data.msg,
-                icon:'none'
-            })
-            if(res.data.success){
-                this._getOrderList(100, 0);
+
+        wx.showModal({
+            title: '提示',
+            content: '是否确定申请退款!',
+            success: r => {
+                if(r.confirm){
+                    //门票退款
+                    myOrderModel.ticketOrderRefund({
+                        type: 1,
+                        id: item.id
+                    }).then(res => {
+                        wx.showModal({
+                            title: '提示',
+                            content: res.data.msg,
+                            showCancel:false,
+                            success:r => {
+                                if (r.confirm) {
+                                    if (res.data.success) {
+                                        this._getOrderList(100, 0);
+                                    }
+                                } 
+                            }
+                        })
+                    })
+                }
             }
-            
         })
+        
     },
     //再次购买
     onBuy(e){
@@ -130,12 +147,19 @@ Page({
     //删除订单
     onDel(e){
         let orderId = e.detail.id;
+        let orderDifference = e.detail.orderDifference;
+        
         wx.showModal({
             title: '提示',
             content: '确定删除订单?',
             success: res => {
                 if (res.confirm){
-                    this._del(orderId)
+                    if (orderDifference == 'MINI_ORDER') {
+                        this._shareOrderDel(orderId)
+                    }else{
+                        this._del(orderId)
+                    }
+                    
                 }
             }
         })
@@ -161,6 +185,21 @@ Page({
                 this._getOrderList(this.data.currentType, 0);
             }
             
+        })
+    },
+    //分享订单删除
+    _shareOrderDel(orderId){
+        myOrderModel.shareOrderDel({
+            id: orderId
+        }).then(res => {
+            console.log(res);
+            wx.showToast({
+                title: res.data.msg,
+            })
+            if (res.data.success) {
+                this._getOrderList(this.data.currentType, 0);
+            }
+
         })
     },
     _orderType(orderType) {
@@ -203,13 +242,16 @@ Page({
             this.setData({ loading: false })
             let temArr = this.data.orderList.concat(res.data.items)
             this.setData({
-                orderList: temArr
+                orderList: temArr,
+                isData: !temArr.length
             })
         })
     },
     _getOrderList(status, start){
         //status 99待支付 100已支付 101已取消
-        wx.showLoading();
+        wx.showLoading({
+            title: '加载中...',
+        })
         myOrderModel.myOrderList({
             status,
             start,
@@ -218,7 +260,8 @@ Page({
             wx.hideLoading();
             this.setData({
                 orderList:res.data.items,
-                total:res.data.total
+                total:res.data.total,
+                isData: !res.data.items.length
             })
         })
     },

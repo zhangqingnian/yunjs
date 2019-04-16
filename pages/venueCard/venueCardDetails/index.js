@@ -13,6 +13,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isShare:false,     //是否显示海报层
         imgUrl: config.base_img_url,
         card: {},
         time: [{
@@ -39,11 +40,26 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        let id = options.id;
+        console.log(options)
+        let id = options.id || decodeURIComponent(options.scene);
+        this.setData({
+            id
+        })
         this._getCard(id);
     },
     onShareAppMessage(Object) {
 
+    },
+    onShare(){
+        this.setData({
+            isShare:true
+        })
+    },
+    onCloseShare(){
+        console.log('close')
+        this.setData({
+            isShare: false
+        })
     },
     //进入场馆
     onGoVenue(){

@@ -1,2 +1,3 @@
 <!--pages/electronicProtocol/index.wxml-->
-<image src='{{imgSrc}}'></image>
+<image src='{{imgSrc}}' catchtap='onOpen'
+            data-name='{{imgSrc}}'></image>

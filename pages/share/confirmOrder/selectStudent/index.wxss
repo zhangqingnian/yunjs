@@ -1,0 +1,2 @@
+/* pages/confirmOrder/selectStudent/index.wxss */
+@import '../selectContacts/index.wxss';

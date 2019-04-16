@@ -101,4 +101,22 @@ export class OrderModel extends Http {
             data
         })
     }
+
+
+    /* 分享 馆卡课程 余额支付*/
+    yeShare(data) {
+        return this.request({
+            url: 'm/mini/venueGoodsOrder/payVenueGoodsOrderForMini',
+            method: 'POST',
+            data
+        })
+    }
+    	
+    wxPayShare(data) {
+        return this.request({
+            url: 'm/pay/wechat/getMiniWechatPaymentParams',
+            method: 'POST',
+            data
+        })
+    }
 }

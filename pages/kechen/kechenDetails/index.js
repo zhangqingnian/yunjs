@@ -25,7 +25,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        let id = options.id;
+       
+        let id = options.id || 169;
         this._getKcDetail(id);
     },
     onShareAppMessage(Object) {

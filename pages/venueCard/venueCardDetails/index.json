@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "场馆馆卡详情"
+    "navigationBarTitleText": "场馆馆卡详情",
+    "usingComponents": {
+        "v-share": "/components/share/index"
+    }
 }

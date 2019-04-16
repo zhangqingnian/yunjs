@@ -21,7 +21,7 @@ Page({
         imgUrl: config.base_img_url,
         isChecked: false, //协议勾选
         card: {},        //课程信息
-        classes:{},       //班级信息
+        classes: {},       //班级信息
         contactsList: [],    //联系人列表
         currentContacts: {}, //当前联系人
         payShow: false,     //是否显示支付组件
@@ -53,9 +53,9 @@ Page({
 
         let sportTypeId = card.courseType || '';  //会员卡是不用传
         let id = card.id
-        this._getCouponList(sportTypeId,id)
+        this._getCouponList(sportTypeId, id)
     },
-    onShow(){
+    onShow() {
         this._getContacts();
     },
     //勾选协议
@@ -86,16 +86,16 @@ Page({
             })
             return
         }
-        
+
         wx.navigateTo({
             url: '../selectStudent/index?contactsList'
         })
     },
     //提交订单
     onSubmit() {
-        
 
-        if (JSON.stringify(this.data.currentContacts) == '{}'){
+
+        if (JSON.stringify(this.data.currentContacts) == '{}') {
             wx.showToast({
                 title: '请先选择学员！',
                 icon: 'none'
@@ -113,7 +113,7 @@ Page({
             }
         }
         let isBindMobile = wx.getStorageSync('isBindMobile');
-        if (!isBindMobile){
+        if (!isBindMobile) {
             wx.navigateTo({
                 url: '/pages/bindMobile/index'
             })
@@ -150,7 +150,7 @@ Page({
         })
     },
     //获取优惠券列表
-    _getCouponList(sportTypeId,id) {
+    _getCouponList(sportTypeId, id) {
         couponModel.getMyCoupon({
             type: 2,
             sportId: sportTypeId,
@@ -190,7 +190,7 @@ Page({
         let buyMoney = this.data.total,  //价格
             cpId = this.data.coupon.couponId || '', //优惠券id
             lmId = this.data.currentContacts.id;    //联系人Id
-        let {  isChecked, discountTotal } = this.data;
+        let { isChecked, discountTotal } = this.data;
 
         let venueId = this.data.card.venueId;
         let courseId = this.data.card.id;
@@ -249,7 +249,7 @@ Page({
             wx.hideLoading()
             let contactsList = res.data.items;
             let currentContacts = contactsList[0] || {};
-            
+
             this.setData({
                 contactsList,    //联系人列表
                 currentContacts //当前联系人

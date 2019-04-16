@@ -1,0 +1,33 @@
+<!--pages/card/shop/index.wxml-->
+<view class='contain'>
+    <view class='list'>
+        <view class='item' wx:for="{{goods}}" wx:key="{{item.id}}" 
+            catchtap='onOrder' data-item='{{item}}'>
+            <view class='itemTop'>
+                <view class='imgWarp'>
+                    <image class='img' src='{{imgUrl + item.fileName}}'></image>
+                    <view class='imgBottom flex_row'>
+                        <view class='priceWarp flex_row'>
+                            <view class='nowPrice'>￥{{item.salePrice +item.discountPrice}}</view>
+                            <view class='oldPrice'>￥{{item.goodsPrice}}</view>
+                        </view>
+                        <view class='status'>{{item.goodsStatus}}</view>
+                    </view>
+                    <!-- <view class='coupon' wx:if="{{item.discountPrice > 0}}">
+                        劵￥{{item.discountPrice}}</view> -->
+                    <image class='recom' wx:if="{{item.recommend == 1}}" 
+                        src='/images/recom.png'></image>
+                </view>
+            </view>
+            <view class='itemBottom'>
+                <view class='itemBottomTop flex_row'>
+                    <view>
+                        <view class='cardName'>{{item.goodsName}}</view>
+                        <view class='venueName'>{{item.venueName}}</view>
+                    </view>
+                    <view class='revise'>订购</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

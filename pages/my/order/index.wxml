@@ -117,7 +117,7 @@
             </v-course>
              
         </block> 
-        <view class='tip' wx:if="{{!orderList.length}}">暂无数据!</view> 
+        <view class='tip' wx:if="{{isData}}">暂无数据!</view> 
     </view>
     <v-loading wx:if="{{loading}}" /> 
 </view>

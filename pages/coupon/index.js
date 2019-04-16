@@ -46,6 +46,21 @@ Page({
     },
     //领取优惠券
     onReceiveCoupon(e) {
+        let token = wx.getStorageSync('token').accessToken;
+        if (!token){
+            wx.navigateTo({
+                url: '/pages/authorize/index'
+            })
+            return
+        }
+
+        let isBindMobile = wx.getStorageSync('isBindMobile');
+        if (!isBindMobile) {
+            wx.navigateTo({
+                url: '/pages/bindMobile/index'
+            })
+            return
+        }
         let { venueId, couponNum } = e.currentTarget.dataset.item;
         couponModel.getReceiveCoupon({
             venueId,

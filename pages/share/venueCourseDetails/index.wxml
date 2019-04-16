@@ -1,0 +1,147 @@
+<!--pages/kechen/kechenDetails/index.wxml-->
+<view class='containner flex_column'>
+    <view class='cardWarp'>
+        <image class='img' src='{{imgUrl + course.fileName}}' mode='aspectFit'></image>
+        <image class='recom' src='/images/recom.png'></image>
+        <view class='coupon' wx:if="{{course.discountPrice && showCoupon}}" 
+            bindtap='onUserCoupon'
+            data-coupon='{{course.discountPrice}}'>劵￥{{course.discountPrice}}</view>
+    </view>
+    <view class='category itemClass'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>{{course.courseName}}</view>
+            <view class='type'>{{course.sportType}}</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>课程价格：</view>
+                <view class='value price flex_row'>
+                    <view wx:if="{{!showCoupon}}">￥{{money}}</view>
+                    <view class='{{!showCoupon ? "del":""}}'>￥{{course.salePrice}}</view>
+                    <view class='del'>￥{{course.price}}</view>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>招生对象：</view>
+                <view class='value'>{{course.enrolStudents}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>课程场馆：</view>
+                <view class='value'>{{course.venueName}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>地址：</view>
+                    <view class='value' style='width:420rpx;'>{{course.address}}</view>
+                </view>
+                <view class='go flex_row' bindtap='onMap' 
+                data-name='{{course.venueName}}'
+                data-address='{{course.address}}'
+                data-lat='{{course.lat}}'
+                data-lon='{{course.lon}}'>
+                    <view>去这里</view>
+                    <image src='/images/venuedetail/icon_1.png'></image>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>总课时：</view>
+                <view class='value'>{{course.classHour}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='selectClass itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>选择班级</view>
+            <view class='type'></view>
+        </view>
+
+        <view class='content'>
+            <scroll-view class="scroll-view_H" scroll-x="true">
+                <!--  报名状态（已满0，报名中1，报名时间已截止2） -->
+                <view class='flex_column {{itemName.isOn ? "on" : ""}}' 
+                bindtap='onSelectClass'
+                data-classId='{{itemName.classId}}'
+                wx:for="{{classList}}"
+                wx:for-item="itemName"
+                wx:key="{{itemName.classId}}">
+                    <view class='types'>{{itemName.className}}</view>
+                    <view class='surplus'>剩余{{itemName.surplusPeople }}个名额</view>
+                </view>
+            </scroll-view>
+            <view class='details'>
+                <view class='flex_row'>
+                    <view class='title'>班级全称：</view>
+                    <view class='type'>{{classes.className }}</view>
+                </view>
+                <view class=' flex_row'>
+                    <view class='title'>报名日期：</view>
+                    <view class='type'>
+                        {{classes.enrollStartTimeStr }}至{{classes.enrollEndTimeStr}}
+                    </view>
+                </view>
+                <view class=' flex_row'>
+                    <view class='title'>有效日期：</view>
+                    <view class='type'>
+                        {{classes.certStartTimeStr}}至{{classes.certEndTimeStr }}
+                    </view>
+                </view>
+                <view class=' flex_row'>
+                    <view class='title'>课程课时：</view>
+                    <view class='type'>{{classes.classDesc }}</view>
+                </view>
+                <view class=' flex_row'>
+                    <view class='title'>班级人数：</view>
+                    <view class='type'>{{classes.classSize }}人</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>班级说明</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{classes.classInstr}}
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>退款说明</view>
+            <view class='type'></view>
+        </view>
+        <text style='display:block;'>
+            {{course.refundInstr}}
+        </text>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>课程内容</view>
+            <view class='type'></view>
+        </view>
+        <view class='content'>
+            {{course.courseDetail}}
+        </view>
+    </view>
+
+    <!-- <view class='baoming' bindtap='onGoSubmit'>报名</view> -->
+    <view class='bottomwarp flex_row' wx:if="{{!extend}}">
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>进入店铺</view>
+        </view>
+        <view class='confirm' bindtap='onGoOrder'>
+            立即购买
+        </view>
+    </view>
+
+    <view class='bottomwarp flex_row' wx:if="{{extend}}">
+        <button class='extend' open-type='share'>
+            我要推广
+        </button>
+    </view>
+</view>

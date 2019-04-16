@@ -76,9 +76,9 @@
             <view class='title'>购买须知</view>
             <view class='type'></view>
         </view>
-        <view class='content'>
+        <text style='display:block;'>
             {{ticket.buyRemark}}
-        </view>
+        </text>
     </view>
 
 

@@ -63,6 +63,14 @@ Page({
     
     //确定兑换
     confirmExchange() {
+        let isBindMobile = wx.getStorageSync('isBindMobile');
+        if (!isBindMobile) {
+            wx.navigateTo({
+                url: '/pages/bindMobile/index'
+            })
+            return
+        }
+        
         if (!this.data.exchangeCode) {
             wx.showToast({
                 title: '请输入兑换码',

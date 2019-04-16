@@ -62,6 +62,100 @@
         </view>
     </view>
 
+    
+    <view class='venueTicket mtop_30' wx:if="{{venueGk.length}}">
+        <view class='top flex_row'>
+            <text class='title'>场馆门票</text>
+            <view class='flex_row warp' bindtap='onBuyVenueTicket'>
+                <text class='text'>查看更多</text>
+                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+        <view class='content flex_row'>
+            <view class='item flex_column' 
+                bindtap='onTicketDetail'
+                data-item='{{item}}'
+                wx:for="{{ticketList}}" wx:key="{{item.id}}">
+                <view class='imgwarp'>
+                    <image class='vipImg' src='{{imgUrl + item.ticketImg }}'></image>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥{{item.ticketPrice}}</text>
+                        <!-- 0 撤销 1发布 -->
+                        <text class='state'>{{util.ticketStatus(item)}}</text>
+                    </view>
+                </view>
+                
+                <view class='footer flex_row' style='margin-top:10rpx;'>
+                    <view class='ticketName'>{{item.ticketName }}</view>
+                    <view class='itemRevise'>订购</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='venueTicket mtop_30' wx:if="{{venueGk.length}}">
+        <view class='top flex_row'>
+            <text class='title'>场馆卡券</text>
+            <!-- <text class='title'>场馆卡券({{venueGkTotal}})</text> -->
+            <view class='flex_row warp' bindtap='onBuyVenueCard'>
+                <text class='text'>查看更多</text>
+                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+        <view class='content flex_row'>
+            <view class='item flex_column' 
+                bindtap='onCardDetail'
+                data-item='{{item}}'
+                wx:for="{{venueGk}}" wx:key="{{item.id}}">
+                <view class='imgwarp'>
+                    <image class='vipImg' src='{{imgUrl + item.fileName }}'></image>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥{{item.buyMoney}}</text>
+                        <!-- 0 撤销 1发布 -->
+                        <text class='state'>{{util.filterCardStauts(item.status)}}</text>
+                    </view>
+                </view>
+                
+                <view class='footer flex_row' style='margin-top:10rpx;'>
+                    <view class='ticketName'>{{item.cardName }}</view>
+                    <view class='itemRevise'>订购</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='course mtop_30' wx:if="{{venueKc.length}}">
+        <view class='top flex_row'>
+            <text class='title'>课程培训</text>
+            <!-- <text class='title'>课程培训( {{venueKcTotal}} )</text> -->
+            <view class='flex_row warp' bindtap='onBuyCourse'>
+                <text class='text'>查看更多</text>
+                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+        <view class='content flex_row'>
+            <view class='item flex_column' 
+                bindtap='onCourseDetail'
+                data-id='{{item.id}}'
+                wx:for="{{venueKc}}" wx:key="{{item.id}}">
+                <view class='imgwarp'>
+                    <image class='vipImg' src='{{imgUrl + item.fileName}}'></image>
+                    <text class='cardName'>{{item.courseName}}</text>
+                    <view class='bottom flex_row'>
+                        <text class='price'>￥{{item.price}}</text>
+                        <text class='state'>{{item.courseStatus}}</text>
+                    </view>
+                </view>
+                
+                <view class='footer flex_row'>
+                    <view class='left'>
+                        <view class='courseName'>{{item.courseName}}</view>
+                        <view class='courseAddress'>{{item.venueName}}</view>
+                    </view>
+                    <view class='itemRevise'>订购</view>
+                </view>
+            </view>
+           
+        </view>
+    </view>
     <view class='serve mtop_30'>
         <view class='title'>服务内容</view>
         <view class='serveType flex_row'>
@@ -114,73 +208,7 @@
         </view>
     </view>
 
-    <view class='course mtop_30' wx:if="{{venueKc.length}}">
-        <view class='top flex_row'>
-            <text class='title'>课程培训( {{venueKcTotal}} )</text>
-            <view class='flex_row warp' bindtap='onBuyCourse'>
-                <text class='text'>查看更多</text>
-                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
-            </view>
-        </view>
-        <view class='content flex_row'>
-            <view class='item flex_column' 
-                bindtap='onCourseDetail'
-                data-id='{{item.id}}'
-                wx:for="{{venueKc}}" wx:key="{{item.id}}">
-                <view class='imgwarp'>
-                    <image class='vipImg' src='{{imgUrl + item.fileName}}'></image>
-                    <text class='cardName'>{{item.courseName}}</text>
-                    <view class='bottom flex_row'>
-                        <text class='price'>￥{{item.price}}</text>
-                        <text class='state'>{{item.courseStatus}}</text>
-                    </view>
-                </view>
-                <view class='courseName'>{{item.courseName}}</view>
-                <view class='footer flex_row'>
-                    <view class='courseAddress'>{{item.venueName}}</view>
-                </view>
-            </view>
-           
-        </view>
-    </view>
-
-    <view class='venueTicket mtop_30' wx:if="{{venueGk.length}}">
-        <view class='top flex_row'>
-            <text class='title'>场馆卡券({{venueGkTotal}})</text>
-            <view class='flex_row warp' bindtap='onBuyVenueCard'>
-                <text class='text'>查看更多</text>
-                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
-            </view>
-        </view>
-        <view class='content flex_row'>
-            <view class='item flex_column' 
-                bindtap='onCardDetail'
-                data-item='{{item}}'
-                wx:for="{{venueGk}}" wx:key="{{item.id}}">
-                <view class='imgwarp'>
-                    <image class='vipImg' src='{{imgUrl + item.fileName }}'></image>
-                    <view class='bottom flex_row'>
-                        <text class='price'>￥{{item.buyMoney}}</text>
-                        <!-- 0 撤销 1发布 -->
-                        <text class='state'>{{util.filterCardStauts(item.status)}}</text>
-                    </view>
-                </view>
-                <view class='ticketName'>{{item.cardName }}</view>
-            </view>
-            <!--  
-            <view class='item flex_column'>
-                <view class='imgwarp'>
-                    <image class='vipImg'></image>
-                    <view class='bottom flex_row'>
-                        <text class='price'>￥289.00</text>
-                        <text class='state'>在售中</text>
-                    </view>
-                </view>
-                <view class='ticketName'>游泳馆门票</view>
-            </view>
-            -->
-        </view>
-    </view>
+    
 
     <view class='introduce mtop_30'>
         <view class='top flex_row'>

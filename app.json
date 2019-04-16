@@ -61,7 +61,17 @@
         "pages/my/kechen/record/index",
         "pages/my/card/record/index",
         "pages/bindMobile/index",
-        "pages/cityList/index"
+        "pages/cityList/index",
+        "pages/share/card/index",
+        "pages/share/shop/index",
+        "pages/share/venueCardDetails/index",
+        "pages/share/venueCourseDetails/index",
+        "pages/share/confirmOrder/card/index",
+        "pages/share/confirmOrder/courser/index",
+        "pages/share/confirmOrder/selectContacts/index",
+        "pages/share/confirmOrder/selectStudent/index"
+
+        
     ],
     "window": {
         "backgroundTextStyle": "light",

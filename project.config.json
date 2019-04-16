@@ -14,7 +14,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.0",
+	"libVersion": "2.5.2",
 	"appid": "wx58248eb6a6468f9c",
 	"projectname": "yunjs",
 	"debugOptions": {
@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 41,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -292,6 +292,53 @@
 					"id": 41,
 					"name": "绑定",
 					"pathName": "pages/bindMobile/index",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": 42,
+					"name": "名片",
+					"pathName": "pages/share/card/index",
+					"query": "",
+					"scene": "1037",
+					"referrerInfo": {
+						"appId": "wx02adff5e9fd1148d",
+						"extraData": "{\"customerId\":1731}"
+					}
+				},
+				{
+					"id": -1,
+					"name": "店铺",
+					"pathName": "pages/share/shop/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "分享馆卡详情",
+					"pathName": "pages/share/venueCardDetails/index",
+					"query": "id=327"
+				},
+				{
+					"id": -1,
+					"name": "分享课程详情",
+					"pathName": "pages/share/venueCourseDetails/index",
+					"query": ""
+				},
+				{
+					"id": 47,
+					"name": "分享后商品详情",
+					"pathName": "pages/share/venueCardDetails/index",
+					"query": "id=4&venueGoodsId=39&packageId=8&customerId=2983&nickName='流星'",
+					"scene": "1037",
+					"referrerInfo": {
+						"appId": "wx02adff5e9fd1148d",
+						"extraData": "{\"customerId\":2983}"
+					}
+				},
+				{
+					"id": -1,
+					"name": "分享后馆卡订单提交",
+					"pathName": "pages/share/confirmOrder/card/index",
 					"query": "",
 					"scene": "1001"
 				}

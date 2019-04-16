@@ -1,0 +1,110 @@
+<!--pages/venueCard/venueCardDetails/index.wxml-->
+<wxs src="../../../utils/venue.wxs" module="util" />
+<view class='containner flex_column'>
+    <view class='cardWarp'>
+        <image class='img' src='{{imgUrl + card.fileName}}' mode='aspectFit'></image>
+        <image class='recom' src='/images/recom.png'></image>
+        <view class='coupon' wx:if="{{card.discountPrice && showCoupon}}" 
+            bindtap='onUserCoupon'
+            data-coupon='{{card.discountPrice}}'>劵￥{{card.discountPrice}}</view>
+    </view>
+
+    <view class='category itemClass'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>{{card.cardName}}</view>
+            <view class='type' wx:if="{{card.sportName}}">{{card.sportName}}</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>馆卡价格：</view>
+                <view class='value price flex_row'>
+                    <view wx:if="{{!showCoupon}}">￥{{money}}</view>
+                    <view class='{{!showCoupon ? "del":""}}'>￥{{card.salePrice}}</view>
+                    <view class='del'>￥{{card.buyMoney}}</view>
+                </view> 
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>馆卡价值：</view>
+                <view class='value'>{{util.cardStatus(card)}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>
+                    {{util.cardTime(card)}}
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>地址：</view>
+                    <view class='value' style='width:420rpx;'>{{card.address}}</view>
+                </view>
+                <view class='go flex_row' 
+                bindtap='onMap' 
+                data-name='{{card.venueName}}'
+                data-address='{{card.address}}'
+                data-lat='{{card.lat}}'
+                data-lon='{{card.lon}}'>
+                    <view>去这里</view>
+                    <image src='/images/venuedetail/icon_1.png'></image>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>馆卡规格：</view>
+                <view class='value'>{{card.description}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>剩余数量：</view>
+                <view class='value'>{{card.surplusAmount}}</view>
+            </view>
+            <view class='item flex_row jihuo'>
+                <view class='name'>激活时间：</view>
+                <view class='value'>
+                    <text class='{{item.isOn ? "on":""}}' 
+                    bindtap='onSelectTime'
+                    data-item='{{item}}'
+                    wx:for="{{time}}" 
+                    wx:key="{{idx}}">{{item.name}}</text>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>提示：</view>
+                <view class='value'>
+                激活时间选择立即可直接使用，选择一天，一天后可使用
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>购买须知</view>
+            <view class='type'></view>
+        </view>
+        <text style='display:block;'>
+            {{card.remark}}
+        </text>
+    </view>
+
+
+
+    <!-- <view class='baoming' bindtap='onGoOrder'>购买馆卡</view> -->
+    <view class='bottomwarp flex_row' wx:if="{{!extend}}">
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>进入店铺</view>
+        </view>
+        <view class='confirm' bindtap='onGoOrder'>
+            立即购买
+        </view>
+    </view>
+
+    <view class='bottomwarp flex_row' wx:if="{{extend}}">
+        <button class='extend' open-type='share'>
+            我要推广
+        </button>
+    </view>
+</view>

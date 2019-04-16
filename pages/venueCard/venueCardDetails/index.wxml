@@ -8,7 +8,11 @@
     <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{card.cardName}}</view>
-            <view class='type' wx:if="{{card.sportName}}">类型：{{card.sportName}}</view>
+            <view class='flex_row'>
+                <view class='type' wx:if="{{card.sportName}}">类型：{{card.sportName}}</view>
+                <view bindtap='onShare'>生成海报</view>
+            </view>
+            
         </view>
         <view class='content flex_column'>
             <view class='item flex_row'>
@@ -76,9 +80,9 @@
             <view class='title'>购买须知</view>
             <view class='type'></view>
         </view>
-        <view class='content'>
+        <text style='display:block;'>
             {{card.remark}}
-        </view>
+        </text>
     </view>
 
 
@@ -94,3 +98,15 @@
         </view>
     </view>
 </view>
+
+<v-share wx:if="{{isShare}}" 
+    bind:close="onCloseShare" 
+    type="{{1}}"
+    goods="{{card}}"
+    page='pages/venueCard/venueCardDetails/index' />
+    <!-- 
+        
+        goods   商品
+        page     扫码后要跳转的页面
+        type     1 : 馆卡， 2 : 课程 ，3 : 门票
+     -->

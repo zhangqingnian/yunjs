@@ -269,26 +269,26 @@ swiper, swiper swiper-item image {
 }
 
 .course .content {
-    padding: 20rpx 70rpx;
+    padding: 20rpx 30rpx;
     justify-content: space-between;
 }
 
 .course .content .item {
-    width: 250rpx;
+    width: 330rpx;
 }
 
 .course .imgwarp {
     position: relative;
-    width: 250rpx;
-    height: 180rpx;
+    width: 330rpx;
+    height: 220rpx;
     border-radius: 10rpx;
     margin-bottom: 20rpx;
     overflow: hidden;
 }
 
 .course .vipImg {
-    width: 250rpx;
-    height: 180rpx;
+    width: 330rpx;
+    height: 220rpx;
 }
 
 .cardName {
@@ -336,6 +336,19 @@ swiper, swiper swiper-item image {
 
 .footer {
     justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.itemRevise{
+    width:64rpx;
+    height:50rpx;
+    background:rgba(255,125,37,1);
+    border-radius:10rpx;
+    color: #fff;
+    text-align: center;
+    line-height: 50rpx;
 }
 
 .venueTicket .content {
@@ -370,7 +383,7 @@ swiper, swiper swiper-item image {
     font-family: PingFang-SC-Medium;
     font-weight: 500;
     color: #323232;
-    margin-top: 20rpx;
+    width:260rpx;
 }
 
 .introduce .top {

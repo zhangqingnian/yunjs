@@ -7,7 +7,7 @@
             <slot name='delete' catchtap="onDel"></slot>
         </view>
     </view>
-    <view class='order-bottom flex_row'>
+    <view class='order-bottom flex_column'>
         <view class='list'>
             <view>
                 <text>门票名称：</text>
@@ -22,7 +22,7 @@
                 <text>{{order.venueMobile}}</text>
             </view>
         </view>
-        <view class='btns flex_column'>
+        <view class='flex_row' style='justify-content:space-between;'>
             <slot name='play' catchtap="onPay"></slot>
             <slot name='refund' catchtap="onRefund"></slot>
             <slot name='code' catchtap="onGoOrder"></slot>

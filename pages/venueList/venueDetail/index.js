@@ -25,6 +25,7 @@ Page({
         venueKc: [],
         venueGk: [],
         venueKKC: {},
+        ticketList:[],
         id:'',
         sportTypeId:'',
         sportName:''
@@ -36,7 +37,7 @@ Page({
     onLoad: function(options) {
         let { id, sportTypeId } = options;
         this.setData({
-            id,
+            id: id || 1320,
             sportTypeId: sportTypeId || ''
         })
         this._getVenueDetail(id, sportTypeId);
@@ -45,6 +46,7 @@ Page({
         this._getGk(id);
         this._getKc(id);
         this._getKKC(id);
+        this._getTicket(id)
     },
     onShareAppMessage(Object) {
 
@@ -56,6 +58,14 @@ Page({
             })
         }
         
+    },
+    //门票详情
+    onTicketDetail(e){
+        let ticket = e.currentTarget.dataset.item;
+        //ticket = JSON.stringify(ticket);
+        wx.navigateTo({
+            url: '/pages/venueTicket/venueTicketDetails/index?id=' + ticket.id,
+        })
     },
     //课程详情
     onCourseDetail(e){
@@ -237,6 +247,20 @@ Page({
                 venueKcTotal:res.data.total
             })
 
+        })
+    },
+    //门票
+    _getTicket(id) {
+        venueModel.getTicket({
+            venueId: id,
+            type: 1,
+            start: 0,
+            limit: 2
+        }).then(res => {
+            console.log(res.data.items)
+            this.setData({
+                ticketList: res.data.items
+            })
         })
     }
 

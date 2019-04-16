@@ -14,7 +14,8 @@ Page({
     data: {
         imgUrl: config.base_img_url,
         ticketList:[],
-        id:''
+        id:'',
+        isData:false
     },
 
     /**
@@ -55,7 +56,8 @@ Page({
                 let temArr = res.data.items.concat(this.data.ticketList)
                 this.setData({
                     ticketList: temArr,
-                    total: res.data.total
+                    total: res.data.total,
+                    isData: !temArr.length
                 })
         })
     }

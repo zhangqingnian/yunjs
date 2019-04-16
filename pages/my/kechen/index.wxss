@@ -82,6 +82,7 @@ page{
 
 .top .news{
    line-height: 38rpx;
+   width: 280rpx;
 }
 .top .news text{
     margin-bottom: 10rpx;

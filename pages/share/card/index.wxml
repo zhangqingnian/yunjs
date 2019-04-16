@@ -1,0 +1,61 @@
+<!--pages/card/index.wxml-->
+<view class='containner flex_column'>
+    <view class='warps'>
+        <image class='bgimg' src='/images/{{color ? color : "wihte"}}.png'></image>
+        <view class='cardContent'>
+            <view class='top flex_row'>
+                <view class='user flex_row'>
+                    <image class='avatar' src='{{imgUrl + userInfo.iconUrl}}'></image>
+                    <view class='nickName'>{{userInfo.nickName}}</view>
+                </view>
+            </view>
+            <view class='bottom '>
+                <view class='bottomItem flex_row'>
+                    <image class='icon' src='/images/card/icon_iphone.png'></image>
+                    <view class='val'>{{userInfo.mobile}}</view>
+                </view>
+                <view class='bottomItem flex_row'>
+                    <image class='icon' src='/images/card/icon_email.png'></image>
+                    <view class='val'>{{userInfo.email ? userInfo.email : "无"}}</view>
+                </view>
+                <view class='bottomItem flex_row'>
+                    <image class='icon' src='/images/card/icon_address.png'></image>
+                    <view class='val'>{{userInfo.address ? userInfo.address : "无" }}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='nav flex_row'>
+        <view class='left flex_row'>
+            <view>斤粉圈</view>
+            <!-- <view class='shop' bindtap='goShop'>进入店铺</view> -->
+        </view>
+        <view class='share-warp'>
+            <image class='share-img' src='/images/share.png'></image>
+            <button class='share-btn' open-type='share'></button>
+        </view>
+    </view>
+
+    <scroll-view class='listwarp' scroll-y="true" bindscrolltolower="onLoadMore">
+        <view class='list flex_row'>
+            <view class='item' wx:for="{{goods}}" wx:key="{{item.id}}">
+                <view class='itemImg' bindtap='onOrder' data-item='{{item}}'>
+                    <image src="{{imgUrl +item.fileName}}"></image>
+                    <view class='itemBottom flex_row'>
+                        <view>￥{{item.salePrice +item.discountPrice}} <text class='oldPrice'>￥{{item.goodsPrice}}</text></view>
+                        <view>{{item.goodsStatus}}</view>
+                    </view>
+                    <view class='coupon' wx:if="{{item.discountPrice > 0}}">劵￥{{item.discountPrice}}</view>
+                    <image wx:if="{{item.recommend == 1}}" class='recom' src='/images/recom.png'></image>
+                </view>
+                <view class='news flex_row'>
+                    <view class='box'>
+                        <view class='cardName'>{{item.goodsName}}</view>
+                        <view class='venueName'>{{item.venueName}}</view>
+                    </view>
+                    <view class='itemRevise' bindtap='onOrder' data-item='{{item}}'>订购</view>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

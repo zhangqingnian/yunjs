@@ -154,6 +154,8 @@ Component({
                 this._payCourse(payPassword, orderCode)
             } else if (currentType == 'area'){
                 this._payArea(payPassword, orderCode)
+            } else if (currentType == 'share'){
+                this._payShare(payPassword, orderCode)
             }
 
 
@@ -165,8 +167,12 @@ Component({
             wx.showLoading({
                 title: '支付中',
             })
-            //门票
-            this._wxpayTicket()
+            if (currentType == 'share'){
+                this._wxpayShare();
+            }else{
+                this._wxpayTicket()
+            }
+           
             
 
             
@@ -232,7 +238,15 @@ Component({
                 this._payafter(res);
             })
         },
-
+        //分享后 馆卡余额支付
+        _payShare(payPassword, orderCode){
+            orderModel.yeShare({
+                orderCode,       //订单号
+                payPassword  //支付密码
+            }).then(res => {
+                this._payafter(res);
+            })
+        },
         //余额支付后 callback
         _payafter(res){
             wx.hideLoading(); //关闭loading
@@ -264,7 +278,7 @@ Component({
         },
 
         /*微信支付*/
-        //门票微信支付
+        //馆卡、门票、场馆、课程 微信支付
         _wxpayTicket(){
             let { totalFee, body, orderCode, couponId } = this.properties;
             orderModel.wxPayTicket({
@@ -273,6 +287,18 @@ Component({
                 body: body,         //标题 (商品名)
                 orderNum: orderCode,     //订单号
                 couponSubId: couponId || '' //优惠券
+            }).then(res => {
+                this._wxpayafter(res);
+            })
+        },
+        //分享商品 微信支付
+        _wxpayShare(){
+            let { totalFee, body, orderCode, couponId } = this.properties;
+            orderModel.wxPayShare({
+                totalFee,         //金额
+                tradeType: "JSAPI",         //小程序支付方式
+                body,                 //标题 (商品名)
+                orderNum: orderCode,        //订单号
             }).then(res => {
                 this._wxpayafter(res);
             })

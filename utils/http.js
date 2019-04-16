@@ -37,8 +37,12 @@ export class Http {
                 } else if (code == '403'){
                     wx.showToast({
                         title: '您暂无此权限!',
-                        icon:'none',
-                        duration:1000
+                        icon:'none'
+                    })
+                } else if (code == '402') {
+                    wx.showToast({
+                        title: '您已被拉黑!',
+                        icon: 'none'
                     })
                 }else {
                     reject();

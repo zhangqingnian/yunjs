@@ -140,9 +140,9 @@
             <view class='title'>课程内容</view>
             <view class='type'></view>
         </view>
-        <view class='content'>
+        <text style='display:block;'>
             {{course.courseDetail}}
-        </view>
+        </text>
     </view>
 
     <!-- <view class='baoming' bindtap='onGoSubmit'>报名</view> -->

@@ -58,4 +58,49 @@ export class CardModel extends Http {
             data
         })
     }
+
+
+    //名片
+    getCard(data) {
+        return this.request({
+            url: 'm/mini/saleUser/front/getSaleUser',
+            data,
+            method: 'POST'
+        })
+    }
+
+    //推荐商品列表
+    recommendList(data) {
+        return this.request({
+            url: 'm/mini/goodsSort/front/getAllGoodsForSale',
+            data,
+            method: 'POST'
+        })
+    }
+
+    //馆卡详情
+    getCardsDetail(data, entry) {
+        return this.request({
+            url: 'm/mini/venueGoods/front/getCardsDetail',
+            data,
+            method: 'POST'
+        })
+    }
+    //课程详情
+    getCourseDetail(data, entry) {
+        return this.request({
+            url: 'm/mini/venueGoods/front/getCourseDetail',
+            data,
+            method: 'POST'
+        })
+    }
+
+    //提交订单(分享 馆卡+课程)
+    submitShareOrder(data){
+        return this.request({
+            url: 'm/mini/venueGoodsOrder/saveVenueGoodsOrderForMini',
+            data,
+            method: 'POST'
+        })
+    }
 }

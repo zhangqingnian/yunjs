@@ -65,7 +65,7 @@ Page({
         this.setData({
             venueList:[]
         })
-        if (sortPriceKey) {
+        if (!sortPriceKey) {
             this._getNowData({ id: sportTypeId, types: 3 });
         } else {
             this._getNowData({ id: sportTypeId, types: 4 });
@@ -154,7 +154,7 @@ Page({
             start,
             types,
             venueName,
-            limit: 20
+            limit: 6
         }).then(res => {
             wx.hideLoading()
             this.data.isLoading = true;
