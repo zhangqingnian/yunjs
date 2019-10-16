@@ -40,15 +40,15 @@ Page({
      */
     onLoad: function (options) {
         let card = JSON.parse(options.course);  //课程
+        card.courseName = card.courseName.replace(/\%26/g, "&");
         let classes = JSON.parse(options.classes); //班级
         let sortId = options.sortId;
         let money = Number(options.money)
-        console.log(card)
-        console.log(classes)
+        let { venueGoodsId, packageId, customerId, type } = options;
         this.setData({
             card,
             classes,
-            sortId,
+            sortId, venueGoodsId, packageId, customerId, type,
             total: money.toFixed(2),
             discountTotal: money.toFixed(2)
         })
@@ -56,7 +56,9 @@ Page({
        
     },
     onShow(){
-        this._getContacts();
+        if (!this.data.currentContacts.name) {
+            this._getContacts();
+        }
     },
     //勾选协议
     onCheck(e) {
@@ -152,6 +154,17 @@ Page({
             wx.hideLoading()
             console.log(res)
             let reslut = res.data;
+            if (reslut.code == 'JUMP_NEW_PRICE') {
+                wx.showModal({
+                    title: '提示',
+                    content: '当前优惠已改变，请按照新的优惠价格购买',
+                    showCancel: false,
+                    success: (r) => {
+                        this._getKcDetail();
+                    }
+                })
+                return;
+            }
             if (reslut.code == 'JUMP_USER_APPLET') {
                 wx.showModal({
                     title: '提示',
@@ -167,7 +180,14 @@ Page({
                 })
                 return;
             }
-
+            if (!reslut.success) {
+                wx.showModal({
+                    title: '提示 ',
+                    content: reslut.msg,
+                    showCancel: false
+                })
+                return
+            }
             wx.showToast({
                 title: reslut.msg,
                 duration: 500,
@@ -200,5 +220,22 @@ Page({
                 currentContacts //当前联系人
             })
         })
-    }
+    },
+    //课程详情
+    _getKcDetail() {
+        let { sortId, venueGoodsId, packageId, customerId, type } = this.data
+        cardModel.getCourseDetail({
+            venueGoodsId,
+            packageId,
+            customerId,
+            type,
+            id: sortId
+        }).then(res => {
+            let money =Number(res.data.data.salePrice);
+            this.setData({
+                total: money.toFixed(2),
+                discountTotal: money.toFixed(2)
+            })
+        })
+    },
 })

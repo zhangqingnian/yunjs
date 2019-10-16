@@ -19,11 +19,12 @@ Page({
      */
     onLoad: function(options) {
         let id = options.id;
+        let fileName = options.vipImg || '';
         this.setData({
-            id
+            id, fileName
         })
 
-        this._getCardNews(id);
+        this._getCardNews();
     },
     /**
          * 获取焦点
@@ -32,19 +33,20 @@ Page({
         this.setData({
             payFocus: true
         });
+        console.log(this.data.payFocus)
     },
     /**
      * 输入密码监听
      */
     inputPwd: function (e) {
-        console.log(e.detail.value)
+        let pwdVal = e.detail.value;
         this.setData({
-            pwdVal: e.detail.value
+            pwdVal
         });
-        // if (e.detail.value.length >= 6) {
-        //     console.log(e.detail.value);  //支付
-
-        // }
+        if (e.detail.value.length >= 6) {
+            console.log('支付');  //支付
+            this.onPay();
+        }
     },
     inputMoney(e){
         let money = e.detail.value.trim();
@@ -56,6 +58,9 @@ Page({
         let { money, pwdVal} = this.data;
         console.log(this.data)
         if (!money){
+            this.setData({
+                pwdVal: ''
+            })
             wx.showToast({
                 title: '请输入支付金额',
                 icon:'none'
@@ -63,17 +68,11 @@ Page({
             return
         }
 
-        if (!pwdVal) {
-            wx.showToast({
-                title: '请输入密码',
-                icon: 'none'
-            })
-            return
-        }
         this._pay();
 
     },
-    _getCardNews(id){
+    _getCardNews(){
+        let id = this.data.id;
         cardModel.myVipCard({
             id
         }).then(res => {
@@ -98,11 +97,19 @@ Page({
                 icon:'none'
             })
 
-            if(res.data.success){
+            if(!res.data.success){
                 this.setData({
-                    money: '',
                     pwdVal: ''
                 })
+                return;
+            }
+
+            if(res.data.success){
+                this.setData({
+                    pwdVal:'',
+                    money:''
+                })
+                this._getCardNews();
             }
             
         })

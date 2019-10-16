@@ -23,14 +23,14 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        let nickName = decodeURIComponent(options.nickName);
+        let nickName = options.nickName ? options.nickName + '的店铺' : '';
         let customerId = options.customerId;
         this.setData({
             customerId,
             nickName
         })
         wx.setNavigationBarTitle({
-            title: nickName + '的店铺'
+            title: nickName 
         })
     },
 

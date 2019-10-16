@@ -1,11 +1,16 @@
 // pages/kechen/index.js
+var QQMapWX = require('../../qqmap/qqmap-wx-jssdk.js');
+var qqmapsdk;
 import {
     config
 } from '../../config.js';
 import {
     VenueModel
 } from '../../models/venue.js';
-
+import {
+    HistoryCity
+} from '../../models/historyCity.js'
+let history = new HistoryCity();
 let venueModel = new VenueModel();
 
 let app = getApp();
@@ -28,7 +33,8 @@ Page({
         sortPriceKey: false,
         sortDistanceKey: false,
         total:0,
-        isLoading: true
+        isLoading: true,
+        
     },
 
     /**
@@ -40,6 +46,11 @@ Page({
     },
     //选择运动项目
     onShow(){
+        qqmapsdk = new QQMapWX({
+            key: 'DHNBZ-4VT3P-W7SDZ-VB64V-JEAQS-L6BQS'
+        });
+
+        this.getUserLocation()
         let sportTypeId = app.globalData.hotCourse || '';
     
         this.setData({
@@ -55,6 +66,127 @@ Page({
             venueList: [],
             typeList: []
         })
+    },
+    getUserLocation: function () {
+        let vm = this;
+        wx.getSetting({
+            success: (res) => {
+                if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
+                    wx.showModal({
+                        title: '请求授权当前位置',
+                        content: '需要获取您的地理位置，请确认授权',
+                        success: function (res) {
+                            if (res.cancel) {
+                                wx.showToast({
+                                    title: '拒绝授权',
+                                    icon: 'none',
+                                    duration: 1000
+                                })
+                            } else if (res.confirm) {
+                                wx.openSetting({
+                                    success: function (dataAu) {
+                                        if (dataAu.authSetting["scope.userLocation"] == true) {
+                                            wx.showToast({
+                                                title: '授权成功',
+                                                icon: 'success',
+                                                duration: 1000
+                                            })
+                                            //再次授权，调用wx.getLocation的API
+                                            vm.getLocation();
+                                        } else {
+                                            wx.showToast({
+                                                title: '授权失败',
+                                                icon: 'none',
+                                                duration: 1000
+                                            })
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    })
+                } else if (res.authSetting['scope.userLocation'] == undefined) {
+                    //调用wx.getLocation的API
+                    vm.getLocation();
+                } else {
+                    //调用wx.getLocation的API
+                    vm.getLocation();
+                }
+            }
+        })
+    },
+    // 微信获得经纬度
+    getLocation: function () {
+
+        let vm = this;
+        wx.getLocation({
+            type: 'gcj02',
+            success: (res) => {
+                var latitude = res.latitude
+                var longitude = res.longitude
+                var speed = res.speed
+                var accuracy = res.accuracy;
+                let objLocation = this.qqMapTransBMap(longitude, latitude)
+                latitude = objLocation.latitude
+                longitude = objLocation.longitude
+                wx.setStorageSync('currentLocation', {
+                    longitude,
+                    latitude
+                })
+                //vm.getLocal(latitude, longitude)
+
+            }
+        })
+    },
+    // 获取当前地理位置
+    getLocal: function (latitude, longitude) {
+        wx.showLoading()
+        let vm = this;
+        qqmapsdk.reverseGeocoder({
+            location: {
+                latitude: latitude,
+                longitude: longitude
+            },
+            coord_type: 3,
+            success: (res) => {
+                let province = res.result.ad_info.province
+                let city = res.result.ad_info.city
+                history.getCity().then(res => {
+                    let cityList = res.data;
+
+                    cityList.forEach(item => {
+                        if (item.city == city) {
+                            wx.setStorageSync('city', {
+                                "city": item.city,
+                                nodecode: item.nodeCode
+                            })
+                        }
+                    })
+                    wx.setStorageSync('cityObj', {
+                        province: province,
+                        city: city,
+                        cityLists: cityList
+                    })
+                    wx.hideLoading();
+
+                })
+
+
+            }
+        });
+    },
+    qqMapTransBMap(longitude, latitude) {
+        let x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        let x = longitude;
+        let y = latitude;
+        let z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+        let theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+        let lngs = z * Math.cos(theta) + 0.0065;
+        let lats = z * Math.sin(theta) + 0.006;
+        return {
+            longitude: lngs,
+            latitude: lats
+        }
     },
     onLoadMore() {
         let types = this.data.types;
@@ -80,12 +212,11 @@ Page({
     },
     //搜索
     onSearch(e) {
-        let keyWords = e.detail.value.trim();
-        if (!keyWords) return;
-        console.log(keyWords)
-        this.setData({ venueList: [] })
+        let venueName = e.detail.value.trim();
+        if (!venueName) return;
+        this.setData({ venueList: [], venueName})
         this._addClass();
-        this._getNowData({ venueName: keyWords });
+        this._getNowData({ venueName});
     },
     onGodetails(e) {
         console.log(e.currentTarget.dataset.item);
@@ -157,7 +288,7 @@ Page({
         })
     },
     //获取当前运动项目的场馆
-    _getNowData({id = '',start = 0, num = '', venueName = ''}) {
+    _getNowData({id = '',start = 0, num = ''}) {
         wx.showLoading({
             title: '拼命加载中...',
         })
@@ -184,7 +315,7 @@ Page({
             start,
             limit: 10.,
             types: num,
-            venueName
+            venueName:this.data.venueName || ''
         }).then(res => {
             wx.hideLoading();
             this.data.isLoading = true;

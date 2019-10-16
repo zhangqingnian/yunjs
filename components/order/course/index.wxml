@@ -26,6 +26,7 @@
             <slot name='play' catchtap="onPay"></slot>
             <slot name='refund' catchtap="onRefund"></slot>
             <slot name='code' catchtap="onGoOrder"></slot>
+            <slot name='rating' catchtap="onRating"></slot>
         </view>
     </view>
 </view>

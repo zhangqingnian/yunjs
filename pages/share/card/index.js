@@ -14,18 +14,23 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isShare: false, //是否显示海报层(太阳码)
+        isSelect: false, //是否显示选择框
         imgUrl: config.base_img_url,
         userInfo:{},
         customerId: '', //分销员用户ID 
         goods:[],
-        isLoading: true
+        isLoading: true,
+        src:'',
+        remark:''
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        let customerId = options.customerId || 2983;
+        console.log(options)
+        let customerId = options.customerId || decodeURIComponent(options.scene);
         this.setData({
             customerId
         })
@@ -35,6 +40,31 @@ Page({
         this.setData({ goods:[]})
         this._getCard(customerId);
         this._recommendList({ customerId });
+    },
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
+    //显示选择框
+    onSelect() {
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
     },
     //进入店铺
     goShop(){
@@ -52,11 +82,17 @@ Page({
         let nickName = this.data.nickName;
         //id 排序id   venueGoodsId 商品id   packageId 任务id
         //cardsOrCourseType  1课程 2馆卡
-        var url = item.cardsOrCourseType == 1 ?
-            '/pages/share/venueCourseDetails/index?id=' + item.id + '&venueGoodsId=' + item.venueGoodsId + '&packageId=' + item.packageId + '&customerId=' + customerId + '&nickName=' + nickName + '&type='+item.type   :
-            '/pages/share/venueCardDetails/index?id=' + item.id + '&venueGoodsId=' + item.venueGoodsId + '&packageId=' + item.packageId + '&customerId=' + customerId + '&nickName=' + nickName + '&type=' + item.type
-
-
+        var url = '';
+        if (item.cardsOrCourseType == 1){
+            url = item.cardsOrCourseType = '/pages/share/venueCourseDetails/index?id=' + item.id + '&venueGoodsId=' + item.venueGoodsId + '&packageId=' + item.packageId + '&customerId=' + customerId + '&nickName=' + nickName + '&type=' + item.type
+        }else {
+            if (item.goodsType == 5){
+                url = '/pages/share/termCardDetails/index?id=' + item.id + '&venueGoodsId=' + item.venueGoodsId + '&packageId=' + item.packageId + '&customerId=' + customerId + '&nickName=' + nickName + '&type=' + item.type
+            }else{
+                url = '/pages/share/venueCardDetails/index?id=' + item.id + '&venueGoodsId=' + item.venueGoodsId + '&packageId=' + item.packageId + '&customerId=' + customerId + '&nickName=' + nickName + '&type=' + item.type
+            }
+            
+        }
         wx.navigateTo({
             url,
         })
@@ -96,7 +132,6 @@ Page({
         cardModel.getCard({
             customerId
         }).then(res => {
-            console.log(res.data)
             if(!res.data.success){
                 wx.showToast({
                     title: res.data.msg
@@ -109,7 +144,8 @@ Page({
             })
             this.setData({
                 userInfo:res.data.data,
-                color: res.data.data.color || '',
+                src: res.data.data.color ? config.base_img_url + res.data.data.color : '',
+                remark:res.data.data.remark || '',
                 customerId: res.data.data.customerId,
                 nickName
             })

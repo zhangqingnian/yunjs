@@ -80,16 +80,20 @@ export class CardModel extends Http {
 
     //馆卡详情
     getCardsDetail(data, entry) {
+        let token = wx.getStorageSync('token').accessToken || '';
+        let url = token ? 'm/mini/venueGoods/getCardsDetail' : 'm/mini/venueGoods/front/getCardsDetail'
         return this.request({
-            url: 'm/mini/venueGoods/front/getCardsDetail',
+            url,
             data,
             method: 'POST'
         })
     }
     //课程详情
     getCourseDetail(data, entry) {
+        let token = wx.getStorageSync('token').accessToken || '';
+        let url = token ? 'm/mini/venueGoods/getCourseDetail' : 'm/mini/venueGoods/front/getCourseDetail'
         return this.request({
-            url: 'm/mini/venueGoods/front/getCourseDetail',
+            url,
             data,
             method: 'POST'
         })
@@ -101,6 +105,14 @@ export class CardModel extends Http {
             url: 'm/mini/venueGoodsOrder/saveVenueGoodsOrderForMini',
             data,
             method: 'POST'
+        })
+    }
+
+    getMark(data){
+        return this.request({
+            url:'m/mini/venueGoods/getMarkForNum',
+            data,
+            method:'POST'
         })
     }
 }

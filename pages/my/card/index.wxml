@@ -36,7 +36,7 @@
                 </view>
                 <view class='btns flex_column'>
                     <text wx:if="{{valid}}" catchtap='onUse' data-item='{{item}}'>使用</text>
-                    <text wx:if="{{valid}}" catchtap='onRecord' data-item='{{item}}'>使用记录</text>
+                    <text  catchtap='onRecord' data-item='{{item}}'>使用记录</text>
                 </view>
             </view>
             <view class='bottom'>
@@ -54,7 +54,7 @@
 </view>
 
 
-<v-code wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}">
+<v-code wx:if="{{show}}" bind:hide="onHides" codeUrl="{{codeUrl}}">
     <view class='topwarp' slot='after'>
         <image class='left' src='/images/logo.png'></image>
         <view class='right'>

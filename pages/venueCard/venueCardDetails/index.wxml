@@ -8,9 +8,10 @@
     <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{card.cardName}}</view>
-            <view class='flex_row'>
+            <view class='flex_row share-center'>
                 <view class='type' wx:if="{{card.sportName}}">类型：{{card.sportName}}</view>
-                <view bindtap='onShare'>生成海报</view>
+                <image class='share-img' style='margin-left:20rpx;' 
+                    bindtap='onSelect' src='/images/share.png'></image> 
             </view>
             
         </view>
@@ -56,7 +57,7 @@
                 <view class='name'>剩余数量：</view>
                 <view class='value'>{{card.surplusAmount}}</view>
             </view>
-            <view class='item flex_row jihuo'>
+            <view class='item flex_row jihuo' wx:if="{{card.type != 7}}">
                 <view class='name'>激活时间：</view>
                 <view class='value'>
                     <text class='{{item.isOn ? "on":""}}' 
@@ -66,7 +67,7 @@
                     wx:key="{{idx}}">{{item.name}}</text>
                 </view>
             </view>
-            <view class='item flex_row'>
+            <view class='item flex_row' wx:if="{{card.type != 7}}">
                 <view class='name'>提示：</view>
                 <view class='value'>
                 激活时间选择立即可直接使用，选择一天，一天后可使用
@@ -80,9 +81,9 @@
             <view class='title'>购买须知</view>
             <view class='type'></view>
         </view>
-        <text style='display:block;'>
-            {{card.remark}}
-        </text>
+        <text style='margin:10rpx 0;display:block;' >{{card.remark}}</text>
+        <view  wx:if="{{card.electronicProtocol}}"  bindtap='onElectronicProtocol'  class='xieyi-color'
+            data-img='{{card.electronicProtocol}}'>电子购买场馆服务卡协议</view>
     </view>
 
 
@@ -98,6 +99,12 @@
         </view>
     </view>
 </view>
+
+<v-back class="chatBtn"/>
+
+<v-actionsheet  isSelect='{{isSelect}}' 
+    bind:myCancel="onCancelSelect"
+    bind:myCreate="onShare"/>
 
 <v-share wx:if="{{isShare}}" 
     bind:close="onCloseShare" 

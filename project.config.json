@@ -21,6 +21,8 @@
 		"hidedInDevtools": []
 	},
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -39,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 42,
 			"list": [
 				{
 					"id": -1,
@@ -75,8 +77,8 @@
 					"id": 5,
 					"name": "场馆详情",
 					"pathName": "pages/venueList/venueDetail/index",
-					"query": "id=1320",
-					"scene": "1001"
+					"query": "id=1388",
+					"scene": 1001
 				},
 				{
 					"id": 6,
@@ -299,8 +301,8 @@
 					"id": 42,
 					"name": "名片",
 					"pathName": "pages/share/card/index",
-					"query": "",
-					"scene": "1037",
+					"query": "customerId=34428",
+					"scene": 1037,
 					"referrerInfo": {
 						"appId": "wx02adff5e9fd1148d",
 						"extraData": "{\"customerId\":1731}"
@@ -313,10 +315,11 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 44,
 					"name": "分享馆卡详情",
 					"pathName": "pages/share/venueCardDetails/index",
-					"query": "id=327"
+					"query": "venueGoodsId=944&id=1361&packageId=88&customerId=34427&type=0",
+					"scene": null
 				},
 				{
 					"id": -1,
@@ -341,6 +344,12 @@
 					"pathName": "pages/share/confirmOrder/card/index",
 					"query": "",
 					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "123",
+					"pathName": "pages/venueCard/venueCardDetails/index",
+					"query": "id=580"
 				}
 			]
 		}

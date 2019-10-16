@@ -1,0 +1,177 @@
+/* pages/confirmOrder/other/index.wxss */
+page {
+    width: 100%;
+    height: 100%;
+}
+
+.mtop30 {
+    margin-top: 30rpx;
+}
+
+.containner {
+    width: 100%;
+    min-height: 100%;
+    background: #f5f5f5;
+    font-size: 28rpx;
+    color: #323232;
+    padding-bottom: 100rpx;
+    box-sizing: border-box;
+}
+
+.ticket {
+    font-size: 20rpx;
+    color: #dcdcdc;
+}
+
+.itemClass {
+    background: #fff;
+    padding: 25rpx 30rpx;
+}
+
+.titleWarp {
+    padding-bottom: 25rpx;
+    justify-content: space-between;
+    border-bottom: 1px solid #dcdcdc;
+    font-size: 32rpx;
+    align-items: center;
+}
+
+.category .title {
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+}
+
+.category .type {
+    color: #63afe0;
+}
+
+.content {
+    padding-top: 20rpx;
+}
+
+.category .item {
+    line-height: 42rpx;
+}
+
+.item .name {
+    min-width: 90rpx;
+}
+
+.jihuo {
+    align-items: center;
+    margin: 10rpx 0;
+}
+
+.color {
+    width: 64rpx;
+    height: 40rpx;
+    background: rgba(99, 175, 224, 1);
+    border-radius: 10rpx;
+}
+
+
+
+.price {
+    color: #da0808;
+    font-size: 24rpx;
+}
+.number{
+    margin-right:60rpx;
+}
+.number image{
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.input{
+    width: 80rpx;
+    height: 40rpx;
+    border: 1px solid #969696;
+    box-sizing: border-box;
+    margin: 0 20rpx;
+    text-align: center;
+    line-height: 40rpx;
+    font-size: 32rpx;
+}
+
+.bottomClass{
+    padding-bottom: 0;
+}
+
+.cuuponwarp{
+    align-items: center;
+}
+
+.cuuponName{
+    font-size: 32rpx;
+    margin-right: 10rpx;
+}
+
+.borderNone{
+    border:none;
+}
+
+.icon_right{
+    width:15rpx;
+    height:27rpx;
+}
+
+.total{
+    padding: 25rpx 30rpx;
+    text-align: right;
+}
+
+.total text {
+    color: #969696;
+    margin-left: 30rpx;
+}
+.total text:last-child{
+    margin-left: 5rpx;
+}
+
+.total .price{
+     color: #da0808;
+    font-size: 32rpx;
+}
+
+.submit{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    background: rgba(99, 224, 140, 1);
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 36rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}
+
+
+.icon_append{
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.student{
+    justify-content: space-between;
+    font-size: 28rpx;
+    align-items: center;
+}
+
+.iphone{
+    margin-left: 200rpx;
+}
+
+.xieyi{
+    align-items: center;
+    padding: 10rpx 30rpx;
+    color: #63AFE0;
+}
+
+.checkbox {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 15rpx;
+}

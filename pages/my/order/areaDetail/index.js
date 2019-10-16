@@ -11,7 +11,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        showRating:false
+        showRating:false,
+        tickeTime:[]
     },
 
     /**
@@ -20,11 +21,15 @@ Page({
     onLoad: function(options) {
         let showRating = options.showRating ? true : false;
         let item = JSON.parse(options.item);
+        console.log(item);
         this.setData({
             item,
-            showRating
+            showRating,
         })
         this._getNew(item.id);
+        if(item.orderType == 24){
+            this._getTickeTime(item.id)
+        }
     },
     onPay(){
         wx.navigateTo({
@@ -45,8 +50,6 @@ Page({
         areaModel.myAreaDetail({
             orderId: id
         }).then(res => {
-            console.log(res);
-            console.log(res.data[0])
             let area = res.data[0];
             if(area.orderType == 15){
                 this._area(area)
@@ -61,6 +64,15 @@ Page({
         let arr = area.areaName.split('|');
         this.setData({
             areaName: arr
+        })
+    },
+    _getTickeTime(id){
+        areaModel.myTickeTime({
+            orderId: id
+        }).then(res => {
+            this.setData({
+                tickeTime: res.data.data.entranceticketVos || []
+            })
         })
     }
 })

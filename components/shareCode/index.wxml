@@ -1,0 +1,7 @@
+<!--components/shareCode/index.wxml-->
+<view class='mask'>
+    <view class='poste_box' id='canvas-container' style='width:260px;'>
+        <image style="width:260px;height:260px;" src='{{src}}' ></image>  
+        <view class='save' bindtap='saveShareImg' wx:if="{{showKeep}}">确定</view>
+    </view>
+</view>

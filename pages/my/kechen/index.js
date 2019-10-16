@@ -12,6 +12,7 @@ Page({
     data: {
         valid: true,
         invalid: false,
+        types: 1,
         courseList: [],
         show: false,
         course: {},
@@ -26,6 +27,14 @@ Page({
      */
     onLoad: function (options) {
         this._getMyCourse(1, 0);
+    },
+    onReachBottom() {
+        let start = this.data.courseList.length;
+        let types = this.data.types;
+        let total = this.data.total;
+        if (start >= total) return;
+        this._getMyCourse(types, start);
+
     },
     //使用
     onUse(e) {
@@ -54,7 +63,9 @@ Page({
     onValid() {
         this.setData({
             valid: true,
-            invalid: false
+            invalid: false,
+            types: 1,
+            courseList:[]
         })
         this._getMyCourse(1, 0);
 
@@ -63,26 +74,27 @@ Page({
     onInvalid() {
         this.setData({
             valid: false,
-            invalid: true
+            invalid: true,
+            types: 2,
+            courseList:[]
         })
         this._getMyCourse(2, 0);
 
     },
     //我的课程 type 1有效 2无效
     _getMyCourse(types, start) {
-        wx.showLoading({
-            title: '加载中'
-        })
+        wx.showLoading()
         courseModel.myCourseList({
             types,
             start,
-            limit: 10
+            limit: 20
         }).then(res => {
             wx.hideLoading();
+            let temArr = this.data.courseList.concat(res.data.items)
             this.setData({
-                courseList: res.data.items
+                courseList: temArr,
+                total: res.data.total
             })
-            console.log(res);
         }).catch(err => {
             wx.hideLoading();
         })

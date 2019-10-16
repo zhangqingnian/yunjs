@@ -18,6 +18,8 @@ Page({
      * 页面的初始数据    经纬度 lat lon
      */
     data: {
+        isShare: false, //是否显示海报层(太阳码)
+        isSelect: false, //是否显示选择框
         imgUrl: config.base_img_url,
         venue: {},
         venueFc: [],
@@ -35,9 +37,11 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        let { id, sportTypeId } = options;
+        let { sportTypeId } = options ;
+        let id = options.id || decodeURIComponent(options.scene);
+        console.log(id);
         this.setData({
-            id: id || 1320,
+            id,
             sportTypeId: sportTypeId || ''
         })
         this._getVenueDetail(id, sportTypeId);
@@ -48,6 +52,33 @@ Page({
         this._getKKC(id);
         this._getTicket(id)
     },
+    
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
+    //显示选择框
+    onSelect() {
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
+    },
+
     onShareAppMessage(Object) {
 
     },
@@ -128,16 +159,32 @@ Page({
     //场地预约
     onBuyfield(e) {
         let venue = JSON.stringify(this.data.venue);
-        if (!this.data.sportTypeId){
+        if (!this.data.sportTypeId) {
             wx.showToast({
                 title: '请先选择运动类型',
-                icon:'none'
+                icon: 'none'
             })
             return
         }
-        wx.navigateTo({
-            url: '/pages/yuding/index?id=' + this.data.id + '&sportTypeId=' + this.data.sportTypeId + '&venue=' + venue + '&sportName=' + this.data.sportName,
+
+        venueModel.getFristTime({
+            venueId:this.data.id,
+            sportId: this.data.sportTypeId
+        }).then(res => {
+            if(res.data.success){
+                let num = res.data.data;
+                console.log(num)
+                wx.navigateTo({
+                    url: '/pages/yuding/index?id=' + this.data.id + '&sportTypeId=' + this.data.sportTypeId + '&venue=' + venue + '&sportName=' + this.data.sportName+'&num='+num,
+                })
+            }
+            
         })
+
+
+        
+        
+        
     },
     //跳转优惠券列表
     onGoCoupon(){
@@ -200,7 +247,7 @@ Page({
 
     //风采
     _getFc(id) {
-        venueModel.getFc({
+        venueModel.getFcFront({
             id: id,
             start: 0,
             limit: 5
@@ -257,7 +304,6 @@ Page({
             start: 0,
             limit: 2
         }).then(res => {
-            console.log(res.data.items)
             this.setData({
                 ticketList: res.data.items
             })

@@ -28,13 +28,13 @@ Page({
 
         this._getClass(id);
     },
-
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
+    //查看协议
+    onElectronicProtocol(e) {
+        let src = e.currentTarget.dataset.img;
+        let imgSrc = config.base_img_url + src;
+        wx.navigateTo({
+            url: '/pages/electronicProtocol/index?imgSrc=' + imgSrc
+        })
     },
     _getClass(classId){
         courseModel.myCourseDetail({

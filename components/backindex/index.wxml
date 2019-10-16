@@ -1,0 +1,4 @@
+<!--components/backcard/index.wxml-->
+<view class='chat' catchtap='onBackcard'>
+    <image src='/images/backindex.png'></image>
+</view>

@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "确认订单",
+    "usingComponents":{
+        "v-pay":"/components/pay/index",
+        "v-coupon": "/components/couponList/index"
+    }
+}

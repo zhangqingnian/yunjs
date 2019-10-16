@@ -1,0 +1,93 @@
+<!--pages/confirmOrder/other/index.wxml-->
+<view wx:if="{{!isCoupon}}" class='containner flex_column'>
+    <view class='category itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view >订单信息</view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>馆卡名称：</view>
+                <view class='value'>{{card.cardName}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效期：</view>
+                <view class='value'>{{card.certificateStartTimeStr}}至{{card.certificateEndTimeStr}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>场馆地址：</view>
+                    <view class='value'>{{card.address}}</view>
+                </view>
+            </view>
+            
+        </view>
+    </view>
+
+    
+
+    <view class=' itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>学员信息</view>
+            <!-- <image class='icon_append' src='/images/venuedetail/icon_append.png'></image> -->
+        </view>
+        <view class='content'>
+            <view class='student flex_row' bindtap='onGoStudentList'>
+                <view class='type'>学员</view>
+                <view class='news flex_row'>
+                    <view class='name'>{{currentContacts.name}}</view>
+                    <view class='iphone'>{{currentContacts.mobile}}</view>
+                </view>
+                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+    </view>
+
+     <view class=' itemClass bottomClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>服务共计</view>
+            <view class='price flex_row'>
+               ￥{{discountTotal}}
+            </view>
+        </view>
+    </view>
+
+
+    <view class='xieyi flex_row' wx:if="{{card.electronicProtocol}}" >
+        <image class='checkbox' src="{{isChecked ? '/images/on.png':'/images/off.png'}}" bindtap='onCheck'></image>
+        <view bindtap='onElectronicProtocol'
+            data-img='{{card.electronicProtocol}}'>同意电子购买场馆服务卡协议</view>
+    </view>
+
+    <view class='total'>
+        <text>已优惠</text>
+        <text>合计:</text>
+        <text class='price'>￥{{discountTotal}}</text>
+    </view>
+
+    
+    
+    <view class='submit' bindtap='onSubmit'>提交订单</view>
+</view>
+
+
+
+
+<v-pay wx:if="{{payShow}}" 
+    bind:close = "onClose" 
+    currentType="{{currentType}}"            
+    body = "{{card.money}}"
+    totalFee = "{{discountTotal}}"
+    orderCode= "{{orderCode}}"/>
+
+<!-- <v-coupon wx:if="{{isCoupon}}"  
+    aid="{{card.id}}" 
+    total = "{{total}}"
+    bind:coupon="onCouponBack"
+    couponList="{{couponList}}"
+    sportTypeId="{{card.sportId}}"/> -->
+
+

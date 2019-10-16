@@ -45,7 +45,7 @@
             <view class='type'></view>
         </view>
         <view class='content'>
-            购票后未使用3天内可退
+            单次购买单张门票未使用，{{ticket.returnticketDeadline}}天内可退款，单次购买多张门票不可退款。
         </view>
     </view>
 

@@ -32,6 +32,9 @@ Component({
         },
         onGoOrder(){
             this.triggerEvent('goOrder', this.properties.order, {})
-        }
+        },
+        onRating(e) {
+            this.triggerEvent('rating', this.properties.order, {})
+        },
     }
 })

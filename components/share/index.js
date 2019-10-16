@@ -16,11 +16,14 @@ Component({
         goods: Object,  //商品
         page: String,    //要跳转的页面
         type: Number,
-
+        share: {
+            type:Object,
+            value:{}
+        },   //分销员推广 携带的信息
 
     },
     attached() {
-        console.log(this.data)
+        console.log(this.data.goods)
 
         this.getAvaterInfo();
 
@@ -30,15 +33,6 @@ Component({
      */
     data: {
         showKeep: false,
-        cardInfo: {
-            avater: "https://app.realmtech.cn/m/file/front/display/2018062239C0501998B68F07.jpg", //需要https图片路径
-            qrCode: "https://app.realmtech.cn/m/file/front/disDisplay/20190408E614E44558D122B9.png", //需要https图片路径
-            TagText: "小姐姐", //标签
-            Name: '小姐姐', //姓名
-            Position: "程序员鼓励师", //职位
-            Mobile: "138", //手机
-            Company: "才华无限有限公司", //公司
-        }
     },
 
     /**
@@ -46,7 +40,7 @@ Component({
      */
     methods: {
         /**
-         * 先下载头像图片
+         * 先下载主图
          */
         getAvaterInfo: function () {
             wx.showLoading({
@@ -55,7 +49,7 @@ Component({
             });
             var that = this;
             wx.downloadFile({
-                url: config.base_img_url + that.data.goods.fileName, //商品主图
+                url: config.base_img_url + (that.data.goods.fileName || that.data.goods.ticketImg), //商品主图
                 success: function (res) {
                     wx.hideLoading();
                     if (res.statusCode === 200) {
@@ -84,16 +78,40 @@ Component({
                 title: '生成中...',
                 mask: true,
             });
-            let id = this.data.goods.id, //商品的ID
+            let share = this.data.share;   
+            let goods = this.data.goods;
+            let id = goods.id,          //商品的ID
                 type = this.data.type,
                 page = this.data.page;
-            //商品名 价格 市场价 统一    
-            let goodsName = this.data.goods.cardName || ''
-            let price = this.data.goods.buyMoney || ''
+            //商品名 价格 市场价 统一 
+            let goodsName = goods.cardName || goods.courseName || goods.ticketName || ''
+            let price = goods.buyMoney || goods.price || goods.ticketPrice || ''
             let marketPrice = ''
+            let scene = id;
+
+            if(goods.salePrice){
+                price = goods.salePrice;
+                marketPrice = goods.buyMoney || goods.price + '';
+            }
+            
+            /*
+                id 排序   
+                venueGoodsId 商品   
+                packageId 任务 
+                customerId 分析 
+                type 主管/分销员
+                nickName 昵称 （不支持中文 没传）
+            */
+
+            if (share.customerId) {
+                scene = share.id + '_' + share.venueGoodsId + '_' + share.packageId + '_' + share.customerId +'_' + share.type;
+            }
+
+            console.log(scene)
+            
 
             venueModel.sunCode({
-                scene: id,
+                scene,
                 page,
                 type,
                 goodId: id
@@ -150,7 +168,6 @@ Component({
                     var left = 15;
                     ctx.setFillStyle('#fff');
                     ctx.fillRect(0, 0, rect.width, height);
-                    console.log(width)
                     //商品主图
                     ctx.drawImage(avaterSrc, 15, 15, 230, 134);
                     ctx.setFontSize(14);
@@ -160,11 +177,11 @@ Component({
                     ctx.setFillStyle('rgba(17,205,110,0.5)')
                     ctx.fillRect(15, 119, 230, 30);
                     ctx.setFillStyle('#fff');
-                    ctx.fillText('限时抢购 超值低价', 28, 140);
+                    ctx.fillText('名额有限赶快订购吧', 28, 140);
 
 
                     //商品名称
-                    ctx.setFontSize(15);
+                    ctx.setFontSize(13);
                     ctx.setFillStyle('#323232');
                     ctx.setTextAlign('left');
                     let [strLength, arr, rows] =
@@ -186,8 +203,9 @@ Component({
                         ctx.setTextAlign('left');
                         ctx.fillText('市场价', 15, 200 + contentHh * arr.length);
                         ctx.beginPath()
-                        ctx.moveTo(55, 197 + contentHh * arr.length)
-                        ctx.lineTo(53 + marketPrice.length * 7.5, 197 + contentHh * arr.length)
+                        ctx.moveTo(52, 197 + contentHh * arr.length)
+                
+                        ctx.lineTo(52 + 10 + marketPrice.toString().length * 7.5 , 197 + contentHh * arr.length)
                         ctx.stroke()
                         ctx.fillText('¥' + marketPrice, 55, 200 + contentHh * arr.length);
                     }
@@ -276,12 +294,42 @@ Component({
                                     }
                                 })
                             },
-                            fail: function (res) {
-                                wx.showToast({
-                                    title: res.errMsg,
-                                    icon: 'none',
-                                    duration: 2000
-                                })
+                            fail: function (err) {
+                                if (err.errMsg === "saveImageToPhotosAlbum:fail:auth denied" || 
+                                    err.errMsg === "saveImageToPhotosAlbum:fail auth deny") {
+                                    // 这边微信做过调整，必须要在按钮中触发，因此需要在弹框回调中进行调用
+                                    wx.showModal({
+                                        title: '提示',
+                                        content: '需要您授权保存相册',
+                                        showCancel: false,
+                                        success: modalSuccess => {
+                                            wx.openSetting({
+                                                success(settingdata) {
+                                                    console.log("settingdata", settingdata)
+                                                    if (settingdata.authSetting['scope.writePhotosAlbum']) {
+                                                        wx.showModal({
+                                                            title: '提示',
+                                                            content: '获取权限成功,再次点击图片即可保存',
+                                                            showCancel: false,
+                                                        })
+                                                    } else {
+                                                        wx.showModal({
+                                                            title: '提示',
+                                                            content: '获取权限失败，将无法保存到相册哦~',
+                                                            showCancel: false,
+                                                        })
+                                                    }
+                                                },
+                                                fail(failData) {
+                                                    console.log("failData", failData)
+                                                },
+                                                complete(finishData) {
+                                                    console.log("finishData", finishData)
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
                             }
                         })
                     },

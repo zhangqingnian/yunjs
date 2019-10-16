@@ -196,6 +196,14 @@ Page({
             wx.hideLoading()
             console.log(res)
             let reslut = res.data;
+            if (!reslut.success) {
+                wx.showModal({
+                    title: '提示 ',
+                    content: reslut.msg,
+                    showCancel: false
+                })
+                return
+            }
             wx.showToast({
                 title: reslut.msg,
                 duration: 1000,

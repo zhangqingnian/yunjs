@@ -1,3 +1,7 @@
 {
-    "navigationBarTitleText": ""
+    "navigationBarTitleText": "",
+    "usingComponents": {
+        "v-shareCode": "/components/shareCode/index",
+        "v-actionsheet": "/components/actionsheet/index"
+    }
 }

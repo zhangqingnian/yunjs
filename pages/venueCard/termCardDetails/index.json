@@ -1,3 +1,8 @@
 {
-    "navigationBarTitleText": "学期卡详情"
+    "navigationBarTitleText": "学期卡详情",
+    "usingComponents": {
+        "v-share": "/components/share/index",
+        "v-actionsheet": "/components/actionsheet/index",
+        "v-back": "/components/backindex/index"
+    }
 }

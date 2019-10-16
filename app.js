@@ -1,4 +1,5 @@
 //app.js
+const mtjwxsdk = require("./utils/mtj-wx-sdk.js");
 import {config} from './config.js'
 
 App({

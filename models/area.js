@@ -16,10 +16,19 @@ export class AreaModel extends Http {
     }
 
    
-    //我的 - 场地（订单） 详情
+    //我的 - （订单） 详情
     myAreaDetail(data) {
         return this.request({
             url: 'm/crm/myIndex/myVenueOrderDetail',
+            method: 'POST',
+            data
+        })
+    }
+
+    //门票核销时间
+    myTickeTime(data){
+        return this.request({
+            url: 'm/crm/entranceticketPublish/getEntranceticketByPublishId',
             method: 'POST',
             data
         })

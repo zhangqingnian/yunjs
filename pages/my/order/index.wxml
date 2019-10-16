@@ -25,7 +25,7 @@
                 <image class='icon' 
                     wx:if="{{item.status != 9}}"  
                     slot='delete' src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >{{!item.tradeStatus ? '已取消(异常）' : '已取消' }}</text>
                 <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
                 <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
                 <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
@@ -33,7 +33,7 @@
 
                 <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
                 <text class='btn' wx:if="{{item.status == 9}}" slot='code'>我的场地</text>
-                <text class='btn' wx:if="{{item.status == 0}}" slot='rating'>评价</text>
+                <text class='btn' wx:if="{{item.status == 0}}" slot='rating'>{{item.ceid ? '查看评价':'评价'}}</text>
                 <text class='btn' wx:if="{{item.status == 0 || item.status == 14}}" 
                     slot='again'>再次购买</text>
             </v-venue>
@@ -46,17 +46,18 @@
                 bind:pay="onPay"
                 bind:goOrder='onGoOrder'
                 bind:refund='onRefund'
+                bind:rating="onRating"
                 order="{{item}}"
                 wx:if="{{item.orderType == 16}}">
                 <image class='icon'
                  wx:if="{{item.status != 9}}"  slot='delete'  
                  src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >{{!item.tradeStatus ? '已取消(异常）' : '已取消' }}</text>
                 <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
                 <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
                 <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
                 <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
-
+                <text class='btn' wx:if="{{item.status == 0}}" slot='rating'>{{item.ceid ? '查看评价':'评价'}}</text>
                 <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
                 <text class='btn' wx:if="{{item.status == 9 || item.status == 0}}" 
                     slot='refund'>申请退款</text>
@@ -73,16 +74,17 @@
                 bind:pay="onPay"
                 bind:buy="onBuy"
                 bind:goOrder='onGoOrder'
+                bind:rating="onRating"
                 order="{{item}}"
                 wx:if="{{item.orderType == 24}}">
                 <image class='icon' wx:if="{{item.status != 9}}"   slot='delete'
                     src='/images/my/icon_delete.png'></image>
-                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+                <text  class='text' wx:if="{{item.status == 1}}" slot='text' >{{!item.tradeStatus ? '已取消(异常）' : '已取消' }}</text>
                 <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
                 <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
                 <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
                 <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
-
+                <text class='btn' wx:if="{{item.status == 0}}" slot='rating'>{{item.ceid ? '查看评价':'评价'}}</text>
                 <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
                 <text class='btn' wx:if="{{item.status == 9}}" slot='refund'>申请退款</text>
                 <text class='btn' wx:if="{{item.status == 9}}" slot='code'>我的门票</text>
@@ -97,18 +99,19 @@
                 data-item = "{{item}}"
                 bind:del="onDel"
                 bind:pay="onPay"
+                bind:rating="onRating"
                 bind:goOrder='onGoOrder'
                  bind:refund='onRefund'
                 order="{{item}}"
                 wx:if="{{item.orderType == 17}}">
                 <image class='icon' wx:if="{{item.status != 9}}"  
                     slot='delete' src='/images/my/icon_delete.png'></image>
-               <text  class='text' wx:if="{{item.status == 1}}" slot='text' >已取消</text>
+               <text  class='text' wx:if="{{item.status == 1}}" slot='text' >{{!item.tradeStatus ? '已取消(异常）' : '已取消' }}</text>
                 <text  class='text' wx:if="{{item.status == 9}}" slot='text' >已支付</text>
                 <text  class='text' wx:if="{{item.status == 0}}" slot='text' >已完成</text>
                 <text  class='text' wx:if="{{item.status == 8}}" slot='text' >待支付</text>
                 <text  class='text' wx:if="{{item.status == 14}}" slot='text' >已退款</text>
-
+                <text class='btn' wx:if="{{item.status == 0}}" slot='rating'>{{item.ceid ? '查看评价':'评价'}}</text>
                 <text class='btn' wx:if="{{item.status == 8}}" slot="play">去支付</text>
                 <text class='btn' wx:if="{{item.status == 9 || item.status == 0}}" 
                     slot='code'>我的课程</text>

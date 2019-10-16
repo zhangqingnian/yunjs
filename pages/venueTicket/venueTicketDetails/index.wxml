@@ -21,7 +21,13 @@
     <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{ticket.ticketName}}</view>
-            <view class='type'>类型：{{ticket.sportName}}</view>
+            <view class='flex_row share-center'>
+                <view class='type' wx:if="{{ticket.sportName}}">
+                    类型：{{ticket.sportName}}</view>
+                <image class='share-img' style='margin-left:20rpx;' 
+                    bindtap='onSelect' src='/images/share.png'></image>        
+                <!-- <view bindtap='onShare'>生成海报</view> -->
+            </view>
         </view>
         <view class='content flex_column'>
             <view class='item flex_row'>
@@ -67,7 +73,7 @@
             <view class='type'></view>
         </view>
         <view class='content'>
-            购票后未使用3天内可退
+            单次购买单张门票未使用，{{ticket.returnticketDeadline}}天内可退款，单次购买多张门票不可退款。
         </view>
     </view>
 
@@ -93,4 +99,14 @@
         </view>
     </view>
 </view>
+<v-back class='chatBtn' />
+<v-actionsheet  isSelect='{{isSelect}}' 
+    bind:myCancel="onCancelSelect"
+    bind:myCreate="onShare"/>
+
+<v-share wx:if="{{isShare}}" 
+    bind:close="onCloseShare" 
+    type="{{3}}"
+    goods="{{ticket}}"
+    page='pages/venueTicket/venueTicketDetails/index' />
 

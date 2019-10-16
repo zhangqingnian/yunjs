@@ -26,17 +26,18 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options)
         let openDate = new Date().getTime();
         let {
             id,
             sportTypeId,
             venue,
-            sportName
+            sportName,
+            num
         } = options;
         id = Number(id);
         sportTypeId = Number(sportTypeId);
-        let hour = this._hour(9, 24);
+        num = Number(num);
+        let hour = this._hour(num);
         let date = this._date(14);
         this.setData({
             id,
@@ -45,9 +46,10 @@ Page({
             date,
             currentDate: date[0],
             venue,
-            sportName
+            sportName,
+            num
         });
-        this._getField(id, sportTypeId, openDate);
+        this._getField(id, sportTypeId, openDate,num);
     },
     //跳转 提交订单页
     onGoOrder(){
@@ -168,13 +170,79 @@ Page({
         venueModel.getField(id, sportTypeId, openDate).then(res => {
             wx.hideLoading();
             let area = res.data;
-            console.log(area)
             this._setWidrh(area.length);
             this._default(area)
         })
     },
+    //0 6 9
     _default(area) {
+        let num = this.data.num;
         let arr = [
+            {
+                "cvaoEndTime": "01:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "00:00",
+                "id": 496814
+            }, 
+            {
+                "cvaoEndTime": "02:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "01:00",
+                "id": 496815
+            }, {
+                "cvaoEndTime": "03:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "02:00",
+                "id": 496816
+            }, {
+                "cvaoEndTime": "04:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "03:00",
+                "id": 496817
+            }, {
+                "cvaoEndTime": "05:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "04:00",
+                "id": 496818
+            }, {
+                "cvaoEndTime": "06:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "05:00",
+                "id": 496819
+            }, {
+                "cvaoEndTime": "07:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "06:00",
+                "id": 496820
+            }, {
+                "cvaoEndTime": "08:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "07:00",
+                "id": 496821
+            }, {
+                "cvaoEndTime": "09:00",
+                "cvaoIsOccupy": 0,
+                "cvaoIsOpen": 0,
+                "cvaoPrice": 0,
+                "cvaoStartTime": "08:00",
+                "id": 496822
+            },
                         {
                             "cvaoEndTime": "10:00",
                             "cvaoIsOccupy": 0,
@@ -281,37 +349,8 @@ Page({
                             "cvaoStartTime": "23:00",
                             "id": 496851
                         }
-        ];
-        // let k = 0;
-        // let newData = [];
-        // for (var i = 0; i < area.length; i++) {
-        //     newData = [];
-        //     let a = area[i].venueAreaOpenTimes;
-        //     area[i].venueAreaOpenTimes = arr;
-        //     if (!a.length) return;
-        //     outer: for (var j = 0; j < area[i].venueAreaOpenTimes.length; j++) {
-        //         inter: for (k; k < area[i].venueAreaOpenTimes.length;) {
-        //             if (k < a.length) {
-        //                 if (a[k].cvaoStartTime == area[i].venueAreaOpenTimes[j].cvaoStartTime) {
-        //                     newData.push(a[k]);
-        //                     k++;
-        //                     continue outer;
-        //                 } else {
-        //                     newData.push(area[i].venueAreaOpenTimes[j])
-        //                     break inter;
-        //                 }
-        //             } else {
-        //                 newData.push(area[i].venueAreaOpenTimes[j])
-        //                 break inter;
-        //             }
-
-        //         }
-        //     }
-        //     if (newData.length != 0) {
-        //         area[i].venueAreaOpenTimes = newData;
-        //         k = 0;
-        //     }
-        // }
+        ].slice(num);
+        console.log(arr);
         for (let k = 0; k < area.length; k++) {
             let [...clon] = arr;
             let one = area[k].venueAreaOpenTimes;
@@ -344,16 +383,16 @@ Page({
             field: area
         })
     },
-    _hour(start, end) {
+    _hour(num) {
         var _arr = [];
-        for (var i = start; i <= end; i++) {
+        for (var i = 0; i <= 24; i++) {
             if (i < 10) {
                 i = '0' + i
             }
             var hour = i + ':00';
             _arr.push(hour)
         }
-        return _arr;
+        return _arr.slice(num);
     },
     _date(max) {
         let _arr = [];

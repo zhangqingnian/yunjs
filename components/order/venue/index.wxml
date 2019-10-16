@@ -31,6 +31,7 @@
             <slot name='code' catchtap="onGoOrder"></slot>
             <slot name='rating' catchtap="onRating"></slot>
             <slot name='again' catchtap="onBuy"></slot>
+            <slot name='rating' catchtap="onRating"></slot>
         </view>
     </view>
 </view>

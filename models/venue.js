@@ -34,12 +34,21 @@ export class VenueModel extends Http {
     }
 
     //场馆详情-风采
-    getFc(data) {
+    getFcFront(data) {
         return this.request({
             url: 'm/crm/venue/front/selectVenueImgDetail',
             data
         })
     }
+
+    //场馆详情-风采
+    getFc(data) {
+        return this.request({
+            url: 'm/crm/venue/selectVenueImgDetail',
+            data
+        })
+    }
+
     //场馆详情-用户评论
     getRating(data) {
         return this.request({
@@ -118,6 +127,15 @@ export class VenueModel extends Http {
         })
     }
 
+    //查询场地最早时间 返回 0 / 6 / 9
+    getFristTime(data) {
+        return this.request({
+            url: 'm/crm/venueArea/front/getModelForSport',
+            method: 'POST',
+            data
+        })
+    }
+
     //馆卡列表(根据类型查馆卡列表)
     getVenueCardList(data){
         return this.request({
@@ -142,7 +160,7 @@ export class VenueModel extends Http {
             url: 'm/crm/venue/front/selectAllVenueType'
         })
     }
-    //分享朋友圈的太阳码  type 1馆卡 2课程 3门票 goodId 
+    //分享朋友圈的太阳码  type 1馆卡 2课程 3门票 4场馆 goodId 
     sunCode(data){
         return this.request({
             url: 'm/wxaCode/front/getSubCode',

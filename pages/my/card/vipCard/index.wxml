@@ -1,7 +1,7 @@
 <!--pages/my/card/vipCard/index.wxml-->
 <view class='containner'>
     <view class='topwarp'>
-        <image class='img'></image>
+        <image class='img' src='{{fileName}}'></image>
         <view>卡内余额</view>
         <view>￥{{vipCard.surplusMoney}}</view>
     </view>
@@ -20,9 +20,10 @@
                     <text wx:if='{{pwdVal.length>i}}'></text>
                 </view>
             </view>
-            <input class='input_control' password type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6' />
+            <input class='input_control'  type='number' focus='{{payFocus}}' bindinput='inputPwd' maxlength='6' value='{{pwdVal}}' />
+            
         </view>
-
-        <view class='baoming' bindtap='onPay'>支付</view>
+        <!-- <view class='baoming' bindtap='onPay'>支付</view> -->
+        
     </view>
 </view>

@@ -22,4 +22,13 @@ export class TicketModel extends Http {
             data
         })
     }
+
+    //门票核销时间
+    myTickeTime(data) {
+        return this.request({
+            url: 'm/crm/entranceticketPublish/getEntranceticketByPublishId',
+            method: 'POST',
+            data
+        })
+    }
 }    

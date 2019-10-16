@@ -6,7 +6,7 @@
             data-name='{{item.fileName}}'
             ></image>
         <view class="{{item.useStatus == 7 ? 'on':''}}">
-            第一节: {{item.status == 9 ? (item.useStatus == 7 ? '未使用':'已使用'):'已失效'}}
+            第{{index + 1}}节: {{item.status == 9 ? (item.useStatus == 7 ? '未使用':'已使用'):'已失效'}}
         </view>
     </view>
     

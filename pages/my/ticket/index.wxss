@@ -101,6 +101,7 @@ page{
     color: #fff;
     text-align: center;
     line-height: 50rpx;
+    margin-bottom: 10rpx;
 }
 
 .top .btns text:first-child{

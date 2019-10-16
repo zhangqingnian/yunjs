@@ -89,7 +89,6 @@
         </view>
         <!-- 门票 -->
         <view class='content flex_column' wx:if="{{area.orderType == 24}}">
-            
             <view class='item flex_row'>
                 <view class='name'>场馆名称：</view>
                 <view class='value'>{{area.venueName}}</view>
@@ -109,9 +108,6 @@
         </view>
     </view>
    
-
-
-
 
     <view class='category itemClass mtop30'>
         <view class='titleWarp flex_row'>
@@ -138,6 +134,12 @@
                 <view class='name'>实付款：</view>
                 <view class='value'>￥{{area.payment}}</view>
             </view>
+            <view class='item flex_row' wx:if="{{area.orderType == 24}}">
+                <view class='name'>核销时间：</view>
+                <view class='value'>
+                    <view wx:for="{{tickeTime}}" wx:key="{{item.erOrderId}}">{{ util.formatDateTime(item.entranceticketVerificTime)}}</view>
+                </view>
+            </view>
         </view>
     </view>
     
@@ -151,6 +153,6 @@
 <v-rating wx:if="{{showRating}}" 
 bind:close = "onClose"
 ceid='{{item.ceid}}'
-stars='{{item.ceStars}}'
+stars='{{item.ceStars ? item.ceStars : 5 }}'
 content='{{item.content}}'
     objectId='{{item.id}}'/>

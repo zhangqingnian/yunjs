@@ -58,6 +58,7 @@ Component({
             this.triggerEvent('close', {}, {})
         },
         onSelecLevel(e){
+            if(this.data.ceid)return;
             let currentItem = e.currentTarget.dataset.item;
             let level = this.data.level;
             level.forEach(item => {

@@ -15,6 +15,8 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isShare: false,     //是否显示海报层
+        isSelect: false,    //是否显示选择框
         imgUrl: config.base_img_url,
         course: {},
         classes:{},
@@ -26,11 +28,39 @@ Page({
      */
     onLoad: function(options) {
        
-        let id = options.id || 169;
+        let id = options.id || decodeURIComponent(options.scene).split('_')[0];
         this._getKcDetail(id);
     },
-    onShareAppMessage(Object) {
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
 
+    //显示选择框
+    onSelect() {
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
+    },
+    onShareAppMessage(Object) {
+        return {
+            title: this.data.course.courseName
+        }
     },
     //进入场馆
     onGoVenue() {
@@ -75,6 +105,14 @@ Page({
             url: '/pages/confirmOrder/courser/index?courser=' + courser + '&classes=' + classes,
         })
     },
+    //查看协议
+    onElectronicProtocol(e) {
+        let src = e.currentTarget.dataset.img;
+        let imgSrc = config.base_img_url + src;
+        wx.navigateTo({
+            url: '/pages/electronicProtocol/index?imgSrc=' + imgSrc
+        })
+    },
     //课程详情
     _getKcDetail(id) {
         venueModel.getKcDetail(id).then(res => {
@@ -100,7 +138,6 @@ Page({
     //班级详情
     _getClass(id) {
         venueModel.getClass(id).then(res => {
-            console.log(res);
             this.setData({
                 classes: res.data.data
             })

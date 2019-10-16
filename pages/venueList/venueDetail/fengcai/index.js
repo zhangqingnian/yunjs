@@ -22,6 +22,13 @@ Page({
      */
     onLoad: function(options) {
         let id = options.id;
+        this.setData({
+            id
+        })
+        
+    },
+    onShow(){
+        let id = this.data.id;
         this._getFc(id)
     },
     onOpenImg(e){

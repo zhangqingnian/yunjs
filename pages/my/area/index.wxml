@@ -45,7 +45,7 @@
     </view>
 </view>
 
-<v-code  wx:if="{{show}}" bind:hide="onHide" codeUrl="{{codeUrl}}" >
+<v-code  wx:if="{{show}}" bind:hide="onHides" codeUrl="{{codeUrl}}" >
     <view class='topwarp' slot='after'>
         <view class='item flex_row'>
             <view class='title'>场地预约</view>

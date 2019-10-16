@@ -36,6 +36,6 @@ Component({
         },
         onGoOrder() {
             this.triggerEvent('goOrder', this.properties.order, {})
-        }
+        },
     }
 })

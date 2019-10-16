@@ -143,6 +143,7 @@ Page({
             return
         }
         let discountTotal = (this.data.total - coupon.money).toFixed(2);
+        console.log(discountTotal)
         this.setData({
             isCoupon: false,
             coupon,
@@ -198,7 +199,7 @@ Page({
         wx.showLoading()
         orderModel.submitCourseOrder({
             buyMoney,
-            money: discountTotal,  //支付金额  
+            money: buyMoney,  //支付金额  
             cpId,                  //优惠券Id    
             venueId,   //场馆id
             classId,   //班级主键
@@ -209,6 +210,14 @@ Page({
             wx.hideLoading()
             console.log(res)
             let reslut = res.data;
+            if (!reslut.success) {
+                wx.showModal({
+                    title: '提示 ',
+                    content: reslut.msg,
+                    showCancel: false
+                })
+                return
+            }
             wx.showToast({
                 title: reslut.msg,
                 duration: 500,

@@ -5,7 +5,13 @@
     <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{course.courseName}}</view>
-            <view class='type'>类型：{{course.sportType}}</view>
+            <view class='flex_row share-center'>
+                <view class='type' wx:if="{{course.sportType}}">
+                    类型：{{course.sportType}}</view>
+                <image class='share-img' style='margin-left:20rpx;' 
+                    bindtap='onSelect' src='/images/share.png'></image>    
+                <!-- <view bindtap='onShare'>生成海报</view> -->
+            </view>
         </view>
         <view class='content flex_column'>
             <view class='item flex_row'>
@@ -140,9 +146,10 @@
             <view class='title'>课程内容</view>
             <view class='type'></view>
         </view>
-        <text style='display:block;'>
-            {{course.courseDetail}}
-        </text>
+        <view style='margin:10rpx 0;'>{{course.courseDetail}}</view>
+        <!-- -->
+        <view  wx:if="{{course.electronicProtocol}}"  bindtap='onElectronicProtocol'  class='xieyi-color'
+            data-img='{{course.electronicProtocol}}'>电子购买场馆服务卡协议</view>
     </view>
 
     <!-- <view class='baoming' bindtap='onGoSubmit'>报名</view> -->
@@ -156,3 +163,14 @@
         </view>
     </view>
 </view>
+
+<v-back class='chatBtn'/>
+<v-actionsheet  isSelect='{{isSelect}}' 
+    bind:myCancel="onCancelSelect"
+    bind:myCreate="onShare"/>
+
+<v-share wx:if="{{isShare}}" 
+    bind:close="onCloseShare" 
+    type="{{2}}"
+    goods="{{course}}"
+    page='pages/kechen/kechenDetails/index' />

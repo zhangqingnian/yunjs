@@ -199,6 +199,7 @@ Page({
                 wx.hideLoading()
                 console.log(res)
                 let reslut = res.data;
+                
                 wx.showToast({
                     title: reslut.msg,
                     duration: 500,

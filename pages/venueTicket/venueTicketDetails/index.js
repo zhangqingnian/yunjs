@@ -18,6 +18,8 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isShare: false,     //是否显示海报层
+        isSelect: false,    //是否显示选择框
         imgUrl: config.base_img_url,
         ticket:{}
     },
@@ -26,11 +28,39 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        let id = options.id;
+        let id = options.id || decodeURIComponent(options.scene).split('_')[0];
         this.getTicketDetail(id)
     },
-    onShareAppMessage(Object) {
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
 
+    //显示选择框
+    onSelect() {
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
+    },
+    onShareAppMessage(Object) {
+        return {
+            title: this.data.ticket.ticketName
+        }
     },
     //进入场馆
     onGoVenue() {

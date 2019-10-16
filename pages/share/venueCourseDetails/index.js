@@ -32,27 +32,95 @@ Page({
         //id 排序   venueGoodsId 商品   packageId 任务 customerId 分析 nickName 昵称
         console.log(options)
         let { id, venueGoodsId, packageId, customerId, nickName,type } = options;
+        var share = {};
+        if (venueGoodsId) {
+            share = options;
+        }
+        if (!venueGoodsId) {
+            /*id 排序
+                venueGoodsId 商品
+                packageId 任务
+                customerId 分析
+                type 主管/分销员
+                nickName 昵称 （不支持中文 没传）*/
+            let arr = decodeURIComponent(options.scene).split('_');
+            id = arr[0];
+            venueGoodsId = arr[1];
+            packageId = arr[2];
+            customerId = arr[3];
+            type = arr[4];
+            nickName = '';
+            share = {
+                id,
+                venueGoodsId,
+                packageId,
+                customerId,
+                type,
+                nickName
+            }
+        }
+
+
         //extend 详情页分享(推广)标识；
-        let extend = options.extend || '';
+        let extend = options.extend || '';   
 
         this.setData({
-            id, venueGoodsId, packageId, customerId, nickName,type,extend
+            id, venueGoodsId, packageId, customerId, nickName, type, extend, share
         })
         
-        this._getKcDetail({id, packageId, customerId,venueGoodsId,type});
+        
+    },
+    onShow() {
+        let {
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            type
+        } = this.data;
+        this._getKcDetail({ id, packageId, customerId, venueGoodsId, type });
+    },
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
+
+    //显示选择框
+    onSelect() {
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
     },
     onGoOrder(){
-        let course = JSON.stringify(this.data.course);
+        let course = this.data.course;
+        course.courseName = course.courseName.replace(/\&/g, "%26");
         let classes = JSON.stringify(this.data.classes);
         let sortId = this.data.id
-        let money = this.data.money;
+        let { venueGoodsId, packageId, customerId, type, money } = this.data;
         wx.navigateTo({
-            url: '/pages/share/confirmOrder/courser/index?course=' + course + '&classes=' + classes + '&sortId=' + sortId + '&money=' + money,
+            url: '/pages/share/confirmOrder/courser/index?course=' + JSON.stringify(course) + '&classes=' + classes + '&sortId=' + sortId + '&money=' + money + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type,
         })
     },
     onShareAppMessage(options) {
         let { id, venueGoodsId, packageId, customerId, nickName, type } = this.data;
         return {
+            title: this.data.course.courseName,
+            imageUrl: this.data.imgUrl + this.data.course.fileName,
             path: '/pages/share/venueCourseDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName
         }
     },
@@ -61,9 +129,24 @@ Page({
         let coupon = e.currentTarget.dataset.coupon;
         let salePrice = this.data.course.salePrice;
         let money = salePrice - coupon;
-        this.setData({
-            showCoupon: false,
-            money
+
+        cardModel.getMark({
+            couponMoney: coupon
+        }).then(res => {
+            let { data, msg, success } = res.data;
+            if (success) {
+                wx.showModal({
+                    title: '提示',
+                    content: data,
+                    showCancel: false,
+                    success: res => {
+                        this.setData({
+                            showCoupon: false,
+                            money
+                        })
+                    }
+                })
+            }
         })
     },
     //进入店铺

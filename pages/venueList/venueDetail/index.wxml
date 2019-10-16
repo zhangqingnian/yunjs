@@ -35,9 +35,12 @@
             </view>
             <view class='go'>去这里</view>
         </view>
-        <view class='telephone flex_row' bindtap='onVenueMobile'>
-            <image class='icon1' src='/images/venuedetail/icon_2.png'></image>
-            <text>{{venue.venueMobile}}</text>
+        <view class='telephone address flex_row' >
+            <view class='flex_row' style='align-items: center;' bindtap='onVenueMobile'>
+                <image class='icon1' src='/images/venuedetail/icon_2.png'></image>
+                <text>{{venue.venueMobile}}</text>
+            </view>
+            <image style='width:150rpx;height:34rpx;' bindtap='onSelect' src='/images/shop-share.png'></image> 
         </view>
     </view>
 
@@ -156,7 +159,7 @@
            
         </view>
     </view>
-    <view class='serve mtop_30'>
+    <view class='serve mtop_30' wx:if="{{venue.venueServiceImgVo.length}}">
         <view class='title'>服务内容</view>
         <view class='serveType flex_row'>
             <block wx:for="{{venue.venueServiceImgVo}}" wx:key="{{idx}}">
@@ -166,7 +169,7 @@
         </view>
     </view>
 
-    <view class='fengcai mtop_30'>
+    <view class='fengcai mtop_30' wx:if="{{venueFc.length}}">
         <view class='top flex_row'>
             <text class='title'>场馆风采</text>
             <view class='flex_row warp' bindtap='onFengcai'>
@@ -226,3 +229,19 @@
         <view bindtap='onBuyfield'>场地预约</view>
     </view>
 </view>
+
+<v-actionsheet  isSelect='{{isSelect}}' 
+    name='生成场馆太阳码'
+    bind:myCancel="onCancelSelect"
+    bind:myCreate="onShare"/>
+
+<v-shareCode wx:if="{{isShare}}" 
+    bind:close="onCloseShare" 
+    type="{{4}}"
+    goodId="{{id}}"
+    page='pages/venueList/venueDetail/index' />
+     <!-- 
+        goodId       场馆ID
+        page     扫码后要跳转的页面
+        type     1 : 馆卡， 2 : 课程 ，3 : 门票 4：场馆
+     -->

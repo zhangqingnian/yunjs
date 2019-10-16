@@ -46,6 +46,12 @@
                     <text>{{card.activateDate == '0' ? '立即' : card.activateDate+'天'}}</text>
                 </view>
             </view>
+            <view  
+            class='item flex xieyi-color'
+            wx:if="{{card.electronicProtocol}}"  
+            bindtap='onElectronicProtocol'  
+            data-img='{{card.electronicProtocol}}'>电子购买场馆服务卡协议</view>
+            
             <!-- <view class='item flex_row'>
                 <view class='name'>提示：</view>
                 <view class='value'>

@@ -256,6 +256,18 @@ Component({
                 content: res.data.msg,
                 showCancel: false,
                 success: reslut => {
+                    if (res.data.code == 'GO_HOME_PAGE') {
+                        
+                        if (r.confirm) {
+                            wx.switchTab({
+                                url: '/pages/index/index',
+                            })
+                        }
+                         
+                        return;
+                    }
+
+
                     //余额不足 充值 //跳转充值
                     // if (res.data.code == "NOT_ENOUGH"){
                     // }

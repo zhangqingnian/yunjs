@@ -12,6 +12,7 @@ Page({
     data: {
         valid: true,
         invalid: false,
+        type: 1,
         ticketList: [],
         show: false,
         ticket: {},
@@ -27,6 +28,14 @@ Page({
     onLoad: function (options) {
         this._getMyTicket(1, 0);
     },
+    onReachBottom() {
+        let start = this.data.ticketList.length;
+        let type = this.data.type;
+        let total = this.data.total;
+        if (start >= total) return;
+        this._getMyTicket(type, start);
+
+    },
     onUser(e) {
         wx.showLoading({
             title: '加载中'
@@ -41,11 +50,10 @@ Page({
             wx.hideLoading();
         })
     },
-    onHide() {
+    onHides() {
         this.setData({
             show: false
         })
-        this._getMyTicket(1, 0);
     },
 
     onGoDetail(e) {
@@ -59,7 +67,9 @@ Page({
     onValid() {
         this.setData({
             valid: true,
-            invalid: false
+            invalid: false,
+            type: 1,
+            ticketList:[]
         })
         this._getMyTicket(1, 0);
 
@@ -68,7 +78,9 @@ Page({
     onInvalid() {
         this.setData({
             valid: false,
-            invalid: true
+            invalid: true,
+            type: 2,
+            ticketList:[]
         })
         this._getMyTicket(2, 0);
 
@@ -81,11 +93,13 @@ Page({
         areaModel.myAreaList({
             type,
             start,
-            limit: 10
+            limit: 20
         }).then(res => {
             wx.hideLoading();
+            let temArr = this.data.ticketList.concat(res.data.items)
             this.setData({
-                ticketList: res.data.items
+                ticketList: temArr,
+                total: res.data.total
             })
             console.log(res);
         }).catch(err => {

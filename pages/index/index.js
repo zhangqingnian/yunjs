@@ -42,14 +42,15 @@ Page({
      */
     onLoad: function(options) {
         qqmapsdk = new QQMapWX({
-            key: 'F4VBZ-CBM3U-O7IVA-2ROG5-IQLE5-HGBUQ'
+            key: 'DHNBZ-4VT3P-W7SDZ-VB64V-JEAQS-L6BQS'
         });
-        
+
+        this.getUserLocation()
         
     },
     onShow: function () {
+        
         let {nodecode,city }= wx.getStorageSync('city'); 
-        console.log(nodecode)
         if (!nodecode) {
             wx.showModal({
                 title: '提示',
@@ -179,7 +180,6 @@ Page({
             url: '/pages/venueList/venueDetail/index?id='+item.id,
         })
     },
-    /* 
     getUserLocation: function () {
         let vm = this;
         wx.getSetting({
@@ -221,9 +221,9 @@ Page({
                 } else if (res.authSetting['scope.userLocation'] == undefined) {
                     //调用wx.getLocation的API
                     vm.getLocation();
-                }
-                else {
+                } else {
                     //调用wx.getLocation的API
+                    let { nodecode, city } = wx.getStorageSync('city');
                     vm.getLocation();
                 }
             }
@@ -231,57 +231,77 @@ Page({
     },
     // 微信获得经纬度
     getLocation: function () {
+
         let vm = this;
         wx.getLocation({
-            type: 'wgs84',
-            success: function (res) {
+            type: 'gcj02',
+            success:(res) => {
                 var latitude = res.latitude
                 var longitude = res.longitude
                 var speed = res.speed
                 var accuracy = res.accuracy;
-                wx.setStorageSync('currentLocation', { latitude, longitude})
-                vm.getLocal(latitude, longitude)
+                let objLocation = this.qqMapTransBMap(longitude, latitude)
+                latitude = objLocation.latitude
+                longitude = objLocation.longitude
+                wx.setStorageSync('currentLocation', {
+                    longitude,
+                    latitude
+                })
+                //vm.getLocal(latitude, longitude)
+
             }
         })
     },
     // 获取当前地理位置
     getLocal: function (latitude, longitude) {
+        wx.showLoading()
         let vm = this;
         qqmapsdk.reverseGeocoder({
             location: {
                 latitude: latitude,
                 longitude: longitude
             },
+            coord_type: 3,
             success: (res) => {
                 let province = res.result.ad_info.province
                 let city = res.result.ad_info.city
-                console.log(city);
                 history.getCity().then(res => {
                     let cityList = res.data;
-                    
+
                     cityList.forEach(item => {
-                        if(item.city == city){
+                        if (item.city == city) {
                             wx.setStorageSync('city', {
-                                "city":item.city,
-                                nodecode:item.nodeCode
+                                "city": item.city,
+                                nodecode: item.nodeCode
                             })
-                            this.gettuijian(item.nodeCode)
                         }
                     })
-
-                    vm.setData({
+                    wx.setStorageSync('cityObj', {
                         province: province,
                         city: city,
-                        latitude: latitude,
-                        longitude: longitude,
                         cityLists: cityList
                     })
+                    wx.hideLoading();
+
                 })
-                
+
 
             }
         });
-    },*/
+    },
+    qqMapTransBMap(longitude, latitude) {
+        let x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        let x = longitude;
+        let y = latitude;
+        let z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+        let theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+        let lngs = z * Math.cos(theta) + 0.0065;
+        let lats = z * Math.sin(theta) + 0.006;
+        return {
+            longitude: lngs,
+            latitude: lats
+        }
+    },
     //格式化数据
     _formatData(arr, amount) {
         let num = arr.length % amount;

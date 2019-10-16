@@ -5,7 +5,7 @@
             catchtap='onOrder' data-item='{{item}}'>
             <view class='itemTop'>
                 <view class='imgWarp'>
-                    <image class='img' src='{{imgUrl + item.fileName}}'></image>
+                    <image class='img' src='{{imgUrl + item.fileName}}' ></image>
                     <view class='imgBottom flex_row'>
                         <view class='priceWarp flex_row'>
                             <view class='nowPrice'>￥{{item.salePrice +item.discountPrice}}</view>

@@ -42,8 +42,10 @@ Page({
         let card = JSON.parse(options.card);
         console.log(card);
         let activateDate = options.currentTime;
+        let cardName = card.cardName.replace(/\%26/g, "&");
         this.setData({
             card,
+            cardName,
             activateDate,
             total: card.buyMoney.toFixed(2),
             discountTotal: card.buyMoney.toFixed(2)
@@ -201,6 +203,14 @@ Page({
             wx.hideLoading()
             console.log(res)
             let reslut = res.data;
+            if (!reslut.success) {
+                wx.showModal({
+                    title: '提示 ',
+                    content: reslut.msg,
+                    showCancel: false
+                })
+                return
+            }
             wx.showToast({
                 title: reslut.msg,
                 duration: 500,

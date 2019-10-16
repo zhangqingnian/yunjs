@@ -79,18 +79,38 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-
+        
     },
     onShow() {
+        let token = wx.getStorageSync('token').accessToken || '';
+        this.setData({
+            token
+        })
+        if (token) {
+            this._getMyUserInfo();
+        }
         
-        this._getMyUserInfo();
     },
     onUser(){
+        if (!this.data.token) {
+            wx.showToast({
+                title: '请先登录!',
+                icon: 'none'
+            })
+            return
+        }
         wx.navigateTo({
             url: './user/index'
         })
     },
     onBottomTap(e) {
+        if(!this.data.token){
+            wx.showToast({
+                title: '请先登录!',
+                icon:'none'
+            })
+            return
+        }
         let name = e.currentTarget.dataset.name;
         let url = this._goLocation(name);
         if (!url) {
@@ -105,6 +125,13 @@ Page({
     },
 
     onListTap(e) {
+        if (!this.data.token) {
+            wx.showToast({
+                title: '请先登录!',
+                icon: 'none'
+            })
+            return
+        }
         let name = e.currentTarget.dataset.name;
         let url = this._goLocation(name) || '';
         console.log(name)
@@ -127,7 +154,11 @@ Page({
         })
 
     },
-
+    login(){
+        wx.navigateTo({
+            url: '/pages/authorize/index',
+        })
+    },
     _goLocation(title) {
         let _router = {
             

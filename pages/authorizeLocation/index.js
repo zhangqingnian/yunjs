@@ -59,7 +59,7 @@ Page({
      */
     onLoad: function(options) {
         qqmapsdk = new QQMapWX({
-            key: 'F4VBZ-CBM3U-O7IVA-2ROG5-IQLE5-HGBUQ'
+            key: 'DHNBZ-4VT3P-W7SDZ-VB64V-JEAQS-L6BQS'
         });
         
         this.getUserLocation()
@@ -121,7 +121,6 @@ Page({
                 } else if (res.authSetting['scope.userLocation'] == undefined) {
                     //调用wx.getLocation的API
                     vm.getLocation();
-                    console.log(22222)
                 } else {
                     //调用wx.getLocation的API
                     let { nodecode, city } = wx.getStorageSync('city');
@@ -141,15 +140,18 @@ Page({
         
         let vm = this;
         wx.getLocation({
-            type: 'wgs84',
-            success: function(res) {
+            type: 'gcj02',
+            success: (res) => {
                 var latitude = res.latitude
                 var longitude = res.longitude
                 var speed = res.speed
                 var accuracy = res.accuracy;
+                let objLocation = this.qqMapTransBMap(longitude, latitude)
+                latitude = objLocation.latitude
+                longitude = objLocation.longitude
                 wx.setStorageSync('currentLocation', {
-                    latitude,
-                    longitude
+                    longitude,
+                    latitude
                 })
                 vm.getLocal(latitude, longitude)
                 
@@ -165,6 +167,7 @@ Page({
                 latitude: latitude,
                 longitude: longitude
             },
+            coord_type:3,
             success: (res) => {
                 let province = res.result.ad_info.province
                 let city = res.result.ad_info.city
@@ -198,4 +201,17 @@ Page({
             }
         });
     },
+    qqMapTransBMap(longitude, latitude) {
+        let x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+        let x = longitude;
+        let y = latitude;
+        let z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+        let theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+        let lngs = z * Math.cos(theta) + 0.0065;
+        let lats = z * Math.sin(theta) + 0.006;
+        return {
+            longitude: lngs,
+            latitude: lats
+        }
+    }
 })

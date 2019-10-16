@@ -73,6 +73,7 @@ Page({
     //我的 xxx
     onGoOrder(e){
         let orderType = e.detail.orderType;
+        console.log(orderType)
         if (orderType == 15) {
             wx.navigateTo({
                 url: '/pages/my/area/index',
@@ -167,6 +168,7 @@ Page({
     //评论
     onRating(e){
         let item = e.currentTarget.dataset.item;
+        console.log(item)
         wx.navigateTo({
             url: './areaDetail/index?item=' + JSON.stringify(item)+'&showRating='+true,
         })
@@ -226,13 +228,7 @@ Page({
         let start = this.data.orderList.length;
         let status = this.data.currentType;
         let total = this.data.total;
-        if(start >= total){
-            wx.showToast({
-                title: '没有数据了',
-                icon:'none'
-            })
-            return;
-        }
+        if(start >= total)return;
         this.setData({ loading: true })
         myOrderModel.myOrderList({
             status,

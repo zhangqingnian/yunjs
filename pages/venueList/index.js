@@ -95,7 +95,7 @@ Page({
         if (!keyWords) return;
         this.setData({
             venueList: [],
-            keyWords
+            keyWords,
         })
         this._addClass();
         this._getNowData({ venueName: keyWords})
@@ -137,7 +137,7 @@ Page({
         
         if (this.data.isLoading){
             this.data.isLoading = false;
-            this._loadMore({ start, types, keyWords })
+            this._loadMore({ start, types, venueName:keyWords })
         }
         
     },

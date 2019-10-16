@@ -13,6 +13,7 @@ Page({
         show: false,
         valid: true,
         invalid: false,
+        status: 'valid',
         cardList: [],
         card:{},
         baseUrl: config.api_base_url,
@@ -27,17 +28,25 @@ Page({
     onLoad: function (options) {
         this._getMyCard('valid', 0);
     },
+    onReachBottom(){
+        let start = this.data.cardList.length;
+        let status = this.data.status;
+        let total = this.data.total;
+        if (start >= total) return;
+        this._getMyCard(status,start);
+        
+    },
     //使用
     onUse(e) {
-        console.log(e.currentTarget.dataset.item)
+        let card = e.currentTarget.dataset.item;
         this.setData({
-            card: e.currentTarget.dataset.item
+            card
         })
-        let {id,type} = e.currentTarget.dataset.item;
+        let { id, type, fileName} = card;
         //会员卡
         if(type == 4){
             wx.navigateTo({
-                url: './vipCard/index?id='+id,
+                url: './vipCard/index?id=' + id + '&vipImg=' + config.base_img_url + fileName,
             })
             return
         }
@@ -59,17 +68,12 @@ Page({
     },
     //使用记录
     onRecord(e) {
-        let { id, type } = e.currentTarget.dataset.item;
+        let { id } = e.currentTarget.dataset.item;
         wx.navigateTo({
             url: './record/index?id=' + id,
         })
     },
-    onHide() {
-        this.setData({
-            show: false
-        })
-        this._getMyCard('valid', 0);
-    },
+    
     //去详情
     onGoDetail(e) {
         let item = e.currentTarget.dataset.item;
@@ -82,7 +86,9 @@ Page({
     onValid() {
         this.setData({
             valid: true,
-            invalid: false
+            invalid: false,
+            status: 'valid',
+            cardList:[]
         })
         this._getMyCard('valid', 0);
 
@@ -91,26 +97,32 @@ Page({
     onInvalid() {
         this.setData({
             valid: false,
-            invalid: true
+            invalid: true,
+            status: 'inValid',
+            cardList:[]
         })
         this._getMyCard('inValid', 0);
 
     },
+    onHides() {
+        this.setData({
+            show: false
+        })
+    },
     //我的课程 type 1有效 2无效
     _getMyCard(status, start) {
-        wx.showLoading({
-            title: '加载中'
-        })
+        wx.showLoading()
         cardModel.myCardList({
             status,
             start,
-            limit: 10
+            limit: 20
         }).then(res => {
             wx.hideLoading();
+            let temArr = this.data.cardList.concat(res.data.items)
             this.setData({
-                cardList: res.data.items
+                cardList: temArr,
+                total:res.data.total
             })
-            console.log(res);
         }).catch(err => {
             wx.hideLoading();
         })

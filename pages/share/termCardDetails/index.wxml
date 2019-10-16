@@ -1,0 +1,111 @@
+<!--pages/venueCard/termCardDetails/index.wxml-->
+<view class='containner flex_column'>
+    <view class='cardWarp'>
+        <image class='img' src='{{imgUrl + card.fileName}}' mode='aspectFit'></image>
+        <image class='recom' src='/images/recom.png'></image>
+    </view>
+
+    <view class='category itemClass'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>{{card.cardName}}</view>
+            <view class='flex_row share-center'>
+                <view class='type' wx:if="{{card.sportName}}">类型：{{card.sportName}}</view>
+                <image class='share-img' style='margin-left:20rpx;' 
+                    bindtap='onSelect' src='/images/share.png'></image> 
+            </view>
+        </view>
+        <view class='content flex_column'>
+            <view class='item flex_row'>
+                <view class='name'>馆卡价格：</view>
+                <view class='value price flex_row'>
+                    <view wx:if="{{!showCoupon}}">￥{{money}}</view>
+                    <view class='{{!showCoupon ? "del":""}}'>￥{{card.salePrice}}</view>
+                    <view class='del'>￥{{card.buyMoney}}</view>
+                </view> 
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>有效时间：</view>
+                <view class='value'>
+                    {{card.certificateStartTimeStr}}至{{card.certificateEndTimeStr}}
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>场馆名称：</view>
+                <view class='value'>{{card.venueName}}</view>
+            </view>
+            <view class='item hasAddress flex_row'>
+                <view class='flex_row'>
+                    <view class='name'>地址：</view>
+                    <view class='value' style='width:420rpx;'>{{card.address}}</view>
+                </view>
+                <view class='go flex_row' 
+                bindtap='onMap' 
+                data-name='{{card.venueName}}'
+                data-address='{{card.address}}'
+                data-lat='{{card.lat}}'
+                data-lon='{{card.lon}}'>
+                    <view>去这里</view>
+                    <image src='/images/venuedetail/icon_1.png'></image>
+                </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>学期卡规格：</view>
+                <view class='value'>{{card.description}} </view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>剩余数量：</view>
+                <view class='value'>{{card.surplusAmount}}</view>
+            </view>
+            <view class='item flex_row'>
+                <view class='name'>课程数量：</view>
+                <view class='value'>{{card.times}}</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='explain itemClass mtop30'>
+        <view class='titleWarp flex_row'>
+            <view class='title'>购买须知</view>
+        </view>
+        <text style='display:block'>
+            {{card.remark}}
+        </text>
+    </view>
+
+
+
+    <view class='bottomwarp flex_row' wx:if="{{!extend}}">
+        <view class='news flex_column' bindtap='onGoVenue'>
+            <image src='/images/venue.png'></image>
+            <view>更多专享</view>
+        </view>
+        <view class='confirm' bindtap='onGoOrder'>
+            立即购买
+        </view>
+    </view>
+
+    <view class='bottomwarp flex_row' wx:if="{{extend}}">
+        <button class='extend' bindtap='onSelect'>
+            我要推广
+        </button>
+    </view>
+</view>
+<v-back class='chatBtn'/>
+<v-actionsheet  isSelect='{{isSelect}}' 
+    bind:myCancel="onCancelSelect"
+    bind:myCreate="onShare"/>
+
+<v-share wx:if="{{isShare}}" 
+    bind:close="onCloseShare" 
+    type="{{1}}"
+    goods="{{card}}"
+    share="{{share}}"
+    page='pages/share/termCardDetails/index' />
+
+<view class='mask' wx:if="{{card.discountPrice && showCoupon}}" >
+    <view class='coupon' wx:if="{{card.discountPrice && showCoupon}}" 
+        bindtap='onUserCoupon'
+        data-coupon='{{card.discountPrice}}'>
+        <image src='/images/coupons.gif' mode='aspectFit'></image>
+    </view>           
+</view>      

@@ -36,14 +36,15 @@ Page({
      */
     onLoad: function (options) {
         let card = JSON.parse(options.card);
-        console.log(card);
+        card.cardName = card.cardName.replace(/\%26/g, "&");
         let activityday = options.currentTime;  //激活天数
         let sortId = options.sortId;
         let money = Number(options.money);  //支付价格
+        let { venueGoodsId, packageId, customerId, type} = options;
         this.setData({
             card,
             activityday,
-            sortId,
+            sortId,venueGoodsId, packageId, customerId, type,
             total:money.toFixed(2),
             discountTotal: money.toFixed(2)
         })
@@ -51,7 +52,10 @@ Page({
        
     },
     onShow(){
-        this._getContacts();
+        if (!this.data.currentContacts.name){
+            this._getContacts();
+        }
+        
     },
     //勾选协议
     onCheck(e){
@@ -146,6 +150,19 @@ Page({
             wx.hideLoading()
             console.log(res)
             let reslut = res.data;
+            if (reslut.code == 'JUMP_NEW_PRICE') {
+                wx.showModal({
+                    title: '提示',
+                    content: '当前优惠已改变，请按照新的优惠价格购买',
+                    showCancel: false,
+                    success: (r) => {
+                        this._getCardDetail()
+                    }
+                })
+                return;
+            }
+
+
             if (reslut.code == 'JUMP_USER_APPLET') {
                 wx.showModal({
                     title: '提示',
@@ -160,6 +177,31 @@ Page({
                     }
                 })
                 return;
+            }
+
+            if (reslut.code == 'GO_HOME_PAGE') {
+                wx.showModal({
+                    title: '提示',
+                    content: reslut.msg,
+                    showCancel: false,
+                    success: (r) => {
+                        if (r.confirm) {
+                            wx.switchTab({
+                                url: '/pages/index/index',
+                            })
+                        }
+                    }
+                })
+                return;
+            }
+
+            if (!reslut.success){
+                wx.showModal({
+                    title: '提示 ',  
+                    content: reslut.msg,
+                    showCancel:false
+                })
+                return
             }
             wx.showToast({
                 title: reslut.msg,
@@ -197,6 +239,24 @@ Page({
                 contactsList,    //联系人列表
                 currentContacts //当前联系人
             })
+        })
+    },
+
+    _getCardDetail() {
+        let { sortId, venueGoodsId, packageId, customerId, type} = this.data
+        cardModel.getCardsDetail({
+            venueGoodsId,
+            id: sortId,
+            packageId,
+            customerId,
+            type
+        }).then(res => {
+            let money = Number(res.data.data.salePrice);
+            this.setData({
+                total: money.toFixed(2),
+                discountTotal: money.toFixed(2)
+            })
+
         })
     }
 })

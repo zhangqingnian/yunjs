@@ -62,6 +62,11 @@
         <view class='content'>
             {{classes.courseDetail}}
         </view>
+        <view  
+            class='item flex xieyi-color'
+            wx:if="{{classes.electronicProtocol}}"  
+            bindtap='onElectronicProtocol'  
+            data-img='{{classes.electronicProtocol}}'>电子购买场馆服务卡协议</view>
     </view>
 
 </view>

@@ -25,12 +25,15 @@ export class Http {
                     wx.showModal({
                         title: '提示',
                         content: '请重新授权登录',
-                        showCancel: false,
-                        confirmText: '确定',
-                        success(){
-                            wx.navigateTo({
-                                url: '/pages/authorize/index',
-                            })
+                        // showCancel: false,
+                        // confirmText: '确定',
+                        success(r){
+                            if(r.confirm){
+                                wx.navigateTo({
+                                    url: '/pages/authorize/index',
+                                })
+                            }
+                            
                         }
                     })
 

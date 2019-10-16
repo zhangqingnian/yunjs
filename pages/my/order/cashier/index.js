@@ -21,12 +21,14 @@ Page({
         this.setData({
             totalFee: item.payment,
             orderCode: item.orderCode,
-            body: item.orderMoney
+            body: item.orderMoney,
+            orderDifference: item.orderDifference 
         })
         this.orderType(item.orderType)
         console.log(this.data)
     },
     orderType(orderType) {
+        console.log(orderType)
         let currentType = '';
         if (orderType == 15) {
             currentType = 'area'
@@ -36,6 +38,10 @@ Page({
             currentType = 'course'
         } else if (orderType == 24) {
             currentType = 'ticket'
+        }
+        //分销订单
+        if (this.data.orderDifference == "MINI_ORDER"){
+            currentType = 'share'
         }
         this.setData({
             currentType

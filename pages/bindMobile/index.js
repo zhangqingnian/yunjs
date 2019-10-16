@@ -27,15 +27,32 @@ Page({
         wx.checkSession({
             success: () => {
                 // session_key 未过期，并且在本生命周期一直有效
-                let { encryptedData, iv, errMsg } = e.detail;
+                var { encryptedData, iv, errMsg } = e.detail;
+                
                 let session_key = wx.getStorageSync('token').session_key
-                if (e.detail.errMsg == 'getPhoneNumber:fail user deny' || e.detail.errMsg == "getPhoneNumber:user deny") {
+                if (e.detail.errMsg.indexOf('fail') != -1) {
                     //拒绝
                     wx.navigateTo({
                         url: '/pages/login/index',
                     })
                 } else {
                     //允许 
+
+                    if (!encryptedData || !iv) {
+                        wx.removeStorageSync('token');
+                        wx.showModal({
+                            title: '提示',
+                            content: '请重新登录',
+                            showCancel: false,
+                            success() {
+                                wx.navigateBack({
+                                    delta: 1,
+                                })
+                            }
+                        })
+
+                        return
+                    }
                     wx.showLoading()
                     questModel.bindMobilePhone({
                         type: 2,

@@ -21,6 +21,7 @@ Page({
         let card = JSON.parse(options.item);
         console.log(card);
         let valid = options.valid;
+        valid = valid == 'true' ? true : false;
         this.setData({
             card,
             valid
@@ -31,6 +32,14 @@ Page({
             show: false
         })
     },
+    //查看协议
+    onElectronicProtocol(e) {
+        let src = e.currentTarget.dataset.img;
+        let imgSrc = config.base_img_url + src;
+        wx.navigateTo({
+            url: '/pages/electronicProtocol/index?imgSrc=' + imgSrc
+        })
+    },
     onUse(e){
         /*
         type  0次数卡 1月卡 2 季卡 3年卡 4会员卡 5学期卡
@@ -39,7 +48,7 @@ Page({
         let types = this.data.card.type;
         if(types == 4){
             wx.navigateTo({
-                url: '../vipCard/index?id='+id,
+                url: '../vipCard/index?id=' + id + '&vipImg=' + config.base_img_url + this.data.card.fileName,
             })
             return
         }

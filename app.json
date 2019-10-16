@@ -65,19 +65,20 @@
         "pages/share/card/index",
         "pages/share/shop/index",
         "pages/share/venueCardDetails/index",
+        "pages/share/termCardDetails/index",
         "pages/share/venueCourseDetails/index",
         "pages/share/confirmOrder/card/index",
         "pages/share/confirmOrder/courser/index",
         "pages/share/confirmOrder/selectContacts/index",
-        "pages/share/confirmOrder/selectStudent/index"
-
-        
+        "pages/share/confirmOrder/selectStudent/index",
+        "pages/share/confirmOrder/termCard/index",
+        "pages/my/ticket/record/index"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#63afe0",
         "navigationBarTitleText": "",
-        "navigationBarTextStyle": "#fff"
+        "navigationBarTextStyle": "white"
     },
     "tabBar": {
         "list": [
@@ -111,5 +112,6 @@
         "scope.userLocation": {
             "desc": "你的位置信息将用于小程序位置接口的效果展示"
         }
-    }
+    },
+    "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,13 @@
+<!--components/actionsheet/index.wxml-->
+<view class='select-warp'>
+    <view class='mask' bindtap='onCancel' wx:if="{{isSelect}}"></view>
+    <view class='select  {{isSelect ? "enter" : "leave"}}' >
+        <view class='send' bindtap='onCancel'>
+            发送给朋友
+            <button class='btn' open-type="share"></button>
+        </view>
+        <view class='create' bindtap='onCreate'>{{name}}</view>
+        <view class='cancel' bindtap='onCancel'>取消</view>
+    </view>
+</view>
+

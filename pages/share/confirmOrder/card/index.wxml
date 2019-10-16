@@ -1,4 +1,5 @@
 <!--pages/confirmOrder/other/index.wxml-->
+<wxs src="../../../../utils/venue.wxs" module="util" />
 <view wx:if="{{!isCoupon}}" class='containner flex_column'>
     <view class='category itemClass mtop30'>
         <view class='titleWarp flex_row'>
@@ -15,7 +16,7 @@
             </view>
             <view class='item flex_row'>
                 <view class='name'>有效期：</view>
-                <view class='value'>{{card.certificateStartTimeStr}}至{{card.certificateEndTimeStr}}</view>
+                <view class='value'>{{util.cardTime(card)}}</view>
             </view>
             <view class='item hasAddress flex_row'>
                 <view class='flex_row'>

@@ -4,23 +4,26 @@
     <view class='cardWarp'>
         <image class='img' src='{{imgUrl + card.fileName}}' mode='aspectFit'></image>
         <image class='recom' src='/images/recom.png'></image>
-        <view class='coupon' wx:if="{{card.discountPrice && showCoupon}}" 
-            bindtap='onUserCoupon'
-            data-coupon='{{card.discountPrice}}'>劵￥{{card.discountPrice}}</view>
+        
     </view>
 
     <view class='category itemClass'>
         <view class='titleWarp flex_row'>
             <view class='title'>{{card.cardName}}</view>
-            <view class='type' wx:if="{{card.sportName}}">{{card.sportName}}</view>
+            <view class='flex_row share-center'>
+                <view class='type' wx:if="{{card.sportName}}">类型：{{card.sportName}}</view>
+                <image class='share-img' style='margin-left:20rpx;' 
+                    bindtap='onSelect' src='/images/share.png'></image> 
+            </view>
+            
         </view>
         <view class='content flex_column'>
             <view class='item flex_row'>
                 <view class='name'>馆卡价格：</view>
                 <view class='value price flex_row'>
-                    <view wx:if="{{!showCoupon}}">￥{{money}}</view>
-                    <view class='{{!showCoupon ? "del":""}}'>￥{{card.salePrice}}</view>
-                    <view class='del'>￥{{card.buyMoney}}</view>
+                    <view wx:if="{{!showCoupon}}">￥{{util.toFixed2(money)}}</view>
+                    <view class='{{!showCoupon ? "del":""}}'>￥{{util.toFixed2(card.salePrice)}}</view>
+                    <view class='del'>￥{{util.toFixed2(card.buyMoney)}}</view>
                 </view> 
             </view>
             <view class='item flex_row'>
@@ -60,7 +63,7 @@
                 <view class='name'>剩余数量：</view>
                 <view class='value'>{{card.surplusAmount}}</view>
             </view>
-            <view class='item flex_row jihuo'>
+            <view class='item flex_row jihuo' wx:if="{{!extend}}">
                 <view class='name'>激活时间：</view>
                 <view class='value'>
                     <text class='{{item.isOn ? "on":""}}' 
@@ -95,7 +98,7 @@
     <view class='bottomwarp flex_row' wx:if="{{!extend}}">
         <view class='news flex_column' bindtap='onGoVenue'>
             <image src='/images/venue.png'></image>
-            <view>进入店铺</view>
+            <view>更多专享</view>
         </view>
         <view class='confirm' bindtap='onGoOrder'>
             立即购买
@@ -103,8 +106,34 @@
     </view>
 
     <view class='bottomwarp flex_row' wx:if="{{extend}}">
-        <button class='extend' open-type='share'>
+        <button class='extend' bindtap='onSelect'>
             我要推广
         </button>
     </view>
 </view>
+
+<v-back class='chatBtn'/>
+
+<v-actionsheet  isSelect='{{isSelect}}' 
+    bind:myCancel="onCancelSelect"
+    bind:myCreate="onShare"/>
+
+<v-share wx:if="{{isShare}}" 
+    bind:close="onCloseShare" 
+    type="{{1}}"
+    goods="{{card}}"
+    share="{{share}}"
+    page='pages/share/venueCardDetails/index' />
+     <!-- 
+        
+        goods   商品
+        page     扫码后要跳转的页面
+        type     1 : 馆卡， 2 : 课程 ，3 : 门票 4：场馆
+     -->
+<view class='mask' wx:if="{{card.discountPrice && showCoupon}}" >
+    <view class='coupon' 
+        bindtap='onUserCoupon'
+        data-coupon='{{card.discountPrice}}'>
+        <image src='/images/coupons.gif' mode='aspectFit'></image>
+    </view>    
+</view>     

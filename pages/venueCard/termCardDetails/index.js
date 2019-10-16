@@ -13,6 +13,8 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isShare: false,     //是否显示海报层
+        isSelect: false,    //是否显示选择框
         imgUrl: config.base_img_url,
         card:{}
     },
@@ -21,8 +23,43 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        let id = options.id;
+        let id = options.id || decodeURIComponent(options.scene).split('_')[0];
         this._getCard(id);
+    },
+    //查看协议
+    onElectronicProtocol(e) {
+        let src = e.currentTarget.dataset.img;
+        let imgSrc = config.base_img_url + src;
+        wx.navigateTo({
+            url: '/pages/electronicProtocol/index?imgSrc=' + imgSrc
+        })
+    },
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
+
+    //显示选择框
+    onSelect() {
+        console.log(123)
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
     },
     //进入场馆
     onGoVenue() {
@@ -31,10 +68,15 @@ Page({
         })
     },
     onShareAppMessage(Object) {
-
+        return {
+            title: this.data.card.cardName
+        }
     },
     onGoOrder(e){
-        let card = JSON.stringify(this.data.card);
+        let card = this.data.card;
+        card.cardName = card.cardName.replace(/\&/g, "%26");
+        card.remark = ''
+        card = JSON.stringify(card)
         wx.navigateTo({
             url: '/pages/confirmOrder/termcard/index?card=' + card
         })

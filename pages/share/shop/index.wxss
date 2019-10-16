@@ -39,14 +39,14 @@ page{
 .itemTop .imgWarp{
     position: relative;
     width:690rpx;
-    height:300rpx;
+    height:414rpx;
     border-radius:20rpx;
     overflow: hidden;
 }
 
 .itemTop .img{
     width:690rpx;
-    height:300rpx;
+    height:414rpx;
     background: #63AFE0;
 }
 

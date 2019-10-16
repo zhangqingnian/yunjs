@@ -13,88 +13,205 @@ Page({
      * 页面的初始数据
      */
     data: {
+        isShare: false, //是否显示海报层
+        isSelect: false, //是否显示选择框
         imgUrl: config.base_img_url,
         card: {},
         time: [{
             name: '立即',
-            value:0,
+            value: 0,
             isOn: true
         }, {
             name: '1天',
-            value:1,
+            value: 1,
             isOn: false
         }, {
             name: '3天',
-                value: 3,
+            value: 3,
             isOn: false
         }, {
             name: '7天',
-                value: 7,
+            value: 7,
             isOn: false
         }],
-        currentTime:0,
-        extend:'',
-        showCoupon:true  //优惠券显示
+        currentTime: 0,
+        extend: '',
+        showCoupon: true, //优惠券显示
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) { 
-        //id 排序   venueGoodsId 商品   packageId 任务 customerId 分析 nickName 昵称
-        console.log(options)
-        let { id, venueGoodsId, packageId, customerId, nickName, type } = options;
-        //extend 详情页分享(推广)标识；
+    onLoad: function(options) {
+        //id 排序   venueGoodsId 商品   packageId 任务 customerId 分析 nickName 昵称 type 主管/分销员
+        let {
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            nickName,
+            type
+        } = options;
+        var share = {};
+        if(venueGoodsId){
+            share = options;
+        }
+       
+        if (!venueGoodsId){
+            /*id 排序
+                venueGoodsId 商品
+                packageId 任务
+                customerId 分析
+                type 主管/分销员
+                nickName 昵称 （不支持中文 没传）*/
+            let arr = decodeURIComponent(options.scene).split('_');
+            id = arr[0];
+            venueGoodsId = arr[1];
+            packageId = arr[2];
+            customerId= arr[3];
+            type = arr[4];
+            nickName = '';
+            share = {
+                id,
+                venueGoodsId,
+                packageId,
+                customerId,
+                type,
+                nickName
+            }
+        }
+        //extend 从分销端跳转带过来的标识详情页分享(推广)标识；
         let extend = options.extend || '';
-
         this.setData({
-            id, venueGoodsId, packageId, customerId, nickName, type, extend
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            nickName,
+            type,
+            extend,
+            share
         })
-        this._getCardDetail({id, venueGoodsId, packageId, customerId,type });
+
+        
+    },
+    onShow(){
+        let {
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            type
+        } = this.data;
+        this._getCardDetail({
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            type
+        });
+    },
+    //生成图片层
+    onShare() {
+        this.setData({
+            isShare: true,
+            isSelect: false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
+        this.setData({
+            isShare: false
+        })
+    },
+
+    //显示选择框
+    onSelect() {
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect() {
+        this.setData({
+            isSelect: false
+        })
     },
     //使用优惠券
-    onUserCoupon(e){
+    onUserCoupon(e) {
         let coupon = e.currentTarget.dataset.coupon;
         let salePrice = this.data.card.salePrice;
         let money = salePrice - coupon;
-        this.setData({
-            showCoupon:false,
-            money
+        wx.showLoading()
+        cardModel.getMark({
+            couponMoney:coupon
+        }).then(res => {
+            wx.hideLoading()
+            let {data, msg, success} = res.data;
+            if(success){
+                wx.showModal({
+                    title: '提示',
+                    content: data,
+                    showCancel: false,
+                    success:res => {
+                        this.setData({
+                            showCoupon: false,
+                            money
+                        })
+                    }
+                })
+            }else{
+                wx.showToast({
+                    title: msg,
+                    icon: 'none',
+                })
+            }
         })
+       
     },
     //进入场馆
-    onGoVenue(){
-        let { id, venueGoodsId, packageId, customerId, nickName } = this.data;
+    onGoVenue() {
+        let {
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            nickName
+        } = this.data;
         wx.navigateTo({
             url: '/pages/share/shop/index?nickName=' + nickName + '&customerId=' + customerId,
         })
     },
     //跳转提交订单页
-    onGoOrder(e){
-        let card = JSON.stringify(this.data.card);
-        let currentTime = this.data.currentTime;
+    onGoOrder(e) {
+        let card = this.data.card;
+        card.cardName = card.cardName.replace(/\&/g, "%26");
+        card.remark ='';
         let sortId = this.data.id
-        let money = this.data.money;
-        console.log(currentTime)
+        let { venueGoodsId, packageId, customerId, type, money, currentTime} = this.data;
+        //id,venueGoodsId,packageId,customerId,type
         wx.navigateTo({
-            url: '/pages/share/confirmOrder/card/index?card=' + card + '&currentTime=' + currentTime + '&sortId=' + sortId + '&money=' + money,
+            url: '/pages/share/confirmOrder/card/index?card=' + JSON.stringify(card) + '&currentTime=' + currentTime + '&sortId=' + sortId + '&money=' + money + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type ,
         })
     },
-    onSelectTime(e){
-        let {isOn, name} = e.currentTarget.dataset.item;
+    onSelectTime(e) {
+        let {
+            isOn,
+            name
+        } = e.currentTarget.dataset.item;
         var currentTime = '';
-        if(!isOn){
+        if (!isOn) {
             let times = this.data.time;
             times.forEach(item => {
-                if(item.name == name){
+                if (item.name == name) {
                     item.isOn = true;
                     currentTime = item.value;
-                }else{
+                } else {
                     item.isOn = false
                 }
             })
             this.setData({
-                time:times,
+                time: times,
                 currentTime: currentTime
             })
         }
@@ -118,13 +235,30 @@ Page({
             }
         })
     },
-    onShareAppMessage(options){
-        let { id, venueGoodsId, packageId, customerId, nickName, type} = this.data;
+    onShareAppMessage(options) {
+        let {
+            id,
+            venueGoodsId,
+            packageId,
+            customerId,
+            nickName,
+            type
+        } = this.data;
         return {
+            title: this.data.card.cardName,
+            imageUrl: this.data.imgUrl + this.data.card.fileName,
             path: '/pages/share/venueCardDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName
         }
     },
-    _getCardDetail({id, venueGoodsId,packageId,customerId,type}) {
+
+
+    _getCardDetail({
+        id,
+        venueGoodsId,
+        packageId,
+        customerId,
+        type
+    }) {
         cardModel.getCardsDetail({
             venueGoodsId,
             id,
@@ -132,7 +266,6 @@ Page({
             customerId,
             type
         }).then(res => {
-            console.log(res.data.data)
             this.setData({
                 card: res.data.data,
                 money: res.data.data.salePrice

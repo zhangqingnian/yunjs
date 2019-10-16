@@ -24,7 +24,7 @@
             <scroll-view class='scroll-view-y' scroll-x style='white-space:nowrap;'>
                 <view class='area'>
                     <!-- 场地 -->
-                    <text wx:for="{{field}}" wx:key="{{item.id}}">{{item.areaName}}</text>
+                    <view wx:for="{{field}}" wx:key="{{item.id}}">{{item.areaName}}</view>
                 </view>
                 <view class='contentWarp'>
                     <block wx:for="{{field}}" wx:key="{{item.id}}">
@@ -76,3 +76,6 @@
         </scroll-view>
     </view>
 </view>
+
+
+<v-back class='chatBtn' />

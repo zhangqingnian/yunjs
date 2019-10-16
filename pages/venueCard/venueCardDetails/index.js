@@ -14,6 +14,7 @@ Page({
      */
     data: {
         isShare:false,     //是否显示海报层
+        isSelect:false,    //是否显示选择框
         imgUrl: config.base_img_url,
         card: {},
         time: [{
@@ -40,27 +41,52 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options)
-        let id = options.id || decodeURIComponent(options.scene);
+        var id = options.id || decodeURIComponent(options.scene).split('_')[0];
         this.setData({
             id
         })
         this._getCard(id);
     },
     onShareAppMessage(Object) {
-
+        return {
+            title: this.data.card.cardName
+        }
     },
-    onShare(){
-        this.setData({
-            isShare:true
+    //查看协议
+    onElectronicProtocol(e) {
+        let src = e.currentTarget.dataset.img;
+        let imgSrc = config.base_img_url + src;
+        wx.navigateTo({
+            url: '/pages/electronicProtocol/index?imgSrc=' + imgSrc
         })
     },
-    onCloseShare(){
-        console.log('close')
+    //生成图片层
+    onShare(){
+        this.setData({
+            isShare:true,
+            isSelect:false
+        })
+    },
+    //关闭图片层
+    onCloseShare() {
         this.setData({
             isShare: false
         })
     },
+
+    //显示选择框
+    onSelect(){
+        this.setData({
+            isSelect: true
+        })
+    },
+    //关闭选择框
+    onCancelSelect(){
+        this.setData({
+            isSelect:false
+        })
+    },
+    
     //进入场馆
     onGoVenue(){
         wx.navigateTo({
@@ -69,11 +95,14 @@ Page({
     },
     //跳转提交订单页
     onGoOrder(e){
-        let card = JSON.stringify(this.data.card);
+        // 对于“&”的处理
+        let card = this.data.card;
+        card.cardName = card.cardName.replace(/\&/g, "%26");
+        card.remark = ''
+         card = JSON.stringify(card)
         let currentTime = this.data.currentTime;
-        console.log(currentTime)
         wx.navigateTo({
-            url: '/pages/confirmOrder/card/index?card=' + card + '&currentTime=' + currentTime,
+            url: '/pages/confirmOrder/card/index?card=' + card + '&currentTime=' + currentTime 
         })
     },
     onSelectTime(e){

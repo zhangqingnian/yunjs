@@ -102,18 +102,18 @@ var ticketStatus = function (obj) {
                 return '已售罄'
             }
 
-            return "剩余:" + shengyu
+            return "剩余:" + (obj.ticketPublishAmount - obj.soldAmount)
         }
     }
 }
 
 
 var cardStatus =  function(obj){
-    /*0, "次数卡"
-        1, "月卡"
-        2, "季卡"
-        3, "年卡"
-        4, "会员卡"
+    /*  0, "次数卡"   xxxx次
+        1, "月卡"     xxxt天
+        2, "季卡"     xxxt天
+        3, "年卡"     xxxt天
+        4, "会员卡"   
         5, "学期课"
         6, "自由卡"
         7, "活动次数卡"
@@ -137,14 +137,18 @@ var cardTime = function (obj) {
         6, "自由卡"
         7, "活动次数卡"
         */
-    if (obj.type == 0 || obj.type == 7) {
-        return obj.activeTime + '天' 
-    } else if (obj.type == 1 || obj.type == 2 || obj.type == 3 || obj.type == 6) {
+    if (obj.type == 7 || obj.type == 5){
+        return obj.certificateStartTimeStr + ' 至 ' + obj.certificateEndTimeStr
+    }else{
         return obj.activeTime + '天'
-    } else if (obj.type == 4) {
-        return obj.activeTime + '元'
     }
 }
+var toFixed2 = function (num) {
+    if(num){
+        return num.toFixed(2);
+    }
+}
+
 
 module.exports = {
     filterStar: filterStar,
@@ -160,5 +164,6 @@ module.exports = {
     filterTypeClass: filterTypeClass,
     ticketStatus: ticketStatus,
     cardStatus: cardStatus,
-    cardTime: cardTime
+    cardTime: cardTime,
+    toFixed2: toFixed2
 }

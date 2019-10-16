@@ -1,0 +1,24 @@
+
+.chat{
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+    position: relative;
+    bottom: 90rpx;
+    right: 25rpx;
+}
+.chat image{
+    width: 90rpx;
+    height: 90rpx;
+}
+.contact{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    border-radius: 50%;
+    opacity: 0;
+}

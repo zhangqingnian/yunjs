@@ -83,7 +83,12 @@ page{
 }
 
 .cardContent .bottom .bottomItem{
-    margin-bottom: 15rpx;
+    /* margin-bottom: 15rpx; */
+}
+.tex{
+    width: 100%;
+    height: 120rpx;
+    overflow-y: scroll;
 }
 .cardContent .bottom .bottomItem:last-child{
     margin-bottom: 0rpx;
