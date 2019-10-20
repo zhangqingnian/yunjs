@@ -200,23 +200,31 @@ page{
 }
 
 .news{
+    display: flex;
     font-size: 22rpx;
     justify-content: space-between;
     align-items: flex-end;
+}
+
+.news .box{
+    width: calc(100% - 60rpx);
 }
 
 .news .box .cardName{
     margin: 10rpx 0;
 }
 
+.venueName{
+    height: 60rpx;
+}
 .itemRevise{
-    width:64rpx;
-    height:50rpx;
+    width:70rpx;
+    height:60rpx;
     background:rgba(255,125,37,1);
     border-radius:10rpx;
     color: #fff;
     text-align: center;
-    line-height: 50rpx;
+    line-height: 60rpx;
 }
 .price{
     color: #DA0808;

@@ -5,8 +5,11 @@ import {
 import {
     CardModel
 } from '../../../models/card.js';
-
+import {
+    VenueModel
+} from '../../../models/venue.js';
 let cardModel = new CardModel();
+let venueModel = new VenueModel();
 Page({
 
     /**
@@ -18,7 +21,9 @@ Page({
         imgUrl: config.base_img_url,
         card:{},
         extend: '',
-        showCoupon: true  //优惠券显示
+        showCoupon: true,  //优惠券显示
+        venueFc: [],
+        isShareType:false
     },
 
     /**
@@ -27,7 +32,12 @@ Page({
     onLoad: function(options) {
         //id 排序   venueGoodsId 商品   packageId 任务 customerId 分析 nickName 昵称
         console.log(options)
-        let { id, venueGoodsId, packageId, customerId, nickName, type } = options;
+        let { id, venueGoodsId, packageId, customerId, nickName, type, isShareType } = options;
+        if (isShareType) {
+            this.setData({
+                isShareType: true
+            })
+        }
         var share = {};
         if (venueGoodsId) {
             share = options;
@@ -54,6 +64,10 @@ Page({
                 type,
                 nickName
             }
+
+            this.setData({
+                isShareType:true
+            })
         }
         //extend 详情页分享(推广)标识；
         let extend = options.extend || '';
@@ -77,6 +91,12 @@ Page({
             customerId,
             type
         });
+    },
+    //场馆风采
+    onFengcai() {
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/fengcai/index?id=' + this.data.card.venueId
+        })
     },
     //生成图片层
     onShare() {
@@ -177,8 +197,20 @@ Page({
         return {
             title: this.data.card.cardName,
             imageUrl: this.data.imgUrl + this.data.card.fileName,
-            path: '/pages/share/termCardDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName
+            path: '/pages/share/termCardDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName + '&isShareType=yes'
         }
+    },
+    //风采
+    _getFc(id) {
+        venueModel.getFcFront({
+            id: id,
+            start: 0,
+            limit: 5
+        }).then(res => {
+            this.setData({
+                venueFc: res.data.items
+            })
+        })
     },
     _getCardDetail({ id, venueGoodsId, packageId, customerId, type }) {
         cardModel.getCardsDetail({
@@ -188,12 +220,18 @@ Page({
             customerId,
             type
         }).then(res => {
-            console.log(res.data.data)
-            this.setData({
-                card: res.data.data,
-                money: res.data.data.salePrice
-            })
-
+            if (res.data.success) {
+                this._getFc(res.data.data.venueId)
+                this.setData({
+                    card: res.data.data,
+                    money: res.data.data.salePrice
+                })
+            } else {
+                wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none'
+                })
+            }
         })
     }
 })

@@ -22,7 +22,8 @@ Page({
         classes:{},
         classList:[],
         extend: '',
-        showCoupon: true  //优惠券显示
+        showCoupon: true,  //优惠券显示
+        isShareType:false
     },
 
     /**
@@ -31,8 +32,13 @@ Page({
     onLoad: function(options) {
         //id 排序   venueGoodsId 商品   packageId 任务 customerId 分析 nickName 昵称
         console.log(options)
-        let { id, venueGoodsId, packageId, customerId, nickName,type } = options;
+        let { id, venueGoodsId, packageId, customerId, nickName, type, isShareType} = options;
         var share = {};
+        if(isShareType){
+            this.setData({
+                isShareType: true
+            })
+        }
         if (venueGoodsId) {
             share = options;
         }
@@ -58,6 +64,9 @@ Page({
                 type,
                 nickName
             }
+            this.setData({
+                isShareType:true
+            })
         }
 
 
@@ -121,7 +130,7 @@ Page({
         return {
             title: this.data.course.courseName,
             imageUrl: this.data.imgUrl + this.data.course.fileName,
-            path: '/pages/share/venueCourseDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName
+            path: '/pages/share/venueCourseDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName + '&isShareType=yes'
         }
     },
     //使用优惠券

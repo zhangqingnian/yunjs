@@ -2,12 +2,7 @@
 <view class='containner flex_column'>
     <view class='cardWarp'>
         <image class='img' src='{{imgUrl + course.fileName}}' mode='aspectFit'></image>
-        <image class='recom' src='/images/recom.png'></image>
-        <view class='coupon' wx:if="{{course.discountPrice && showCoupon}}" 
-            bindtap='onUserCoupon'
-            data-coupon='{{course.discountPrice}}'>
-            <image src='/images/coupons.gif' mode='aspectFit'></image>
-        </view>    
+        <image class='recom' src='/images/recom.png'></image> 
     </view>
     <view class='category itemClass'>
         <view class='titleWarp flex_row'>
@@ -163,3 +158,11 @@
     goods="{{course}}"
     share="{{share}}"
     page='pages/share/venueCourseDetails/index' />
+
+<view class='mask' wx:if="{{isShareType && card.discountPrice && showCoupon}}" > 
+    <view class='coupon' wx:if="{{course.discountPrice && showCoupon}}" 
+            bindtap='onUserCoupon'
+            data-coupon='{{course.discountPrice}}'>
+            <image src='/images/coupons.gif' mode='aspectFit'></image>
+        </view>          
+</view>         

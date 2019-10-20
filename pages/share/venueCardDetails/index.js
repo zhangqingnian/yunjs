@@ -5,8 +5,11 @@ import {
 import {
     CardModel
 } from '../../../models/card.js';
-
+import {
+    VenueModel 
+} from '../../../models/venue.js';
 let cardModel = new CardModel();
+let venueModel = new VenueModel();
 Page({
 
     /**
@@ -37,6 +40,8 @@ Page({
         currentTime: 0,
         extend: '',
         showCoupon: true, //优惠券显示
+        venueFc:[],
+        isShareType:false //是否从分享进 
     },
 
     /**
@@ -50,9 +55,15 @@ Page({
             packageId,
             customerId,
             nickName,
-            type
+            type,
+            isShareType
         } = options;
         var share = {};
+        if (isShareType) {
+            this.setData({
+                isShareType: true
+            })
+        }
         if(venueGoodsId){
             share = options;
         }
@@ -79,6 +90,9 @@ Page({
                 type,
                 nickName
             }
+            this.setData({
+                isShareType:true   //是否是从分享的海报进入
+            })
         }
         //extend 从分销端跳转带过来的标识详情页分享(推广)标识；
         let extend = options.extend || '';
@@ -92,8 +106,6 @@ Page({
             extend,
             share
         })
-
-        
     },
     onShow(){
         let {
@@ -110,6 +122,12 @@ Page({
             customerId,
             type
         });
+    },
+    //场馆风采
+    onFengcai() {
+        wx.navigateTo({
+            url: '/pages/venueList/venueDetail/fengcai/index?id=' + this.data.card.venueId
+        })
     },
     //生成图片层
     onShare() {
@@ -247,10 +265,21 @@ Page({
         return {
             title: this.data.card.cardName,
             imageUrl: this.data.imgUrl + this.data.card.fileName,
-            path: '/pages/share/venueCardDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName
+            path: '/pages/share/venueCardDetails/index?id=' + id + '&venueGoodsId=' + venueGoodsId + '&packageId=' + packageId + '&customerId=' + customerId + '&type=' + type + '&nickName=' + nickName + '&isShareType=yes'
         }
     },
-
+    //风采
+    _getFc(id) {
+        venueModel.getFcFront({
+            id: id,
+            start: 0,
+            limit: 5
+        }).then(res => {
+            this.setData({
+                venueFc: res.data.items
+            })
+        })
+    },
 
     _getCardDetail({
         id,
@@ -266,11 +295,22 @@ Page({
             customerId,
             type
         }).then(res => {
-            this.setData({
-                card: res.data.data,
-                money: res.data.data.salePrice
-            })
+            if(res.data.success){
+                this._getFc(res.data.data.venueId)
+                this.setData({
+                    card: res.data.data,
+                    money: res.data.data.salePrice
+                })
+                console.log(this.data)
+            }else{
+                wx.showToast({
+                    title: res.data.msg,
+                    icon: 'none'
+                })
+            }
+            
 
         })
-    }
+    },
+    
 })

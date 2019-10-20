@@ -221,3 +221,37 @@ height:200rpx;
     top:0;
     background: rgba(0, 0, 0, .8)
 }
+
+/* -------------- */
+.icon_right {
+    width: 15rpx;
+    height: 27rpx;
+    margin-left: 10rpx;
+}
+.fengcai{
+    background: #fff;
+}
+
+.fengcai .top {
+    padding: 25rpx 30rpx;
+    border-bottom: 1px solid #dcdcdc;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fengcai .top .text {
+    color: #63afe0;
+    font-size: 28rpx;
+}
+
+.fengcai .top .warp {
+    align-items: center;
+}
+
+.fengcai .content {
+    padding: 20rpx 30rpx;
+}
+
+.fengcai .content image {
+    margin-right: 20rpx;
+}

@@ -81,7 +81,22 @@
             </view>
         </view>
     </view>
-
+    <view class='fengcai mtop30' wx:if="{{venueFc.length}}">
+        <view class='top flex_row'>
+            <text class='title'>场馆风采</text>
+            <view class='flex_row warp' bindtap='onFengcai'>
+                <text class='text'>查看更多</text>
+                <image class='icon_right' src='/images/venuedetail/icon_right.png'></image>
+            </view>
+        </view>
+        <view class='content flex_row'>
+            <scroll-view class="scroll-view_H" scroll-x="true">
+                <block wx:for="{{venueFc}}" wx:key="{{idx}}">
+                    <image style='width:188rpx;height:140rpx;' src='{{imgUrl + item.tfFileName}}'></image>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
     <view class='explain itemClass mtop30'>
         <view class='titleWarp flex_row'>
             <view class='title'>购买须知</view>
@@ -130,7 +145,7 @@
         page     扫码后要跳转的页面
         type     1 : 馆卡， 2 : 课程 ，3 : 门票 4：场馆
      -->
-<view class='mask' wx:if="{{card.discountPrice && showCoupon}}" >
+<view class='mask' wx:if="{{isShareType && card.discountPrice && showCoupon}}" >
     <view class='coupon' 
         bindtap='onUserCoupon'
         data-coupon='{{card.discountPrice}}'>
